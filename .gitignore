@@ -1,0 +1,27 @@
+# Obsidian
+.obsidian/workspace*
+.obsidian/cache
+
+# VSCode
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Generated files
+*.pdf
+*.epub
+*.mobi
+
+# OS
+.DS_Store
+Thumbs.db
