@@ -370,7 +370,7 @@ def emphasize_code_symbols(text: str) -> str:
 
     text = safe_sub(
         r'\b([a-zA-Z_][a-zA-Z0-9_]*\.(?:c|h))\b',
-        r"<code style='font-family: monospace; font-weight: 600; background-color: #e8f5e9; padding: 0.1em 0.3em; border: 1px solid #c8e6c9;'>\1</code>",
+        r"<code style='font-family: monospace; font-weight: 600; background-color: #fff8e1; padding: 0.1em 0.3em; border: 1px solid #ffe082;'>\1</code>",
         text
     )
     text = safe_sub(
@@ -413,37 +413,7 @@ def process_md(md_path: Path, chapter_index: int):
     print(f"\n[MD] {md_path.name} (章{chapter_index})")
     text = md_path.read_text(encoding="utf-8")
     
-    # 段落間に空行を追加(SKILL.md 8章対応)
-    def add_paragraph_spacing(md_text: str) -> str:
-        """段落間に空行を追加(内容変更は禁止、空行追加のみ)"""
-        lines = md_text.split('\n')
-        result = []
-        
-        for i, line in enumerate(lines):
-            result.append(line)
-            
-            # 次の行が存在する場合
-            if i < len(lines) - 1:
-                current_stripped = line.strip()
-                next_stripped = lines[i + 1].strip()
-                
-                # 現在行が非空行で、次行も非空行で、見出しやリストでない場合
-                # かつ、既に空行が続いていない場合に空行を追加
-                if (current_stripped and next_stripped and 
-                    not current_stripped.startswith('#') and 
-                    not next_stripped.startswith('#') and
-                    not current_stripped.startswith('-') and
-                    not current_stripped.startswith('*') and
-                    not current_stripped.startswith('```') and
-                    not next_stripped.startswith('```')):
-                    # 次の行が空行でない場合のみ追加
-                    if i + 1 < len(lines) - 1:
-                        if lines[i + 1].strip():
-                            result.append('')  # 空行追加
-        
-        return '\n'.join(result)
-    
-    text = add_paragraph_spacing(text)
+    # 段落間空行処理は削除(テーブル変換を壊すため)
     
     # ファイル名から安全なIDを生成（バッククォートなどを除去）
     safe_stem = re.sub(r'[\\/:*?"<>|`]', '_', md_path.stem)
@@ -468,7 +438,7 @@ def process_md(md_path: Path, chapter_index: int):
         
         result = []
         for i, img in enumerate(imgs):
-            result.append(f'<div style="margin: 0.3em 0; text-align: center; background-color: #fafafa; padding: 0.5em; border: 1px solid #ddd;"><img src="images/code/{img}" alt="Code {code_counter} Part {i+1}" style="max-width: 100%; height: auto;"/></div>')
+            result.append(f'<div style="margin: 1.2em 0; text-align: center; background-color: #fafafa; padding: 0.5em; border: 1px solid #ddd;"><img src="images/code/{img}" alt="Code {code_counter} Part {i+1}" style="max-width: 100%; height: auto;"/></div>')
         
         placeholder = f"@@CODE_BLOCK_{code_counter}@@"
         code_placeholders[placeholder] = "".join(result)
@@ -488,7 +458,7 @@ def process_md(md_path: Path, chapter_index: int):
         # safe_stem を使用
         img_name = f"{safe_stem}_mermaid{img_counter}.png"
         if mermaid_to_image(match.group(1), MERMAID_DIR / img_name, img_counter):
-            return f'<div style="margin: 1.5em 0; page-break-inside: avoid; text-align: center; background-color: #fafafa; padding: 1em; border: 1px solid #ddd;"><img src="images/mermaid/{img_name}" alt="Diagram" style="max-width: 100%; height: auto;"/></div>'
+            return f'<div style="margin: 1.2em 0; page-break-inside: avoid; text-align: center; background-color: #fafafa; padding: 1em; border: 1px solid #ddd;"><img src="images/mermaid/{img_name}" alt="Diagram" style="max-width: 100%; height: auto;"/></div>'
         return "<p>[図生成失敗]</p>"
     text = re.sub(r"```mermaid\s*(.*?)```", mermaid_repl, text, flags=re.S)
 
@@ -498,7 +468,7 @@ def process_md(md_path: Path, chapter_index: int):
     text = emphasize_code_symbols(text)
     for k, v in code_placeholders.items(): text = text.replace(k, v)
 
-    # テーブル処理
+    # テーブル処理(Kindle互換性向上)
     def table_repl(match):
         lines = match.group(0).strip().split('\n')
         if len(lines) < 3: return match.group(0)
@@ -507,13 +477,17 @@ def process_md(md_path: Path, chapter_index: int):
         for line in lines[2:]:
             cells = [c.strip() for c in line.split('|') if c.strip()]
             if cells: rows.append(cells)
-        html = '<table style="width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: 0.9em; page-break-inside: avoid;">\n<thead>\n<tr>\n'
-        for h in headers: html += f'<th style="border: 1px solid #666; padding: 0.7em; text-align: left; background: #f5f5f5;">{h}</th>\n'
+        
+        # Kindle互換性のためにシンプルなスタイルを使用
+        html = '<table style="width: 100%; border-collapse: collapse; margin: 1.2em 0; font-size: 0.85em;">\n<thead>\n<tr>\n'
+        for h in headers: 
+            html += f'<th style="border: 2px solid #333; padding: 0.8em; text-align: left; background-color: #e0e0e0; font-weight: bold;">{h}</th>\n'
         html += '</tr>\n</thead>\n<tbody>\n'
         for i, row in enumerate(rows):
-            bg = '#fafafa' if i % 2 == 1 else '#fff'
+            bg = '#f5f5f5' if i % 2 == 1 else '#ffffff'
             html += '<tr>\n'
-            for c in row: html += f'<td style="border: 1px solid #999; padding: 0.6em; background: {bg};">{c}</td>\n'
+            for c in row: 
+                html += f'<td style="border: 1px solid #666; padding: 0.7em; background-color: {bg};">{c}</td>\n'
             html += '</tr>\n'
         html += '</tbody>\n</table>\n'
         return html
@@ -532,22 +506,49 @@ def process_md(md_path: Path, chapter_index: int):
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
 
-    # 見出し
-    text = re.sub(r"^# (.+)$", lambda m: f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 2em 0 1.2em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always;">{m.group(1)}</h1>', text, flags=re.M)
-    text = re.sub(r"^## (.+)$", r'<h2 style="font-size: 1.5em; margin: 2em 0 1em 0; font-weight: bold; background-color: #e3f2fd; padding: 0.6em 0.8em; border-left: 5px solid #1976d2;">\1</h2>', text, flags=re.M)
-    text = re.sub(r"^### (.+)$", r'<h3 style="font-size: 1.3em; margin: 1.5em 0 0.8em 0; font-weight: bold; background-color: #e8f5e9; padding: 0.5em 0.7em; border-left: 4px solid #388e3c;">\1</h3>', text, flags=re.M)
-    text = re.sub(r"^#### (.+)$", r'<h4 style="font-size: 1.15em; margin: 1.2em 0 0.6em 0; font-weight: bold; background-color: #fff3e0; padding: 0.4em 0.6em; border-left: 3px solid #ff9800;">\1</h4>', text, flags=re.M)
-    text = re.sub(r"^##### (.+)$", r'<h5 style="font-size: 1.05em; margin: 1em 0 0.5em 0; font-weight: bold;">\1</h5>', text, flags=re.M)
-    text = re.sub(r"^###### (.+)$", r'<h6 style="font-size: 1em; margin: 0.8em 0 0.4em 0; font-weight: bold;">\1</h6>', text, flags=re.M)
+    # 見出し (マージンを縮小して行間を詰める、配色の刷新)
+    text = re.sub(r"^# (.+)$", lambda m: f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 1.2em 0 1em 0; font-weight: bold; line-height: 1.3; background-color: #f0f0f0; padding: 0.5em 0.8em; border-bottom: 4px solid #444; page-break-before: always;">{m.group(1)}</h1>', text, flags=re.M)
+    text = re.sub(r"^## (.+)$", r'<h2 style="font-size: 1.5em; margin: 1.2em 0 0.6em 0; font-weight: bold; background-color: #e8eaf6; padding: 0.5em 0.8em; border-left: 5px solid #3f51b5;">\1</h2>', text, flags=re.M)
+    text = re.sub(r"^### (.+)$", r'<h3 style="font-size: 1.3em; margin: 1.0em 0 0.5em 0; font-weight: bold; background-color: #f3e5f5; padding: 0.4em 0.7em; border-left: 4px solid #8e24aa;">\1</h3>', text, flags=re.M)
+    text = re.sub(r"^#### (.+)$", r'<h4 style="font-size: 1.15em; margin: 0.8em 0 0.4em 0; font-weight: bold; background-color: #ffebee; padding: 0.3em 0.6em; border-left: 3px solid #e53935;">\1</h4>', text, flags=re.M)
+    text = re.sub(r"^##### (.+)$", r'<h5 style="font-size: 1.05em; margin: 0.6em 0 0.3em 0; font-weight: bold;">\1</h5>', text, flags=re.M)
+    text = re.sub(r"^###### (.+)$", r'<h6 style="font-size: 1em; margin: 0.5em 0 0.2em 0; font-weight: bold;">\1</h6>', text, flags=re.M)
 
-    # リストと段落
+    # リストと段落 (インラインスタイル除去しCSSに委譲)
     text = re.sub(r"^[\-\*] (.+)$", r"<li>\1</li>", text, flags=re.M)
-    text = re.sub(r"(<li>.*?</li>\n?)+", lambda m: f"<ul style='margin: 1.2em 0; padding-left: 2em; line-height: 1.9;'>\n{m.group(0)}</ul>\n", text, flags=re.S)
+    text = re.sub(r"(<li>.*?</li>\n?)+", lambda m: f"<ul>\n{m.group(0)}</ul>\n", text, flags=re.S)
 
+    # 引用 (blockquote) 処理
+    lines_q = []
+    in_quote = False
+    for line in text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("> "):
+            if not in_quote:
+                lines_q.append("<blockquote>")
+                in_quote = True
+            lines_q.append(f"<p>{stripped[2:]}</p>")
+        else:
+            if in_quote:
+                lines_q.append("</blockquote>")
+                in_quote = False
+            lines_q.append(line)
+    if in_quote: lines_q.append("</blockquote>")
+    text = "\n".join(lines_q)
+
+    # 段落処理: 空行を<br/>に変換し、非HTMLタグ行を<p>で囲む
     lines = []
     for line in text.splitlines():
-        if line.strip() and not line.strip().startswith("<"): lines.append(f"<p>{line}</p>")
-        else: lines.append(line)
+        stripped = line.strip()
+        # 空行の場合は無視(pタグのマージンで十分)
+        if not stripped:
+            continue
+        # HTMLタグで始まる行はそのまま
+        elif stripped.startswith("<"):
+            lines.append(line)
+        # それ以外は<p>で囲む
+        else:
+            lines.append(f"<p>{line}</p>")
     
     html_content = "\n".join(lines)
     
@@ -599,8 +600,15 @@ def main():
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>Book</title>
 <style>
-body{{font-family:"Hiragino Mincho ProN",serif; line-height:1.8; margin:0; padding:1em; text-align:justify; color:#111;}} 
+body{{font-family:"Hiragino Mincho ProN",serif; line-height:1.6; margin:0; padding:0.5em; text-align:justify; color:#111;}} 
+p{{margin: 0.5em 0; text-indent: 1em;}}
+h1{{margin: 1.5em 0 1em 0; line-height: 1.3;}}
+h2{{margin: 1.5em 0 0.8em 0; line-height: 1.3;}}
+h3, h4, h5, h6 {{margin: 1.2em 0 0.6em 0; line-height: 1.3;}}
+ul, ol {{margin: 1.0em 0; padding-left: 2em;}}
+li {{margin: 0.4em 0;}}
 img{{max-width:100%; height:auto;}}
+blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc; background-color: #f9f9f9; color: #555; font-style: italic;}}
 </style>
 </head><body>{toc}{''.join(body)}</body></html>""", encoding="utf-8")
 
