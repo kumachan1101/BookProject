@@ -600,8 +600,8 @@ def main():
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>Book</title>
 <style>
-body{font-family:"Hiragino Mincho ProN",serif; line-height:1.6; margin:0; padding:0.5em; text-align:left; color:#111;} 
-p{margin: 0.5em 0;}
+body{{font-family:"Hiragino Mincho ProN",serif; line-height:1.6; margin:0; padding:0.5em; text-align:left; color:#111;}} 
+p{{margin: 0.5em 0;}}
 h1{{margin: 1.5em 0 1em 0; line-height: 1.3;}}
 h2{{margin: 1.5em 0 0.8em 0; line-height: 1.3;}}
 h3, h4, h5, h6 {{margin: 1.2em 0 0.6em 0; line-height: 1.3;}}

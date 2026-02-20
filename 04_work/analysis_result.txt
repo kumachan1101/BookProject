@@ -1,0 +1,327 @@
+
+--- 03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md ---
+Static Variables (Check for Thread Safety):
+  Line 5: static int s_calibration_offset = -15;
+  Line 8: static int s_error_count = 0;
+  Line 9: static bool s_initialized = false;
+  Line 12: static unsigned s_call_count = 0;
+  Line 13: static struct ConnectionPool s_pool = {
+  Line 24: static bool s_is_initialized = false;
+
+--- 04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md ---
+Static Variables (Check for Thread Safety):
+  Line 6: static StatusChangeCallback g_listener_func = NULL;
+
+--- 05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md ---
+Allocations:
+  Line 9: User* u = (User*)malloc(sizeof(User));
+  Line 14: Device* dev = (Device*)malloc(sizeof(Device));
+  Line 25: dev->internal_buffer = (OwnedResource*)malloc(sizeof(OwnedResource));
+Frees:
+  Line 6: free(user); // 最後に自身を解放
+  Line 8: if (res != NULL) free(res);
+  Line 28: free(dev); // 失敗時は巻き戻し（原子性の保証）
+  Line 15: free(dev);
+
+--- 06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md ---
+Allocations:
+  Line 8: Context_t* ctx = (Context_t*)calloc(1, sizeof(struct Context));
+  Line 4: Object_t* obj = (Object_t*)malloc(sizeof(struct Object));
+Frees:
+  Line 6: free(ctx);
+  Line 5: free(obj);
+  Line 4: free(ctx);
+
+--- 07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md ---
+Allocations:
+  Line 10: Sensor_t* s = malloc(sizeof(struct Sensor));
+  Line 12: Sensor_t* s = malloc(sizeof(struct Sensor));
+  Line 3: Sensor_t* sensor = malloc(sizeof(struct Sensor));
+  Line 18: User_t* user = malloc(sizeof(struct User));
+  Line 13: Product_t* product = malloc(sizeof(struct Product));
+Frees:
+  Line 24: free(sensor);
+  Line 2: free(sensor);
+  Line 6: free(sensor);
+  Line 5: free(user);
+  Line 5: free(product);
+
+--- 08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md ---
+Static Variables (Check for Thread Safety):
+  Line 9: static int last_file_error = FILE_ERROR_NONE; // 非スレッドセーフ
+  Line 11: static _Thread_local int last_file_error = FILE_ERROR_NONE;
+Allocations:
+  Line 26: User_t* new_user = malloc(sizeof(*new_user));
+  Line 48: FileHandle_t* handle = (FileHandle_t*)malloc(sizeof(struct FileHandle));
+Frees:
+  Line 3: if (user != NULL) free(user);
+  Line 5: free(handle);
+
+--- 09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md ---
+Allocations:
+  Line 4: Resource* res = malloc(sizeof(Resource));
+  Line 7: res->internal_data = malloc(capacity);
+  Line 16: DataManager_t* dm = malloc(sizeof(DataManager_t));
+  Line 24: dm->data = malloc(sizeof(int) * capacity);
+  Line 6: Resource1* resource1_create(void) { return malloc(sizeof(Resource1)); }
+  Line 7: Resource2* resource2_create(void) { return malloc(sizeof(Resource2)); }
+  Line 8: Resource3* resource3_create(void) { return malloc(sizeof(Resource3)); }
+Frees:
+  Line 5: free(res->internal_data);
+  Line 6: free(res);
+  Line 10: free(res);
+  Line 28: free(dm);  // 部分的に確保したものを解放
+  Line 12: free(dm->data);
+  Line 17: free(dm);
+  Line 9: void resource1_destroy(Resource1* r) { free(r); }
+  Line 10: void resource2_destroy(Resource2* r) { free(r); }
+  Line 11: void resource3_destroy(Resource3* r) { free(r); }
+
+--- 12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md ---
+Allocations:
+  Line 17: Library* lib = malloc(sizeof(Library));
+  Line 20: lib->books = malloc(sizeof(Book*) * 10);
+  Line 40: Book* book = malloc(sizeof(Book));
+  Line 12: Library* lib = malloc(sizeof(Library));
+  Line 15: lib->books = malloc(sizeof(Book*) * 10);
+  Line 12: Book* book = malloc(sizeof(Book));
+Frees:
+  Line 18: free(lib);
+  Line 36: free(lib->books[i]);
+  Line 38: free(lib->books);
+  Line 39: free(lib);
+
+--- 13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md ---
+Allocations:
+  Line 33: SerialContext* ctx = malloc(sizeof(SerialContext));
+  Line 38: IDevice* device = malloc(sizeof(IDevice));
+  Line 31: UsbContext* ctx = malloc(sizeof(UsbContext));
+  Line 37: IDevice* device = malloc(sizeof(IDevice));
+  Line 16: PercentContext* ctx = malloc(sizeof(PercentContext));
+  Line 20: IDiscount* s = malloc(sizeof(IDiscount));
+  Line 16: FixedContext* ctx = malloc(sizeof(FixedContext));
+  Line 20: IDiscount* s = malloc(sizeof(IDiscount));
+  Line 16: CreditContext* ctx = malloc(sizeof(CreditContext));
+  Line 20: IFee* fee = malloc(sizeof(IFee));
+  Line 16: ConvenienceContext* ctx = malloc(sizeof(ConvenienceContext));
+  Line 20: IFee* fee = malloc(sizeof(IFee));
+Frees:
+  Line 23: free(ctx);
+  Line 41: free(ctx);
+  Line 16: free(device);
+  Line 23: free(device);
+  Line 23: free(ctx);
+  Line 40: free(ctx);
+  Line 14: free(device);
+  Line 21: free(device);
+  Line 29: free(device);
+  Line 21: if (!s) { free(ctx); return NULL; }
+  Line 21: if (!s) { free(ctx); return NULL; }
+  Line 16: // free(s1) 等の終了処理が必要（省略）
+  Line 21: if (!fee) { free(ctx); return NULL; }
+  Line 21: if (!fee) { free(ctx); return NULL; }
+
+--- 13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md ---
+Allocations:
+  Line 21: ImmediateNotify* notify = malloc(sizeof(ImmediateNotify));
+  Line 2: ScheduledNotify* notify = malloc(sizeof(ScheduledNotify));
+Frees:
+  Line 30: free(strategy);
+  Line 17: free(strategy);
+
+--- 14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md ---
+Allocations:
+  Line 34: IResource* res = malloc(sizeof(IResource));
+  Line 35: NetResource_Data* data = malloc(sizeof(NetResource_Data));
+Frees:
+  Line 25: if (self) free(self);
+  Line 38: if(res) free(res);
+  Line 40: if(data) free(data);
+  Line 28: free(res);
+
+--- 15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md ---
+Static Variables (Check for Thread Safety):
+  Line 14: static IDeviceVTable readonly_vtable = {
+
+--- 16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md ---
+Allocations:
+  Line 7: MySQLConnection* conn = malloc(sizeof(MySQLConnection));
+  Line 12: MySQLContext* ctx = malloc(sizeof(MySQLContext));
+  Line 16: IDatabase* db = malloc(sizeof(IDatabase));
+  Line 12: PostgresContext* ctx = malloc(sizeof(PostgresContext));
+  Line 17: IDatabase* db = malloc(sizeof(IDatabase));
+  Line 8: OrderProcessor* proc = malloc(sizeof(OrderProcessor));
+  Line 12: CreditCardProcessor* cc = malloc(sizeof(CreditCardProcessor));
+  Line 17: BankTransferProcessor* bank = malloc(sizeof(BankTransferProcessor));
+  Line 16: CreditCardContext* ctx = malloc(sizeof(CreditCardContext));
+  Line 18: IPaymentMethod* method = malloc(sizeof(IPaymentMethod));
+  Line 16: BankContext* ctx = malloc(sizeof(BankContext));
+  Line 18: IPaymentMethod* method = malloc(sizeof(IPaymentMethod));
+  Line 10: OrderProcessor* proc = malloc(sizeof(struct OrderProcessor));
+Frees:
+  Line 32: free(conn);
+  Line 23: free(ctx);
+  Line 19: free(ctx);
+  Line 31: free(ctx);
+  Line 20: free(ctx);
+  Line 5: free(mysql); // 簡易的なクリーンアップ
+  Line 10: free(postgres);
+  Line 5: free(p1->payment_module);
+  Line 6: free(p1);
+  Line 10: free(p2->payment_module);
+  Line 11: free(p2);
+  Line 7: if (method->self) free(method->self);
+  Line 8: free(method);
+  Line 23: free(proc);
+
+--- 16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md ---
+Allocations:
+  Line 10: char* result = malloc(strlen(data) + 16);
+  Line 4: char* result = malloc(strlen(data) + 16);
+  Line 24: result = malloc(strlen(data) + 1);
+  Line 11: char* res = malloc(strlen(data) + 32);
+  Line 21: ITransform* t = malloc(sizeof(ITransform));
+  Line 22: int* key_len = malloc(sizeof(int));
+  Line 6: char* res = malloc(strlen(data) + 32);
+  Line 16: ITransform* t = malloc(sizeof(ITransform));
+  Line 17: int* level = malloc(sizeof(int));
+  Line 5: char* res = malloc(strlen(data) + strlen(prefix) + 1);
+  Line 14: ITransform* t = malloc(sizeof(ITransform));
+  Line 24: UserService* service = malloc(sizeof(UserService));
+  Line 25: service->username = strdup(username);
+  Line 11: INotifier* n = malloc(sizeof(INotifier));
+  Line 24: INotifier* n = malloc(sizeof(INotifier));
+  Line 13: struct UserService* service = malloc(sizeof(struct UserService));
+  Line 16: service->username = strdup(username);
+  Line 9: MockDatabaseContext* ctx = malloc(sizeof(MockDatabaseContext));
+  Line 15: IDatabase* db = malloc(sizeof(IDatabase));
+Frees:
+  Line 33: free(result);
+  Line 27: free(t->self);
+  Line 29: free(t);
+  Line 14: free(result);
+  Line 13: free(s->username); free(s);
+  Line 32: if (n) free(n);
+  Line 18: free(service->username);
+  Line 19: free(service);
+  Line 21: free(mock_ctx);
+  Line 22: free(mock_db);
+
+--- 16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md ---
+Allocations:
+  Line 26: ITax* tax = malloc(sizeof(ITax));
+  Line 15: ITax* tax = malloc(sizeof(ITax));
+Frees:
+  Line 42: free(tax);
+
+--- 17_第2部 第13章 統合実践（基本）_01.md ---
+Static Variables (Check for Thread Safety):
+  Line 11: static IIOVTable file_io_vtable = {
+  Line 22: static IParserVTable json_parser_vtable = {
+Allocations:
+  Line 24: return strdup("{\"id\":10, \"name\":\"InitialUser\"}");
+  Line 36: ProcessedData* data = (ProcessedData*)malloc(sizeof(ProcessedData));
+  Line 17: return strdup("{\"id\":10, \"name\":\"FileUser\"}");
+  Line 20: FileIOData* file_data = (FileIOData*)malloc(sizeof(FileIOData));
+  Line 25: IIO* io = (IIO*)malloc(sizeof(IIO));
+  Line 17: ProcessedData* data = (ProcessedData*)malloc(sizeof(ProcessedData));
+  Line 30: JsonParserData* parser_data = (JsonParserData*)malloc(sizeof(JsonParserData));
+  Line 34: IParser* parser = (IParser*)malloc(sizeof(IParser));
+Frees:
+  Line 4: free(raw_data);
+  Line 13: if (data) free(data);
+  Line 22: free(io);
+  Line 17: free(data);
+  Line 27: free(parser);
+  Line 23: free(raw_data); // 具象が作成した文字列の解放
+  Line 7: free(self);
+  Line 29: free(file_data);
+  Line 8: free(data);
+  Line 17: free(self);
+  Line 37: free(parser_data);
+
+--- 17_第2部 第13章 統合実践（基本）_02.md ---
+Static Variables (Check for Thread Safety):
+  Line 21: static IIOVTable net_io_vtable = {
+Allocations:
+  Line 10: return strdup("{\"id\":99, \"name\":\"NetworkUser\"}");
+  Line 28: IIO* io = (IIO*)malloc(sizeof(IIO));
+
+--- 18_第2部 第14章 統合実践（応用）_01.md ---
+Static Variables (Check for Thread Safety):
+  Line 34: static IProcessorVTable name##_vtable = { name##_impl, name##_destroy }; \
+  Line 11: static IProcessorVTable pipeline_vtable = {
+  Line 18: static IProcessorVTable filter_vtable = {
+  Line 18: static IProcessorVTable compressor_vtable = {
+  Line 18: static IProcessorVTable filter_vtable = {
+  Line 19: static IProcessorVTable name##_vtable = { name##_impl, name##_destroy }; \
+Allocations:
+  Line 15: return strdup(buf);
+  Line 24: return strdup(buf);
+  Line 27: return strdup(buf); \
+  Line 39: name##_data_t* d = malloc(sizeof(name##_data_t)); \
+  Line 21: IProcessor* p = malloc(sizeof(IProcessor));
+  Line 16: current_data = strdup(input_data);
+  Line 18: PipelineProcessorImpl* impl = malloc(sizeof(PipelineProcessorImpl));
+  Line 21: impl->processors = malloc(sizeof(IProcessor*) * count);
+  Line 12: return strdup(buf);
+  Line 25: filter_data_t* d = malloc(sizeof(filter_data_t));
+  Line 12: return strdup(buf);
+  Line 25: compressor_data_t* d = malloc(sizeof(compressor_data_t));
+  Line 10: return strdup(buf);
+  Line 27: filter_data_t* d = malloc(sizeof(filter_data_t));
+  Line 12: return strdup(buf); \
+  Line 22: IProcessor* p = malloc(sizeof(IProcessor)); \
+  Line 23: name##_data_t* d = malloc(sizeof(name##_data_t)); \
+Frees:
+  Line 37: free(temp1);
+  Line 52: free(temp1);
+  Line 65: free(res1);
+  Line 70: free(res2);
+  Line 6: free(temp1);
+  Line 31: free(self); /* name##_data_t を解放 */ \
+  Line 41: if (!p || !d) { free(p); free(d); return NULL; } \
+  Line 34: free(p);
+  Line 26: free(current_data); // 古いデータを解放
+  Line 6: free(impl->processors);
+  Line 7: free(impl);
+  Line 23: if (!impl->processors) { free(impl); return NULL; }
+  Line 31: if (!p) { free(impl->processors); free(impl); return NULL; }
+  Line 12: free(res);
+  Line 16: free(self);
+  Line 27: if (!p || !d) { free(p); free(d); return NULL; }
+  Line 16: free(self);
+  Line 27: if (!p || !d) { free(p); free(d); return NULL; }
+  Line 15: free(self);
+  Line 29: if (!p || !d) { free(p); free(d); return NULL; }
+  Line 16: free(self); /* name##_data_t を解放 */ \
+  Line 25: if (!p || !d) { free(p); free(d); return NULL; } \
+
+--- 18_第2部 第14章 統合実践（応用）_02.md ---
+Static Variables (Check for Thread Safety):
+  Line 25: static IProcessorVTable name##_vtable = { name##_impl, name##_destroy }; \
+  Line 8: static int is_aes_initialized = 0;
+  Line 42: static ICryptoEngineVTable aes_vtable = {
+  Line 29: static ICryptoEngineVTable mock_vtable = {
+Allocations:
+  Line 22: return strdup(buf); \
+  Line 29: name##_data_t* d = malloc(sizeof(name##_data_t)); \
+  Line 21: return strdup(buf);
+  Line 37: CustomerModule* self = malloc(sizeof(CustomerModule));
+  Line 11: CustomerModule* self = malloc(sizeof(CustomerModule));
+  Line 19: char* buf = malloc(len);
+  Line 49: AESEngineData* data = malloc(sizeof(AESEngineData));
+  Line 53: ICryptoEngine* engine = malloc(sizeof(ICryptoEngine));
+  Line 14: return strdup("[MOCK]encrypted");
+  Line 36: ICryptoEngine* engine = malloc(sizeof(ICryptoEngine));
+Frees:
+  Line 24: static void name##_destroy(void* self) { free(self); } \
+  Line 31: if (!p || !d) { free(p); free(d); return NULL; } \
+  Line 48: free(encrypted);
+  Line 23: free(engine);
+  Line 32: free(self);
+  Line 31: free(encrypted);
+  Line 38: free(self); // AESEngineDataの解放
+  Line 56: free(data);
+  Line 19: free(encrypted);
+  Line 25: // ここで free(self) を実行してはならない（クラッシュの原因となる）。
