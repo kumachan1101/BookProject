@@ -77,7 +77,7 @@ APIを通じて初期化指示と温度値（整数）をやり取りします�
     style Helper fill:#f9f,stroke:#333,stroke-width:2px
 ```
 
-#### temperature_sensor.h
+#### センサーモジュールのヘッダ設計（公開契約）
 
 センサーモジュールが外部に対して保証する「契約（公開API）」のみを定義しています。`stdbool.h` をインクルードし、初期化関数と読み取り関数のプロトタイプ宣言を行っています。
 
@@ -97,7 +97,7 @@ int temperature_sensor_read(void);  // 戻り値: 温度(℃ × 10)、エラー�
 #endif // TEMPERATURE_SENSOR_H
 ```
 
-#### temperature_sensor.c
+#### 状態変数と内部実装のカプセル化
 
 ヘッダで宣言されたAPIを実装し、`static`変数を用いて内部状態（キャリブレーション値など）をこのファイル内に「閉じ込めて」います。まず、状態変数とプライベートな補助関数を見てみましょう。
 
@@ -124,6 +124,8 @@ static bool is_reading_valid(int raw_value)
 }
 ```
 
+#### 公開APIの実装（初期化処理）
+
 続いて、公開APIの初期化処理です。初期化を実行し、エラーカウンタをリセットしています。
 
 初期化の具体的な手順（ここでは単純な変数リセットやログ出力）を隠蔽しています。内部実装の変更がインターフェースに影響しないため、高い保守性が保たれています。
@@ -139,6 +141,8 @@ bool temperature_sensor_init(void)
     return true;
 }
 ```
+
+#### 公開APIの実装（温度読み取り処理）
 
 最後に、メイン機能である温度読み取りAPIです。内部のヘルパー関数 `is_reading_valid` を使用して値を検証し、補正値を適用して返します。
 
@@ -164,7 +168,7 @@ int temperature_sensor_read(void)
 }
 ```
 
-#### main.c
+#### クライアントからの利用（依存遮断の確認）
 
 センサーモジュールの利用者となるクライアントコードです。公開API `temperature_sensor_init` と `temperature_sensor_read` のみを呼び出し、温度データを取得・表示しています。
 
@@ -200,7 +204,7 @@ int main(void)
 }
 ```
 
-#### 実行結果
+#### 利用側から見た実行時の振る舞い
 
 プログラムの実行結果です。内部のキャリブレーション値が適用された温度が取得できていることがわかります。
 
@@ -251,7 +255,7 @@ int main(void)
     style State fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
-#### logger.h
+#### ログ機能のインターフェース設計
 
 ログ出力機能のインターフェースを定義しています。`log_message` 関数のプロトタイプ宣言のみを行います。
 
@@ -267,7 +271,7 @@ void log_message(const char* message);
 #endif // LOGGER_H
 ```
 
-#### logger.c
+#### 関数内staticによるログシステムの実装
 
 ログ出力機能の実装です。関数内 `static` 変数を活用して状態を管理しています。
 
@@ -301,7 +305,7 @@ void log_message(const char* message)
 }
 ```
 
-#### main.c
+#### 利用側（自動初期化の恩恵）
 
 ログ機能の利用者コードです。明示的な初期化関数を呼ぶことなく、`log_message` を連続して呼び出しています。
 
@@ -322,7 +326,7 @@ int main(void)
 }
 ```
 
-#### 実行結果
+#### ログシステムの実行結果
 
 初回呼び出し時のみ初期化メッセージが表示され、以降はカウントアップされていることが確認できます。
 
@@ -378,7 +382,7 @@ APIを中心としたアクセス制御を示した図です。
     style Init fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
-#### connection_pool.h
+#### プール機能のインターフェース設計
 
 コネクションプールのインターフェース定義です。今回は構造体の隠蔽（不完全型）も利用しています。
 
@@ -400,7 +404,7 @@ bool connection_pool_execute(ConnectionPool* pool, const char* query);
 #endif // CONNECTION_POOL_H
 ```
 
-#### connection_pool.c
+#### シングルトンパターンによるプールの実装
 
 シングルトンパターンの実装です。まず、構造体の定義と、唯一のインスタンス、そしてそれを取得する関数を見てみます。
 
@@ -445,6 +449,8 @@ ConnectionPool* connection_pool_get(void)
 }
 ```
 
+#### プールを利用したクエリ実行APIの実装
+
 次に、コネクションプールを利用する具体的な操作関数です。取得したプールに対してクエリを実行します。
 
 操作対象を引数として受け取ることで、操作の責任を明確にしています。「どのプールに対して操作するか」が明示的であり、副作用の範囲が予測しやすくなっています。
@@ -464,7 +470,7 @@ bool connection_pool_execute(ConnectionPool* pool, const char* query)
 }
 ```
 
-#### main.c
+#### 複数モジュールからのプール共有
 
 複数のモジュールからコネクションプールを利用するシミュレーションです。`module_a` と `module_b` からそれぞれ `connection_pool_get` を呼び出し、同じプールに対してクエリを発行しています。
 
@@ -500,7 +506,7 @@ int main(void)
 }
 ```
 
-#### 実行結果
+#### シングルトンの動作確認
 
 どのモジュールから呼ばれても、クエリ番号（`query_count`）が継続してカウントアップされており、同じインスタンスが使われていることがわかります。
 
