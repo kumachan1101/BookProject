@@ -76,7 +76,7 @@ IMGKIT_OPTIONS = {
 CODE_CSS = """
 <style>
 /* 全体の背景 */
-body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 1400px; box-sizing: border-box; }
+body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 1400px; max-width: 1400px; box-sizing: border-box; overflow: hidden; }
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
@@ -98,6 +98,8 @@ body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 140
   font-weight: 600 !important;
   border: 2px solid #44475a; /* 枠線を少し明るく */
   white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-word;
   word-wrap: break-word;
 }
 
@@ -393,7 +395,7 @@ def emphasize_code_symbols(text: str) -> str:
 
     text = safe_sub(
         r'\b([a-zA-Z_][a-zA-Z0-9_]*\.(?:c|h))\b',
-        r"<code style='font-family: monospace; font-weight: 600; background-color: #e8f5e9; padding: 0.1em 0.3em; border: 1px solid #c8e6c9;'>\1</code>",
+        r"<code style='font-family: monospace; font-weight: 600; background-color: #f5f5f5; padding: 0.1em 0.3em; border: 1px solid #e0e0e0;'>\1</code>",
         text
     )
     text = safe_sub(

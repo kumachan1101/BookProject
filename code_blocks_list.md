@@ -1,0 +1,389 @@
+# コード例一覧
+
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (10 行): `#ifndef TEMPERATURE_SENSOR_H #define TEMPERATURE_S...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (15 行): `#include "temperature_sensor.h" #include <stdio.h>...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (8 行): `// 公開API実装: 初期化処理 bool temperature_sensor_init(voi...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (16 行): `// 公開API実装: 温度読み取り int temperature_sensor_read(voi...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (26 行): `#include "temperature_sensor.h" #include <stdio.h>...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (5 行): `=== Temperature Sensor Example === [Sensor] Initia...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (6 行): `#ifndef LOGGER_H #define LOGGER_H  // 抽象契約：ログ出力のAP...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (22 行): `#include "logger.h" #include <stdio.h> #include <s...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (11 行): `#include "logger.h"  int main(void) {     log_mess...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (5 行): `--- Log System Initialized --- [LOG #1] Applicatio...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (12 行): `#ifndef CONNECTION_POOL_H #define CONNECTION_POOL_...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (33 行): `#include "connection_pool.h" #include <stdio.h> #i...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (11 行): `// 具象実装C: クエリ実行 bool connection_pool_execute(Conne...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (26 行): `#include "connection_pool.h" #include <stdio.h>  /...`
+- **03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md** (5 行): `=== Connection Pool Example === [Pool] Initializin...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (6 行): `#ifndef DATA_SORTER_H #define DATA_SORTER_H  // 設計...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (24 行): `#include <stdio.h> #include "data_sorter.h"  // 前章...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (8 行): `// 外部公開関数 int ascending_compare(const void* a, con...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (26 行): `#include "data_sorter.h" #include <stdio.h> #inclu...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (6 行): `int main(void) {     run_comparison_test();      r...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (5 行): `TRACE: [Client] 比較テストを開始します。 [Client] === 昇順比較 (x=...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (24 行): `#ifndef LOGGER_INTERFACE_H #define LOGGER_INTERFAC...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (17 行): `#include "logger_interface.h" #include <stdio.h>  ...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (16 行): `// 具象実装B: コンソールログ実装 #include "logger_interface.h" ...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (20 行): `// main.c #include "logger_interface.h" #include <...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (19 行): `int main(void) {     printf("[main] 処理開始。\n");    ...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (12 行): `[main] 処理開始。 --- FileLoggerを注入 --- [FILE LOG] Lvl ...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (37 行): `#ifndef MESSAGE_WRITER_H #define MESSAGE_WRITER_H ...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (21 行): `#include "message_writer.h" #include <stdio.h>  //...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (18 行): `// --- 具象実装B: 呼び出し回数カウンター付きロガー ---  static void co...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (12 行): `// 依存注入のためのヘルパー実装 void init_prefix_writer(MessageW...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (42 行): `#include "message_writer.h" #include <stdio.h>  //...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md** (15 行): `=== インスタンス固有の『状態』を持つ動的結合のテスト === --- Writer 1 (Pre...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md** (13 行): `#ifndef STATUS_MONITOR_H #define STATUS_MONITOR_H ...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md** (23 行): `// status_monitor.c #include "status_monitor.h" #i...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md** (11 行): `#include <stdio.h>  void handle_status_update_v1(i...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md** (26 行): `#include "status_monitor.h" #include <stdio.h> #in...`
+- **04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md** (10 行): `[main] 処理開始: 制御の反転（IoC）テスト --- Listener V1 注入（状態1を...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (18 行): `#include <stdint.h> #include <stdbool.h>  // 抽象契約：...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (9 行): `#include "color.h" #include <stdio.h>  Color color...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (14 行): `// original構造体を内部で変更しない設計契約 Color color_to_graysca...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (4 行): `bool color_equals(Color a, Color b) {     return (...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (21 行): `#include "color.h" #include <stdio.h> #include <st...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (6 行): `int main(void) {     use_color_object();      retu...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (3 行): `Original: R=255 After Grayscale: Original R: 255, ...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (17 行): `#ifndef USER_H #define USER_H  // 抽象契約：Entity Obje...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (20 行): `#include "user.h" #include <stdlib.h> #include <st...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (8 行): `// メモリ解放の責任をこの関数に単一化 void user_destroy(User* user)...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (17 行): `#include "user.h" #include <stdio.h> #include <std...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (6 行): `int main(void) {     use_user_entity();      retur...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (4 行): `--- use_user_entity 開始 --- [user.c] User 'Alice' 生...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (34 行): `#ifndef DEVICE_H #define DEVICE_H  // 外部で定義されるServ...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (38 行): `#include "device.h" #include <stdlib.h> #include <...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (18 行): `// 破棄における所有権に基づいたリソース解放 void device_destroy(Device...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (24 行): `// ※本来は Logger の定義が必要ですが、ここではポインタとしての扱いを示すため省略形としま...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md** (3 行): `[Device] 生成完了。内部バッファを所有し、Loggerを参照しています。 [Device] ...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_02.md** (30 行): `#ifndef SHAPE_H #define SHAPE_H  typedef enum {   ...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_02.md** (21 行): `#include "shape.h" #include <stdio.h>  int shape_a...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_02.md** (21 行): `#include "shape.h" #include <stdio.h>  int main(vo...`
+- **05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_02.md** (2 行): `Circle Area: 300 Rect Area: 40...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (10 行): `// 設計意図: structタグのみを宣言し、内部データ構造を隠蔽（不完全型） struct Co...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (9 行): `#include "context.h" #include <stdlib.h> #include ...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (16 行): `// 具象実装：ファクトリ関数（生成） Context_t* context_create(void...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (8 行): `// 具象実装：値の読み出し関数 int context_get_value(const Conte...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (8 行): `// 具象実装：デストラクタ関数（破棄） void context_destroy(Context_...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (18 行): `#include "context.h" #include <stdio.h> #include <...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (6 行): `int main(void) {     use_context_module();      re...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (3 行): `[context.c] Context struct secured: 0x... [client....`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (14 行): `// 抽象契約：データ構造は不完全型で隠蔽 typedef struct Object Object...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (10 行): `#include "object.h" #include <stdlib.h> #include <...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (14 行): `Object_t* object_create(const VTable_t* vtable_imp...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (10 行): `void object_do_something(Object_t* obj) {     // 防...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (7 行): `// 内部状態の公開アクセサ int object_get_state(const Object_t...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (7 行): `void object_destroy(Object_t* obj) {     if (obj !...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (17 行): `#include "object.h" #include <stdio.h> #include <s...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (11 行): `void use_vtable_object(void) {     // 具象VTable（振る舞...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (6 行): `int main(void) {     use_vtable_object();      ret...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (3 行): `[object.c] Object created at 0x..., VTable set. Co...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (10 行): `#define ERROR_NULL_POINTER -1 #define ERROR_INVALI...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (32 行): `// バリデーション付きSetter #define MAX_VALUE 100  // 具象実装：...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (12 行): `// 初期化：internal_stateを10に設定する場合の修正イメージ // （※既存の co...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (1 行): `// （※値読み出し関数 context_get_value は2.1節ですでに定義済みのため省略）...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (6 行): `void context_destroy(Context_t* ctx) {     if (ctx...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (29 行): `#include "context.h" #include <stdio.h> #include <...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (6 行): `int main(void) {   use_context_module_with_setter(...`
+- **06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md** (6 行): `[context.c] Attempting to set value to 50... [cont...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (5 行): `// <stdbool.h> をインクルードしていない typedef struct Sensor ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (11 行): `#include <stdbool.h>  // 先にこれをインクルードしてしまう #include...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (25 行): `#include "sensor.h"  // bool が未定義なのでコンパイルエラー！ // e...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (9 行): `#ifndef SENSOR_H #define SENSOR_H #include <stdboo...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (19 行): `// IWYU原則：自身のヘッダを最初にインクルード #include "sensor.h" // ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (3 行): `bool sensor_is_ready(Sensor_t* sensor) {     retur...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (3 行): `void sensor_destroy(Sensor_t* sensor) {     free(s...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (10 行): `#include "sensor.h"  // sensor.h が自己完結しているので安全  vo...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (11 行): `#include <stdint.h> #include "hardware_driver.h"  ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (5 行): `// これをインクルードすると... // hardware_driver.h も自動的にインクルー...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (12 行): `#ifndef HARDWARE_DRIVER_H #define HARDWARE_DRIVER_...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (9 行): `#include "hardware_driver.h" #include <stdio.h>  H...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (5 行): `float hardware_read_data(HardwareHandle* hw) {    ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (6 行): `void hardware_close(HardwareHandle* hw) {     if (...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (11 行): `#ifndef SENSOR_H #define SENSOR_H // 設計の勘所: ここで ha...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (15 行): `#include "sensor.h" // 実装でのみ必要な依存関係（ヘッダには現れない） // ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (12 行): `Sensor_t* sensor_create_hardware(unsigned int hw_i...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (8 行): `int sensor_read(Sensor_t* sensor, float* out_value...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (8 行): `void sensor_destroy(Sensor_t* sensor) {     if (se...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (9 行): `// logger.h #ifndef LOGGER_H #define LOGGER_H // セ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (13 行): `#include "logger.h" #include <stdio.h>  void log_s...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (15 行): `#include "sensor.h" #include "logger.h" #include <...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (5 行): `[Hardware] Initialized ID: 42 [sensor.c] Sensor cr...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (8 行): `// user.h typedef struct User User; // プレフィックスがない ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (6 行): `typedef struct Product Product; // 関数名が衝突する可能性 Pro...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (19 行): `#ifndef USER_H #define USER_H  typedef struct User...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (27 行): `#include "user.h" #include <stdlib.h> #include <st...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (6 行): `const char* user_get_name(const User_t* user) {   ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (7 行): `void user_destroy(User_t* user) {     if (user != ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (11 行): `#ifndef PRODUCT_H #define PRODUCT_H // 他の定数は defin...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (22 行): `#include "product.h" #include <stdlib.h> #include ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (7 行): `void product_destroy(Product_t* product) {     if ...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (6 行): `const char* product_get_name(const Product_t* prod...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (20 行): `#include "user.h" #include "product.h" #include <s...`
+- **07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md** (6 行): `[user.c] User 'Alice' created [product.c] Product ...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (13 行): `#ifndef USER_H #define USER_H // 設計意図: Userモジュールの公...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (11 行): `#ifndef STORAGE_H #define STORAGE_H // 設計意図: Stora...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (24 行): `#include <stdio.h> #include <stdlib.h> #include "u...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (2 行): `[ERROR] User Module Fault: Code -1001 [ERROR] Stor...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (8 行): `// 抽象契約の定義：User_tの宣言 (不完全型) struct User; typedef s...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (44 行): `#include "user.h" #include <stdlib.h> #include <st...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (4 行): `void user_destroy(User_t* user) {     if (user != ...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (31 行): `#include <stdio.h> #include <stdlib.h> #include "u...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (6 行): `int main(void) {     run_user_creation_test();    ...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (3 行): `[main.c] 成功: コード 0。ハンドル: 0x... [user.c] Error: Inv...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (27 行): `#ifndef FILE_MODULE_H #define FILE_MODULE_H #inclu...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (64 行): `#include "file_module.h" #include <stdlib.h> #incl...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (7 行): `void file_close(FileHandle_t* handle) {     if (ha...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (4 行): `int file_get_last_error(void) {     return last_fi...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (20 行): `const char* file_get_error_message(int error_code)...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (38 行): `#include <stdio.h> #include <stdlib.h> #include "f...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (6 行): `int main(void) {     test_file_operations();      ...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (10 行): `--- Test 1: 成功ケース --- [file_module.c] File opened:...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (11 行): `// storage.h #ifndef STORAGE_H #define STORAGE_H #...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (35 行): `#include "storage.h" #include <string.h> #include ...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (11 行): `// user_profile.h #ifndef USER_PROFILE_H #define U...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (45 行): `#include "user_profile.h" #include "storage.h" #in...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (32 行): `#include <stdio.h> #include <stdlib.h> #include "u...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (6 行): `int main(void) {     test_error_propagation();    ...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md** (11 行): `--- Test 1: 成功ケース --- [storage.c] Written: alice =...`
+- **08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_02.md** (14 行): `typedef enum {     ERR_OK = 0,     // システム系     ER...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (8 行): `// 移譲の例  void resource_destroy(Resource* res) {   ...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (8 行): `// 参照の例  int process_data(const Data* data) {     ...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (17 行): `// 生成の例  Resource* resource_create(size_t capacity...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (20 行): `#include <stddef.h>  // 不完全型：内部構造を隠蔽 struct DataMa...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (39 行): `#include "data_manager.h" #include <stdlib.h> #inc...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (19 行): `// 形態 I: 移譲の実装 void dm_destroy(DataManager_t* dm) ...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (8 行): `// 形態 II: 参照の実装 int dm_process(const DataManager_t...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (23 行): `#include "data_manager.h" #include <stdio.h>  int ...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (6 行): `[生成開始] capacity=100 [生成成功] 0x5578b2c0 [処理] 0x5578b...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (8 行): `#include <stddef.h>  // 形態 II: 参照（バッファ提供） // input...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (23 行): `#include "buffer_processor.h" #include <string.h> ...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (18 行): `#include <stdio.h> #include "buffer_processor.h"  ...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (12 行): `#include <stdio.h> #include <stdlib.h>  // ダミーのリソー...`
+- **09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md** (52 行): `int complex_operation(void) {     // ステップ1: すべてのポイ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (11 行): `typedef struct {     // 1. 永続化（データベース管理者の責任）     u...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (8 行): `#ifndef USER_AUTH_H #define USER_AUTH_H // 構造体タグ(U...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (8 行): `#ifndef USER_PROFILE_H #define USER_PROFILE_H  typ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (15 行): `#ifndef USER_ENTITY_H #define USER_ENTITY_H // ヘッダ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (32 行): `#include <stdio.h> #include <time.h> #include <str...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (2 行): `=== SRP違反コードの実行 === ログファイル app.log に出力されました...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (3 行): `[14:23:15] Level 1: Application started [14:23:15]...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (8 行): `#ifndef LOG_FORMATTER_H #define LOG_FORMATTER_H #i...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (25 行): `#include "log_formatter.h" #include <stdio.h> #inc...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (5 行): `#ifndef FILE_LOG_WRITER_H #define FILE_LOG_WRITER_...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (15 行): `#include "file_log_writer.h" #include <stdio.h>  i...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (5 行): `#ifndef LOGGER_H #define LOGGER_H  void log_messag...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (14 行): `#include "log_formatter.h" #include "file_log_writ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (12 行): `#include "logger.h" #include <stdio.h>  int main(v...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (2 行): `=== SRP準拠コードの実行 === ログファイル app.log に出力されました...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md** (3 行): `[14:23:15] Level 1: Application started [14:23:15]...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (24 行): `#include <stdio.h> #include <string.h> // 選択ロジックと計...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (16 行): `int main(void) {     printf("=== SRP違反コードの実行 ===\n...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (7 行): `=== SRP違反コードの実行 === 小サイズデータ（500バイト）の圧縮 --- Executi...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (14 行): `#ifndef COMPRESSION_STRATEGY_H #define COMPRESSION...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (6 行): `#ifndef LZ4_STRATEGY_H #define LZ4_STRATEGY_H #inc...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (25 行): `#include "lz4_strategy.h" #include <stdio.h> #incl...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (6 行): `#ifndef GZIP_STRATEGY_H #define GZIP_STRATEGY_H #i...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (24 行): `#include "gzip_strategy.h" #include <stdio.h> #inc...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (6 行): `#ifndef COMPRESSION_SELECTOR_H #define COMPRESSION...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (14 行): `#include "compression_selector.h" #include "lz4_st...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (5 行): `#ifndef COMPRESSOR_H #define COMPRESSOR_H  int com...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (15 行): `#include "compressor.h" #include "compression_sele...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (20 行): `#include "compressor.h" #include <stdio.h> #includ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (9 行): `=== SRP準拠コードの実行 === 小サイズデータ（500バイト）の圧縮 --- [Compre...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (48 行): `#include <stdio.h> #include <stdlib.h> #include <s...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (19 行): `// 責任2: UI表示（特定のフォーマットでの出力）  void library_print_st...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (8 行): `#ifndef BOOK_H #define BOOK_H  typedef struct {   ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (14 行): `#ifndef LIBRARY_H #define LIBRARY_H #include <stdd...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (26 行): `#include "library.h" #include <stdlib.h> #include ...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (40 行): `void library_add_book(Library* lib, const char* ti...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (7 行): `#ifndef UI_H #define UI_H #include "library.h"  vo...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (30 行): `#include "ui.h" #include <stdio.h>  void ui_displa...`
+- **12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md** (15 行): `#include "library.h" #include "ui.h"  int main(voi...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (19 行): `#ifndef IDEVICE_H #define IDEVICE_H #include <stdd...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (49 行): `#include "idevice.h" #include <stdio.h> #include <...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (17 行): `#include "idevice.h" #include <stdio.h> // ビジネスロジッ...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (27 行): `#include "idevice.h" #include <stdio.h> #include <...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (48 行): `#include "idevice.h" #include <stdio.h> #include <...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (33 行): `// 既存の外部宣言 extern int core_process_data(IDevice* d...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (29 行): `#include <stdio.h> // 割引の種類を増やすたびに、この列挙型と関数の修正が必要 ...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (11 行): `#ifndef IDISCOUNT_H #define IDISCOUNT_H  typedef s...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (14 行): `#include "idiscount.h" #include <stdio.h> // この関数は...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (26 行): `#include "idiscount.h" #include <stdlib.h>  typede...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (26 行): `#include "idiscount.h" #include <stdlib.h>  typede...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (26 行): `#include "idiscount.h" #include <stdio.h> // 各戦略の生...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (12 行): `#include <stdio.h>  typedef enum {     PAY_CREDIT ...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (18 行): `// enumの順番と一貫性を保つ責任が開発者に丸投げされている  int (*fee_table[...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (8 行): `int main(void) {     printf("--- クレジットカード ---\n");...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (11 行): `#ifndef IFEE_H #define IFEE_H  typedef struct {   ...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (26 行): `#include "ifee.h" #include <stdlib.h>  typedef str...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (26 行): `#include "ifee.h" #include <stdlib.h>  typedef str...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (15 行): `#include "ifee.h" #include <stdio.h> // この関数は、将来支払...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md** (19 行): `#include "ifee.h" #include <stdio.h> // 各戦略の生成（詳細は...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (21 行): `#include <stdio.h> #include <stdbool.h>  void send...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (6 行): `// イメージ typedef struct {     INotifyStrategy base;...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (15 行): `#ifndef INOTIFY_STRATEGY_H #define INOTIFY_STRATEG...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (31 行): `#include "inotify_strategy.h" #include <stdio.h> #...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (20 行): `#include "inotify_strategy.h" #include <stdio.h> #...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (18 行): `INotifyStrategy* create_scheduled_notify(const cha...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (15 行): `#include "inotify_strategy.h" #include <stdio.h> /...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (7 行): `#ifndef IMMEDIATE_NOTIFY_H #define IMMEDIATE_NOTIF...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (7 行): `#ifndef SCHEDULED_NOTIFY_H #define SCHEDULED_NOTIF...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (19 行): `#include "inotify_strategy.h" #include "immediate_...`
+- **13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md** (33 行): `#include "idevice.h" #include <string.h> #include ...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md** (57 行): `#ifndef IFILE_STREAM_H #define IFILE_STREAM_H #inc...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md** (8 行): `#ifndef ISTORAGE_H #define ISTORAGE_H #include <st...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md** (22 行): `#include "istorage.h" #include <string.h>  typedef...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md** (35 行): `#include "istorage.h" #include <string.h> #include...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (34 行): `#include "isensor.h" #include <time.h>  typedef st...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (16 行): `#include "isensor.h" // ハードウェア読み取りのモック（本来は別ヘッダ） fl...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (18 行): `#ifndef ISENSOR_H #define ISENSOR_H  /**  * @brief...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (28 行): `#ifndef IRESOURCE_H #define IRESOURCE_H  /* 契約で定義さ...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (31 行): `#include "iresource.h" #include <stdbool.h> #inclu...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (33 行): `#include "iresource.h" #include <stdbool.h> #inclu...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (48 行): `/* LSP COMPLIANT: エラーマッピングによる事後条件の保証 */  static in...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (31 行): `#include "iresource.h" #include <stdio.h> #include...`
+- **14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md** (3 行): `--- Acquiring Resource --- [NetProvider] Internal ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (12 行): `#ifndef DEVICE_MANAGER_H #define DEVICE_MANAGER_H ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (10 行): `#ifndef DEVICE_TYPES_H #define DEVICE_TYPES_H // 設...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (9 行): `#ifndef DEVICE_MONITOR_H #define DEVICE_MONITOR_H ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (6 行): `#ifndef DEVICE_CONFIGURATOR_H #define DEVICE_CONFI...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (16 行): `#include "device_monitor.h" #include "device_confi...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (15 行): `#include <stdio.h> #include "device_monitor.h" // ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (6 行): `// すべての機能を詰め込んだVTable typedef struct {     int (*r...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (18 行): `// 読み取り専用デバイスの実装 static int read_only_read_data(vo...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (7 行): `#ifndef IDEVICE_READER_H #define IDEVICE_READER_H ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (7 行): `#ifndef IDEVICE_CONFIGURATOR_H #define IDEVICE_CON...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (7 行): `#ifndef IDEVICE_OPTIMIZER_H #define IDEVICE_OPTIMI...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (12 行): `#ifndef IDEVICE_RWC_H #define IDEVICE_RWC_H #inclu...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (20 行): `#include "idevice_reader.h" #include <stdio.h> sta...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (26 行): `#include "IDeviceRWC.h" #include <stdio.h> #includ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md** (11 行): `int main(void) {     // 擬似的なデバイス生成（本来はFactoryで行う） ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md** (15 行): `#ifndef MODULE_B_H #define MODULE_B_H #include <st...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md** (12 行): `#ifndef MODULE_A_H #define MODULE_A_H #include "mo...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md** (9 行): `#include "module_a.h"  int main(void) {     // この時...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md** (16 行): `#ifndef MODULE_A_H #define MODULE_A_H  /* * 【ISP適用...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md** (7 行): `#include "module_a.h" #include "module_b.h" // 実装フ...`
+- **15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md** (12 行): `#include "module_a.h"  int main(void) {     /* * 設...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (19 行): `#ifndef MYSQL_DRIVER_H #define MYSQL_DRIVER_H #inc...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (33 行): `#include "mysql_driver.h" #include <stdio.h> #incl...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (19 行): `#include "mysql_driver.h"  // ← 具象実装に直接依存 #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (5 行): `=== Processing Order === [MySQL] Connecting to: lo...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (12 行): `// PostgreSQLに変更する場合、order_service.cを全面的に書き換える必要があ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (16 行): `#ifndef IDATABASE_H #define IDATABASE_H #include <...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (9 行): `// ヘルパーマクロ // 呼び出し側のコードを簡潔にするためのシンタックスシュガー #define...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (9 行): `#include "idatabase.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (24 行): `// 具象実装 // 抽象インターフェースで定義されたシグネチャに従って実装します  static ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (28 行): `// VTableの実体 // 関数ポインタを静的に定義します static const IData...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (32 行): `#include "idatabase.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (29 行): `// VTableの実体 // 関数ポインタを静的に定義します static const IData...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (17 行): `#include "idatabase.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (13 行): `int main(void) {     // 1. MySQLの実装を注入     IDataba...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (10 行): `=== MySQL Operations === [MySQL] Connecting to: lo...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (23 行): `#include <stdio.h> #include <stdlib.h>  // --- 具象実...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (34 行): `// --- レポーター（複数の具象に密結合） --- typedef struct {     i...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (15 行): `int main(void) {     printf("=== 本番環境（DIP違反：実機センサー...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (7 行): `=== 本番環境（DIP違反：実機センサー） === [Hardware] Reading from...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (16 行): `#ifndef ISENSOR_H #define ISENSOR_H  // センサーロジックの型...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (25 行): `#include "isensor.h" #include <stdio.h> #include <...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (24 行): `#include "isensor.h" #include <stdio.h> #include <...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (10 行): `#include "isensor.h" #include <stdlib.h>  // 共通のデス...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (16 行): `#ifndef WEATHER_REPORTER_H #define WEATHER_REPORTE...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (35 行): `#include "weather_reporter.h" #include <stdio.h> #...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (27 行): `#include "isensor.h" #include "weather_reporter.h"...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md** (7 行): `=== 本番環境（物理センサーを注入） === [Hardware] Reading from I2...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (18 行): `#include <stdio.h> #include <string.h> #include <s...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (45 行): `// 具象実装2：ZIP（追加された具象詳細）  char* zip_compress(const ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (4 行): `=== 固定された変換（DIP違反） === [AES:password123] [ZIP:larg...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (11 行): `#ifndef ITRANSFORM_H #define ITRANSFORM_H // 変換ロジッ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (31 行): `#include "itransform.h" #include <stdlib.h> #inclu...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (26 行): `// --- ZIP実装 ---  static char* zip_impl(void* self...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (31 行): `// --- NoOp実装（変換なし） --- static char* noop_impl(voi...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (16 行): `#include "itransform.h" #include <stdio.h> #includ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (24 行): `#include "itransform.h" #include <stdio.h> // プロトタ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (4 行): `=== メソッド注入：処理ごとに戦略を切り替え === [AES-256:password123] ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (30 行): `#include <stdio.h> #include <stdlib.h> #include <s...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (17 行): `// 外部から「具象のポインタ」と「内部管理用のタイプ」を渡さなければならない  void set_...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (16 行): `int main(void) {     UserService* s = create_servi...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (8 行): `=== 配信なし === Registering: alice === メール通知を設定 === R...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (10 行): `#ifndef INOTIFIER_H #define INOTIFIER_H // 通知ロジックの...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (33 行): `#include "inotifier.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (21 行): `#include "inotifier.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (21 行): `void set_notifier(struct UserService* service, INo...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (9 行): `#ifndef INOTIFIER_H #define INOTIFIER_H  typedef s...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (19 行): `#include "inotifier.h" #include <stdio.h>  /* User...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (13 行): `/* *  **依存先を切り替える前に、古い通知器を破棄する。**      * 構造体の中身を知ら...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (8 行): `=== 通知なし === Registering: alice === メール通知を設定（プロパティ...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (37 行): `#include "idatabase.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (20 行): `static const IDatabaseVTable MOCK_VTABLE = {     ....`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (13 行): `#include "idatabase.h" #include <stdio.h> #include...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (30 行): `extern IDatabase* create_mock_database(MockDatabas...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md** (11 行): `=== テスト実行 === === Test Operations === [Mock] Conne...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md** (7 行): `typedef struct {     double (*calculate_tax)(void*...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md** (43 行): `#include "itax.h" #include <assert.h> #include <st...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md** (21 行): `#include "itax.h" #include <stdlib.h>  static doub...`
+- **16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md** (7 行): `// 例：ファイルシステムの抽象化 typedef struct {     // ファイルは「開い...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (14 行): `#include "file_io.h"      // DIP違反: 具象IOモジュールに直接依存...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (14 行): `// SRP違反: IO、Parser、制御の3つの責任が混在  int processor_run...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (10 行): `// 2. Parser（処理） - json_parserという具象を直接知っている     pr...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (56 行): `// 3. IO（出力） - file_ioという具象を直接知っている     printf("[P...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (10 行): `=== SOLID原則違反コードの実行 === [Processor] 入力処理開始: input....`
+- **17_第2部 第13章 統合実践（基本）_01.md** (8 行): `#ifndef PROCESSED_DATA_H #define PROCESSED_DATA_H ...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (26 行): `#ifndef I_IO_H #define I_IO_H #include "processed_...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (23 行): `#include "i_io.h" #include <stdlib.h>  char* io_re...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (26 行): `#ifndef I_PARSER_H #define I_PARSER_H #include "pr...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (28 行): `#include "i_parser.h" #include <stdlib.h>  Process...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (9 行): `#ifndef PROCESSOR_H #define PROCESSOR_H #include "...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (39 行): `#include "processor.h" #include <stdlib.h> #includ...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (6 行): `#ifndef FILE_IO_IMPL_H #define FILE_IO_IMPL_H #inc...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (27 行): `#include "file_io_impl.h" #include "processed_data...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (38 行): `// 具象実装：destroyメソッド  static void file_io_destroy_i...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (6 行): `#ifndef JSON_PARSER_IMPL_H #define JSON_PARSER_IMP...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (26 行): `#include "i_parser.h" #include "processed_data.h" ...`
+- **17_第2部 第13章 統合実践（基本）_01.md** (43 行): `// 具象実装：free_dataメソッド  static void json_parser_fre...`
+- **17_第2部 第13章 統合実践（基本）_02.md** (54 行): `// システムのエントリポイント // 具象実装のヘッダをインクルード（依存をこの層に集中させます）...`
+- **17_第2部 第13章 統合実践（基本）_02.md** (12 行): `=== DIP/DI準拠コードの実行 === [Main] モジュール初期化中... [Main] ...`
+- **17_第2部 第13章 統合実践（基本）_02.md** (36 行): `#include "i_io.h" #include <stdlib.h> #include <st...`
+- **17_第2部 第13章 統合実践（基本）_02.md** (43 行): `#include "processor.h" #include <stdio.h> // NetIO...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (74 行): `#include <stdio.h> #include <stdlib.h> #include <s...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (8 行): `=== main開始 (原則適用前：密結合) ===   [Log] Filter 実行中...  ...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (9 行): `char* pipeline_process_bad(const char* input) {   ...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (7 行): `// 処理が2つの場合: 2パターン pipeline_process_bad()         ...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (7 行): `#ifndef CONCRETE_PROCESSORS_H #define CONCRETE_PRO...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (53 行): `#include "concrete_processors.h" #include <stdio.h...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (11 行): `#ifndef I_PROCESSOR_H #define I_PROCESSOR_H #inclu...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (36 行): `#include "i_processor.h" // 内部構造体の定義 typedef struc...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (7 行): `#ifndef PIPELINE_PROCESSOR_H #define PIPELINE_PROC...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (38 行): `#include "pipeline_processor.h" #include <string.h...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (37 行): `static void pipeline_destroy_impl(void* self) {   ...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (52 行): `#include <stdio.h> #include <stdlib.h> #include <s...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (8 行): `=== main開始 (原則適用後：柔軟な結合) ===   [Log] Filtered 実行中....`
+- **18_第2部 第14章 統合実践（応用）_01.md** (34 行): `// Filter の実装  typedef struct { int call_count; } ...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (34 行): `// Compressor の実装（ほぼ同じ構造を再度記述）  typedef struct { i...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (2 行): `DEFINE_PROCESSOR(filter, "Filtered") DEFINE_PROCES...`
+- **18_第2部 第14章 統合実践（応用）_01.md** (31 行): `#define DEFINE_PROCESSOR(name, label) \ \ typedef ...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (7 行): `// たった1行追加するだけ DEFINE_PROCESSOR(encryptor, "Encryp...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (3 行): `IProcessor* enc = encryptor_processor_create(); ch...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (46 行): `/* 必要なヘッダのインクルード */ #include "i_processor.h" #incl...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (33 行): `int main(void) {     // 各プロセッサを生成     IProcessor* ...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (5 行): `// 120通りのパターンすべてに対応できる IProcessor* pattern_A[] = {...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (11 行): `IProcessor* リサイズ = resize_processor_create(); IPro...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (9 行): `IProcessor* 正規化 = normalize_processor_create(); IP...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (6 行): `// この1つのファイルだけで、無限の組み合わせに対応 pipeline_processor.c  ...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (12 行): `// テストコード  void test_customer_save() {     Custome...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (49 行): `/* ========================================  * 具象的...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (7 行): `void test_customer_save() {     CustomerModule* cm...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (2 行): `CustomerModule* cm = customer_module_create(); // ...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (11 行): `#ifndef I_CRYPTO_ENGINE_H #define I_CRYPTO_ENGINE_...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (15 行): `#ifndef I_CRYPTO_ENGINE_INTERNAL_H #define I_CRYPT...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (25 行): `#include "i_crypto_engine_internal.h"  char* crypt...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (15 行): `#ifndef CUSTOMER_MODULE_H #define CUSTOMER_MODULE_...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (33 行): `#include "customer_module.h" #include <stdio.h> #i...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (6 行): `#ifndef AES_CRYPTO_ADAPTER_H #define AES_CRYPTO_AD...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (65 行): `#include "aes_crypto_adapter.h" #include "i_crypto...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (11 行): `#ifndef MOCK_CRYPTO_H #define MOCK_CRYPTO_H #inclu...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (43 行): `#include "mock_crypto.h" #include "i_crypto_engine...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (29 行): `#include "customer_module.h" #include "aes_crypto_...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (3 行): `=== 本番環境 ===   [AES] 実際の暗号化処理中...   [CustomerModul...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (43 行): `#include "customer_module.h" #include "mock_crypto...`
+- **18_第2部 第14章 統合実践（応用）_02.md** (7 行): `=== テスト環境 ===   [Mock] 暗号化をシミュレート（実際の処理なし）   [Cust...`
