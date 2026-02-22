@@ -11,7 +11,7 @@ import imgkit
 
 # ========= 設定 =========
 CHAPTER_DIR = Path("../02_章別")  # 修正: 02_章別を対象にする
-DIST_DIR = Path("dist")
+DIST_DIR = Path("../05_生成/dist")
 IMG_DIR = DIST_DIR / "images"
 MERMAID_DIR = IMG_DIR / "mermaid"
 CODE_IMG_DIR = IMG_DIR / "code"
@@ -20,7 +20,7 @@ BOOK_HTML = DIST_DIR / "book.html"
 BOOK_EPUB = DIST_DIR / "book.epub"
 BOOK_MOBI = DIST_DIR / "book.mobi"
 
-COVER_IMAGE = Path("cover.png")
+COVER_IMAGE = Path("../cover.png")
 
 # Kindle互換性設定
 MAX_IMAGE_WIDTH = 1400
@@ -29,19 +29,24 @@ MAX_IMAGE_HEIGHT = 1600
 # 【重要】ご自身の環境に合わせてパスを変更してください
 MMDC = r"C:\Users\kumac\AppData\Roaming\npm\mmdc.cmd"
 
+TARGET_CODE_IMAGE_HEIGHT = 1400  # コード画像の目標高さ
+LINE_HEIGHT_PX = 55              # 1行あたりの推定高さ (line-height 1.45 * font-size 38px)
+
 IMGKIT_OPTIONS = {
     "format": "png",
     "encoding": "UTF-8",
     "quiet": "",
     "width": str(MAX_IMAGE_WIDTH),
+    "minimum-font-size": "1",    # フォントサイズ縮小を防止
     "quality": "95",
+    "disable-smart-width": "",   # 指定幅を厳守
 }
 
 # 視認性を最大化したCSS設定（ファイル名見出し・色分け強化版）
 CODE_CSS = """
 <style>
 /* 全体の背景 */
-body { margin: 0; padding: 0; background: #1a1a1a; }
+body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 1400px; box-sizing: border-box; }
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
@@ -110,8 +115,7 @@ body { margin: 0; padding: 0; background: #1a1a1a; }
 </style>
 """
 
-# 1画像あたりの最大行数（文字拡大に合わせて調整）
-MAX_LINES_PER_IMAGE = 24
+# MAX_LINES_PER_IMAGE は動的計算に置き換え（TARGET_CODE_IMAGE_HEIGHT / LINE_HEIGHT_PX ベース）
 
 
 # ========= 初期化 =========
@@ -224,8 +228,12 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
     part_num = 0
     
     while start_line < len(highlighted_lines):
+        # タイトル部分の高さを考慮して動的に行数を計算
+        title_height = 120 if (title and part_num == 0) else 0
+        available_height = TARGET_CODE_IMAGE_HEIGHT - title_height - 100  # パディング分を引く
+        max_lines_for_chunk = max(10, int(available_height / LINE_HEIGHT_PX))
         remaining = len(highlighted_lines) - start_line
-        chunk_size = min(remaining, MAX_LINES_PER_IMAGE)
+        chunk_size = min(remaining, max_lines_for_chunk)
         end_line = start_line + chunk_size
         chunk_html = '\n'.join(highlighted_lines[start_line:end_line])
         

@@ -28,7 +28,7 @@ BOOK_HTML = DIST_DIR / "book.html"
 BOOK_EPUB = DIST_DIR / "book.epub"
 BOOK_MOBI = DIST_DIR / "book.mobi"
 
-COVER_IMAGE = Path("cover.png")
+COVER_IMAGE = Path("05_生成/cover.png")
 
 # Kindle互換性設定
 MAX_IMAGE_WIDTH = 1400
@@ -169,8 +169,32 @@ def split_pdf_by_pages(pdf_path: Path) -> dict:
         print(f"[PDF] 総ページ数: {total_pages}")
         
         # 各ページを各章に1ページずつ配分
+        # PDFの各ページは「各章」に対応しているが、MDファイルのインデックスとは異なる。
+        # 以下は PDFのページ数(0-14) を MDファイルのインデックス にマッピングする辞書
+        PAGE_TO_MD_INDEX = {
+            0: 0,   # 第1部 第1章
+            1: 1,   # 第1部 第2章
+            2: 2,   # 第1部 第3章
+            3: 4,   # 第1部 第4章
+            4: 5,   # 第1部 第5章
+            5: 6,   # 第1部 第6章
+            6: 8,   # 第1部 第7章
+            7: 11,  # 第2部 第8章
+            8: 13,  # 第2部 第9章
+            9: 15,  # 第2部 第10章
+            10: 17, # 第2部 第11章
+            11: 19, # 第2部 第12章
+            12: 22, # 第2部 第13章
+            13: 24, # 第2部 第14章
+            14: 26  # 第2部 第15章
+        }
+        
         for page_num in range(total_pages):
-            chapter_index = page_num  # ページ0→章0, ページ1→章1, ...
+            if page_num not in PAGE_TO_MD_INDEX:
+                print(f"[WARN] ページ{page_num}に対応するMDファイルが設定されていません")
+                continue
+                
+            chapter_index = PAGE_TO_MD_INDEX[page_num]
             
             if chapter_index not in chapter_images:
                 chapter_images[chapter_index] = []
@@ -412,15 +436,19 @@ def process_md(md_path: Path, chapter_index: int):
     """Markdownファイルを処理（章ごとのPDF画像挿入対応）"""
     print(f"\n[MD] {md_path.name} (章{chapter_index})")
     text = md_path.read_text(encoding="utf-8")
-    
-    # 段落間空行処理は削除(テーブル変換を壊すため)
-    
+
+    # ![PDF](chapterXX.pdf) 形式の行をMarkdown段階で除去
+    # （PDFはPDFImageとして章ごとに挿入されるため、Markdownの参照は不要）
+    text = re.sub(r'!\[PDF\]\([^)]*\.pdf\)\s*', '', text)
+
     # ファイル名から安全なIDを生成（バッククォートなどを除去）
     safe_stem = re.sub(r'[\\/:*?"<>|`]', '_', md_path.stem)
     
     # 章タイトル抽出
     h1_match = re.search(r"^# (.+)$", text, flags=re.M)
     chapter_title = h1_match.group(1) if h1_match else md_path.stem
+
+    
 
     code_counter = 0
     code_placeholders = {}
@@ -554,16 +582,18 @@ def process_md(md_path: Path, chapter_index: int):
     
     # 章ごとのPDF画像を挿入 (章の直後、H1タグのすぐ後ろ)
     if chapter_index in chapter_pdf_images:
-        pdf_html = '<div style="margin: 2em 0; page-break-after: always;">\n'
-        # 「参考資料」という項目名は不要とのことで削除
-        # pdf_html += '<h2 style="... >参考資料</h2>\n'
+        pdf_html = '<div style="margin: 2em 0; page-break-after: always; page-break-inside: avoid;">\n'
         for pdf_img_path in chapter_pdf_images[chapter_index]:
-            pdf_html += f'<div style="margin: 0.5em 0; text-align: center;"><img src="{pdf_img_path}" alt="Reference Material" style="max-width: 100%; height: auto;"/></div>\n'
+            pdf_html += f'<div style="margin: 0.5em 0; text-align: center;"><img src="{pdf_img_path}" alt="Reference Material" style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;"/></div>\n'
         pdf_html += '</div>\n'
         
         # h1タグの直後にPDF画像を挿入
         h1_pattern = r'(<h1[^>]*>.*?</h1>)'
-        html_content = re.sub(h1_pattern, r'\1' + pdf_html, html_content, count=1)
+        # 既存のMarkdown由来のPDF画像を削除
+        html_content = re.sub(r'<p><img src="[^"]+\.pdf".*?/?></p>', '', html_content)
+        html_content = re.sub(r'<p>!\[PDF\]\([^)]+\)</p>', '', html_content)
+        
+        html_content = re.sub(h1_pattern, r'\1\n' + pdf_html, html_content, count=1)
     
     return html_content, chapter_title
 
@@ -600,8 +630,8 @@ def main():
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><title>Book</title>
 <style>
-body{{font-family:"Hiragino Mincho ProN",serif; line-height:1.6; margin:0; padding:0.5em; text-align:left; color:#111;}} 
-p{{margin: 0.5em 0;}}
+body{{font-family:"Hiragino Mincho ProN",serif; line-height:1.6; margin:0; padding:0.5em; text-align:justify; color:#111;}} 
+p{{margin: 0.5em 0; text-indent: 1em;}}
 h1{{margin: 1.5em 0 1em 0; line-height: 1.3;}}
 h2{{margin: 1.5em 0 0.8em 0; line-height: 1.3;}}
 h3, h4, h5, h6 {{margin: 1.2em 0 0.6em 0; line-height: 1.3;}}
@@ -633,7 +663,7 @@ blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc;
     try:
         print("[EPUB変換開始...]")
         subprocess.run(epub_options, check=True)
-        print(f"✓ EPUB完了: {BOOK_EPUB}")
+        print(f"[OK] EPUB完了: {BOOK_EPUB}")
         
         # MOBI変換
         if Path(BOOK_EPUB).exists():
@@ -641,7 +671,7 @@ blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc;
             subprocess.run(["ebook-convert", str(BOOK_EPUB), str(BOOK_MOBI), 
                             "--output-profile", "kindle", 
                             "--mobi-file-type", "both"], check=True)
-            print(f"✓ MOBI完了: {BOOK_MOBI}")
+            print(f"[OK] MOBI完了: {BOOK_MOBI}")
             
             # PDF変換
             print("[PDF変換開始...]")
@@ -651,7 +681,7 @@ blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc;
                             "--paper-size", "a5",
                             "--pdf-default-font-size", "12",
                             "--pdf-mono-font-size", "12"], check=True)
-            print(f"✓ PDF完了: {book_pdf}")
+            print(f"[OK] PDF完了: {book_pdf}")
     except Exception as e:
         print(f"[ERROR] 変換失敗: {e}")
         print("※Calibreがインストールされているか確認してください。")
