@@ -169,8 +169,32 @@ def split_pdf_by_pages(pdf_path: Path) -> dict:
         print(f"[PDF] 総ページ数: {total_pages}")
         
         # 各ページを各章に1ページずつ配分
+                # PDFの各ページは「各章」に対応しているが、MDファイルのインデックスとは異なる。
+        # 以下は PDFのページ数(0-14) を MDファイルのインデックス にマッピングする辞書
+        PAGE_TO_MD_INDEX = {
+            0: 2,   # 第1部 第1章
+            1: 3,   # 第1部 第2章
+            2: 4,   # 第1部 第3章 (_01)
+            3: 6,   # 第1部 第4章
+            4: 7,   # 第1部 第5章
+            5: 8,   # 第1部 第6章 (_01)
+            6: 10,  # 第1部 第7章 (_01)
+            7: 12,  # 第2部 第8章 (_01)
+            8: 14,  # 第2部 第9章 (_01)
+            9: 19,  # 第2部 第10章 (_01)
+            10: 22, # 第2部 第11章 (_01)
+            11: 24, # 第2部 第12章 (_01)
+            12: 27, # 第2部 第13章 (_01)
+            13: 29, # 第2部 第14章 (_01)
+            14: 31  # 第2部 第15章
+        }
+        
         for page_num in range(total_pages):
-            chapter_index = page_num  # ページ0→章0, ページ1→章1, ...
+            if page_num not in PAGE_TO_MD_INDEX:
+                print(f"[WARN] ページ{page_num}に対応するMDファイルが設定されていません")
+                continue
+                
+            chapter_index = PAGE_TO_MD_INDEX[page_num]
             
             if chapter_index not in chapter_images:
                 chapter_images[chapter_index] = []
@@ -422,6 +446,8 @@ def process_md(md_path: Path, chapter_index: int):
     h1_match = re.search(r"^# (.+)$", text, flags=re.M)
     chapter_title = h1_match.group(1) if h1_match else md_path.stem
 
+    
+
     code_counter = 0
     code_placeholders = {}
 
@@ -554,16 +580,18 @@ def process_md(md_path: Path, chapter_index: int):
     
     # 章ごとのPDF画像を挿入 (章の直後、H1タグのすぐ後ろ)
     if chapter_index in chapter_pdf_images:
-        pdf_html = '<div style="margin: 2em 0; page-break-after: always;">\n'
-        # 「参考資料」という項目名は不要とのことで削除
-        # pdf_html += '<h2 style="... >参考資料</h2>\n'
+        pdf_html = '<div style="margin: 2em 0; page-break-after: always; page-break-inside: avoid;">\n'
         for pdf_img_path in chapter_pdf_images[chapter_index]:
-            pdf_html += f'<div style="margin: 0.5em 0; text-align: center;"><img src="{pdf_img_path}" alt="Reference Material" style="max-width: 100%; height: auto;"/></div>\n'
+            pdf_html += f'<div style="margin: 0.5em 0; text-align: center;"><img src="{pdf_img_path}" alt="Reference Material" style="max-width: 100%; height: auto; border: 1px solid #ddd; padding: 5px;"/></div>\n'
         pdf_html += '</div>\n'
         
         # h1タグの直後にPDF画像を挿入
         h1_pattern = r'(<h1[^>]*>.*?</h1>)'
-        html_content = re.sub(h1_pattern, r'\1' + pdf_html, html_content, count=1)
+        # 既存のMarkdown由来のPDF画像を削除
+        html_content = re.sub(r'<p><img src="[^"]+\.pdf".*?/?></p>', '', html_content)
+        html_content = re.sub(r'<p>!\[PDF\]\([^)]+\)</p>', '', html_content)
+        
+        html_content = re.sub(h1_pattern, r'\1\n' + pdf_html, html_content, count=1)
     
     return html_content, chapter_title
 
