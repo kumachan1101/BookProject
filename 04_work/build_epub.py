@@ -402,7 +402,81 @@ def process_md(md_path: Path):
         return html
     text = re.sub(r'(?:^\|.+\|$\n?){3,}', table_repl, text, flags=re.M)
 
+    # ---- Obsidian Callout 変換 ----
+    # > [!NOTE] タイトル
+    # > 本文行1
+    # > 本文行2
+    # → 水色/黄色/緑色の装飾ボックスに変換
+
+    callout_styles = {
+        'NOTE':      ('✏', '#e3f2fd', '#1565c0', '#bbdefb'),
+        'INFO':      ('ℹ', '#e3f2fd', '#1565c0', '#bbdefb'),
+        'TIP':       ('💡', '#e8f5e9', '#2e7d32', '#c8e6c9'),
+        'IMPORTANT': ('⚠', '#fff8e1', '#e65100', '#ffe082'),
+        'WARNING':   ('⚠', '#fff3e0', '#bf360c', '#ffcc80'),
+        'CAUTION':   ('❌', '#ffebee', '#b71c1c', '#ffcdd2'),
+        'SUCCESS':   ('✓', '#e8f5e9', '#2e7d32', '#c8e6c9'),
+    }
+
+    def convert_callout(text):
+        lines = text.split('\n')
+        result = []
+        i = 0
+        while i < len(lines):
+            # コールアウト開始行を探す: > [!TYPE] タイトル
+            m = re.match(r'^>\s*\[!(NOTE|INFO|TIP|IMPORTANT|WARNING|CAUTION|SUCCESS)\]\s*(.*)', lines[i], re.I)
+            if m:
+                ctype = m.group(1).upper()
+                ctitle = m.group(2).strip()
+                icon, bg, border_color, header_bg = callout_styles.get(ctype, ('ℹ', '#e3f2fd', '#1565c0', '#bbdefb'))
+                # 本文行を収集（> で始まる連続行）
+                body_lines = []
+                i += 1
+                while i < len(lines) and re.match(r'^>\s?', lines[i]):
+                    body_line = re.sub(r'^>\s?', '', lines[i]).strip()
+                    if body_line:
+                        body_lines.append(body_line)
+                    i += 1
+                # タイトルがない場合はctype自体をタイトルにする
+                display_title = ctitle if ctitle else ctype.capitalize()
+                body_html = ' '.join(body_lines)
+                # HTMLを生成
+                html = (
+                    f'<div style="background-color:{bg}; border-left:4px solid {border_color}; '
+                    f'border-radius:4px; margin:1.2em 0; padding:0.8em 1em; page-break-inside:avoid;">'
+                    f'<div style="color:{border_color}; font-weight:bold; margin-bottom:0.4em;">'
+                    f'{icon} {display_title}</div>'
+                    f'<div style="color:#333; line-height:1.8;">{body_html}</div>'
+                    f'</div>'
+                )
+                result.append(html)
+            elif re.match(r'^>\s?', lines[i]):
+                # コールアウト以外の > 行（通常blockquoteや孤立した >）
+                # 連続する > 行をまとめてHTMLのblockquoteに変換
+                bq_lines = []
+                while i < len(lines) and re.match(r'^>\s?', lines[i]):
+                    bq_line = re.sub(r'^>\s?', '', lines[i]).strip()
+                    if bq_line:
+                        bq_lines.append(bq_line)
+                    i += 1
+                if bq_lines:
+                    bq_html = (
+                        '<blockquote style="border-left:3px solid #ccc; '
+                        'margin:0.8em 0 0.8em 1em; padding:0.4em 1em; '
+                        'color:#555; font-style:italic;">'
+                        + ' '.join(bq_lines)
+                        + '</blockquote>'
+                    )
+                    result.append(bq_html)
+            else:
+                result.append(lines[i])
+                i += 1
+        return '\n'.join(result)
+
+    text = convert_callout(text)
+
     # 装飾
+
     text = re.sub(r'【重要】', r'<b style="background-color: #fff9c4; padding: 0.2em 0.5em; border-left: 3px solid #ffa726;">【重要】</b>', text)
     text = re.sub(r'【注意】', r'<b style="background-color: #ffcdd2; padding: 0.2em 0.5em; border-left: 3px solid #ef5350;">【注意】</b>', text)
     text = re.sub(r'【ポイント】', r'<b style="background-color: #e1f5fe; padding: 0.2em 0.5em; border-left: 3px solid #42a5f5;">【ポイント】</b>', text)
@@ -424,7 +498,7 @@ def process_md(md_path: Path):
     text = re.sub(r"^###### (.+)$", r'<h6 style="font-size: 1em; margin: 0.8em 0 0.4em 0; font-weight: bold;">\1</h6>', text, flags=re.M)
 
     # リストと段落
-    text = re.sub(r"^[\-\*] (.+)$", r"<li>\1</li>", text, flags=re.M)
+    text = re.sub(r"^[\-\*]\s+(.+)$", r"<li>\1</li>", text, flags=re.M)
     text = re.sub(r"(<li>.*?</li>\n?)+", lambda m: f"<ul style='margin: 1.2em 0; padding-left: 2em; line-height: 1.9;'>\n{m.group(0)}</ul>\n", text, flags=re.S)
 
     lines = []
@@ -490,19 +564,30 @@ img{{max-width:100%; height:auto;}}
 
     try:
         print("[EPUB変換開始...]")
-        subprocess.run(epub_options, check=True)
-        print(f"✓ EPUB完了: {BOOK_EPUB}")
+        result = subprocess.run(epub_options, capture_output=True)
+        if result.returncode == 0:
+            print("[OK] EPUB完了:", BOOK_EPUB)
+        else:
+            stderr = result.stderr.decode('utf-8', errors='replace')
+            print(f"[ERROR] EPUB変換失敗: {stderr}")
+            return
         
         # Kindle(MOBI)変換
         if Path(BOOK_EPUB).exists():
             print("[MOBI変換開始...]")
-            subprocess.run(["ebook-convert", str(BOOK_EPUB), str(BOOK_MOBI), 
-                            "--output-profile", "kindle", 
-                            "--mobi-file-type", "both"], check=True)
-            print(f"✓ MOBI完了: {BOOK_MOBI}")
+            result2 = subprocess.run([
+                "ebook-convert", str(BOOK_EPUB), str(BOOK_MOBI),
+                "--output-profile", "kindle",
+                "--mobi-file-type", "both"
+            ], capture_output=True)
+            if result2.returncode == 0:
+                print("[OK] MOBI完了:", BOOK_MOBI)
+            else:
+                stderr2 = result2.stderr.decode('utf-8', errors='replace')
+                print(f"[ERROR] MOBI変換失敗: {stderr2}")
     except Exception as e:
         print(f"[ERROR] 変換失敗: {e}")
-        print("※Calibreがインストールされているか確認してください。")
+        print("Calibreがインストールされているか確認してください。")
 
 if __name__ == "__main__":
     main()

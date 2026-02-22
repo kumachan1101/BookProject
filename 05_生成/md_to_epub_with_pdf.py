@@ -28,7 +28,7 @@ BOOK_HTML = DIST_DIR / "book.html"
 BOOK_EPUB = DIST_DIR / "book.epub"
 BOOK_MOBI = DIST_DIR / "book.mobi"
 
-COVER_IMAGE = Path("cover.png")
+COVER_IMAGE = Path("05_生成/cover.png")
 
 # Kindle互換性設定
 MAX_IMAGE_WIDTH = 1400
@@ -169,24 +169,24 @@ def split_pdf_by_pages(pdf_path: Path) -> dict:
         print(f"[PDF] 総ページ数: {total_pages}")
         
         # 各ページを各章に1ページずつ配分
-                # PDFの各ページは「各章」に対応しているが、MDファイルのインデックスとは異なる。
+        # PDFの各ページは「各章」に対応しているが、MDファイルのインデックスとは異なる。
         # 以下は PDFのページ数(0-14) を MDファイルのインデックス にマッピングする辞書
         PAGE_TO_MD_INDEX = {
-            0: 2,   # 第1部 第1章
-            1: 3,   # 第1部 第2章
-            2: 4,   # 第1部 第3章 (_01)
-            3: 6,   # 第1部 第4章
-            4: 7,   # 第1部 第5章
-            5: 8,   # 第1部 第6章 (_01)
-            6: 10,  # 第1部 第7章 (_01)
-            7: 12,  # 第2部 第8章 (_01)
-            8: 14,  # 第2部 第9章 (_01)
-            9: 19,  # 第2部 第10章 (_01)
-            10: 22, # 第2部 第11章 (_01)
-            11: 24, # 第2部 第12章 (_01)
-            12: 27, # 第2部 第13章 (_01)
-            13: 29, # 第2部 第14章 (_01)
-            14: 31  # 第2部 第15章
+            0: 0,   # 第1部 第1章
+            1: 1,   # 第1部 第2章
+            2: 2,   # 第1部 第3章
+            3: 4,   # 第1部 第4章
+            4: 5,   # 第1部 第5章
+            5: 6,   # 第1部 第6章
+            6: 8,   # 第1部 第7章
+            7: 11,  # 第2部 第8章
+            8: 13,  # 第2部 第9章
+            9: 15,  # 第2部 第10章
+            10: 17, # 第2部 第11章
+            11: 19, # 第2部 第12章
+            12: 22, # 第2部 第13章
+            13: 24, # 第2部 第14章
+            14: 26  # 第2部 第15章
         }
         
         for page_num in range(total_pages):
@@ -436,9 +436,11 @@ def process_md(md_path: Path, chapter_index: int):
     """Markdownファイルを処理（章ごとのPDF画像挿入対応）"""
     print(f"\n[MD] {md_path.name} (章{chapter_index})")
     text = md_path.read_text(encoding="utf-8")
-    
-    # 段落間空行処理は削除(テーブル変換を壊すため)
-    
+
+    # ![PDF](chapterXX.pdf) 形式の行をMarkdown段階で除去
+    # （PDFはPDFImageとして章ごとに挿入されるため、Markdownの参照は不要）
+    text = re.sub(r'!\[PDF\]\([^)]*\.pdf\)\s*', '', text)
+
     # ファイル名から安全なIDを生成（バッククォートなどを除去）
     safe_stem = re.sub(r'[\\/:*?"<>|`]', '_', md_path.stem)
     
@@ -661,7 +663,7 @@ blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc;
     try:
         print("[EPUB変換開始...]")
         subprocess.run(epub_options, check=True)
-        print(f"✓ EPUB完了: {BOOK_EPUB}")
+        print(f"[OK] EPUB完了: {BOOK_EPUB}")
         
         # MOBI変換
         if Path(BOOK_EPUB).exists():
@@ -669,7 +671,7 @@ blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc;
             subprocess.run(["ebook-convert", str(BOOK_EPUB), str(BOOK_MOBI), 
                             "--output-profile", "kindle", 
                             "--mobi-file-type", "both"], check=True)
-            print(f"✓ MOBI完了: {BOOK_MOBI}")
+            print(f"[OK] MOBI完了: {BOOK_MOBI}")
             
             # PDF変換
             print("[PDF変換開始...]")
@@ -679,7 +681,7 @@ blockquote {{margin: 1.2em 0; padding: 0.8em 1.2em; border-left: 5px solid #ccc;
                             "--paper-size", "a5",
                             "--pdf-default-font-size", "12",
                             "--pdf-mono-font-size", "12"], check=True)
-            print(f"✓ PDF完了: {book_pdf}")
+            print(f"[OK] PDF完了: {book_pdf}")
     except Exception as e:
         print(f"[ERROR] 変換失敗: {e}")
         print("※Calibreがインストールされているか確認してください。")
