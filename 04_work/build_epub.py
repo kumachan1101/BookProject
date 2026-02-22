@@ -50,7 +50,7 @@ BOOK_HTML = DIST_DIR / "book.html"
 BOOK_EPUB = DIST_DIR / "book.epub"
 BOOK_MOBI = DIST_DIR / "book.mobi"
 
-COVER_IMAGE = Path("../cover.png")
+COVER_IMAGE = Path("../05_生成/cover.png")
 
 # Kindle互換性設定
 MAX_IMAGE_WIDTH = 1400
@@ -309,13 +309,24 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
     start_line = 0
     part_num = 0
     
+    # 固定行数で統一（サイズの安定化）
+    MAX_LINES = 28
+    # タイトル付き最初の画像は少し減らす
+    MAX_LINES_WITH_TITLE = 25
+    # オーファン防止：残りがこの行数以下なら前のチャンクに含める
+    ORPHAN_THRESHOLD = 6
+    
     while start_line < len(highlighted_lines):
-        # タイトル部分の高さを考慮して動的に行数を計算
-        title_height = 120 if (title and part_num == 0) else 0
-        available_height = TARGET_CODE_IMAGE_HEIGHT - title_height - 100  # パディング分を引く
-        max_lines_for_chunk = max(10, int(available_height / LINE_HEIGHT_PX))
+        is_first = (part_num == 0 and title)
+        max_lines_for_chunk = MAX_LINES_WITH_TITLE if is_first else MAX_LINES
         remaining = len(highlighted_lines) - start_line
         chunk_size = min(remaining, max_lines_for_chunk)
+        
+        # オーファン防止：次のチャンクが少なすぎる場合、今のチャンクに含める
+        next_remaining = remaining - chunk_size
+        if 0 < next_remaining <= ORPHAN_THRESHOLD:
+            chunk_size = remaining  # 全部含める
+        
         end_line = start_line + chunk_size
         chunk_html = '\n'.join(highlighted_lines[start_line:end_line])
         
@@ -332,7 +343,7 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
         if title and part_num == 0:
             html += f"""<div style="background: #FFFFFF; color: #000000; padding: 25px 40px; 
             font-family: 'Consolas', 'Monaco', monospace; font-size: 34px; 
-            font-weight: 800; border-bottom: 4px solid #6272a4; margin-bottom: 0;">
+            font-weight: 800; border-bottom: 4px solid #999999; margin-bottom: 0;">
 {title}
 </div>
 """
@@ -456,20 +467,31 @@ def process_md(md_path: Path, chapter_index: int = -1):
         text = re.sub(rf'^({keyword}[^\n]*)$\s*\n+```c\s*(.*?)```', lambda m: extract_code_common(m.group(2), m.group(1)), text, flags=re.S | re.M)
     text = re.sub(r"```c\s*(.*?)```", lambda m: extract_code_common(m.group(1)), text, flags=re.S)
 
+    # Mermaidもプレースホルダ化してinline_code変換から保護
     img_counter = 0
+    mermaid_placeholders = {}
     def mermaid_repl(match):
         nonlocal img_counter; img_counter += 1
         img_name = f"{md_path.stem}_mermaid{img_counter}.png"
         if mermaid_to_image(match.group(1), MERMAID_DIR / img_name, img_counter):
-            return f'<div style="margin: 1.5em 0; page-break-inside: avoid; text-align: center; background-color: #fafafa; padding: 1em; border: 1px solid #ddd;"><img src="images/mermaid/{img_name}" alt="Diagram" style="max-width: 100%; height: auto;"/></div>'
-        return "<p>[図生成失敗]</p>"
+            html_result = f'<div style="margin: 1.5em 0; page-break-inside: avoid; text-align: center; background-color: #fafafa; padding: 1em; border: 1px solid #ddd;"><img src="images/mermaid/{img_name}" alt="Diagram" style="max-width: 100%; height: auto;"/></div>'
+        else:
+            html_result = "<p>[図生成失敗]</p>"
+        placeholder = f"@@MERMAID_BLOCK_{img_counter}@@"
+        mermaid_placeholders[placeholder] = html_result
+        return placeholder
     text = re.sub(r"```mermaid\s*(.*?)```", mermaid_repl, text, flags=re.S)
+
+    # ![PDF](chapterXX.pdf) を除去
+    text = re.sub(r'!\[PDF\]\([^)]+\.pdf\)', '', text)
 
     text = md_images_to_html(text)
     text = md_links_to_html(text)
     text = inline_code_to_html(text)
     text = emphasize_code_symbols(text)
+    # プレースホルダを復元（コード画像、Mermaid画像）
     for k, v in code_placeholders.items(): text = text.replace(k, v)
+    for k, v in mermaid_placeholders.items(): text = text.replace(k, v)
 
     # テーブル処理（簡潔かつ堅牢に）
     def table_repl(match):
