@@ -15,6 +15,36 @@ DIST_DIR = Path("../05_生成/dist")
 IMG_DIR = DIST_DIR / "images"
 MERMAID_DIR = IMG_DIR / "mermaid"
 CODE_IMG_DIR = IMG_DIR / "code"
+PDF_IMG_DIR = IMG_DIR / "pdf"
+
+# PDF資料のパス（04_workから見た相対パス）
+RESOURCE_PDF_PATH = Path("../03_資料/SOLID_C_Architecture.pdf")
+
+# PDFページ → MDファイルインデックスのマッピング（20ページ分）
+# インデックスは sorted(02_章別/*.md) の順番に対応
+# PDFスライドは章順に作成されているため、順番に各章の先頭ファイルへ対応付け
+PAGE_TO_MD_INDEX = {
+    0:  0,   # PDF p1  → 01_序論
+    1:  1,   # PDF p2  → 02_第1部 学習ガイドマップ
+    2:  2,   # PDF p3  → 03_第1部 第1章 static
+    3:  3,   # PDF p4  → 04_第1部 第2章 関数ポインタ_01
+    4:  5,   # PDF p5  → 05_第1部 第3章 構造体_01
+    5:  7,   # PDF p6  → 06_第1部 第4章 不完全型
+    6:  8,   # PDF p7  → 07_第1部 第5章 モジュール_01
+    7:  10,  # PDF p8  → 08_第1部 第6章 エラーハンドリング_01
+    8:  12,  # PDF p9  → 09_第1部 第7章 メモリ管理_01
+    9:  14,  # PDF p10 → 10_第1部 まとめ
+    10: 15,  # PDF p11 → 11_第2部 学習ガイドマップ
+    11: 16,  # PDF p12 → 12_第2部 第8章 SRP_01
+    12: 18,  # PDF p13 → 13_第2部 第9章 OCP_01
+    13: 20,  # PDF p14 → 14_第2部 第10章 LSP_01
+    14: 22,  # PDF p15 → 15_第2部 第11章 ISP_01
+    15: 24,  # PDF p16 → 16_第2部 第12章 DIP_01
+    16: 27,  # PDF p17 → 17_第2部 第13章 統合（基本）_01
+    17: 29,  # PDF p18 → 18_第2部 第14章 統合（応用）_01
+    18: 31,  # PDF p19 → 19_第2部 第15章 SOLID統合
+    19: 32,  # PDF p20 → 20_結論
+}
 
 BOOK_HTML = DIST_DIR / "book.html"
 BOOK_EPUB = DIST_DIR / "book.epub"
@@ -134,6 +164,7 @@ def force_remove_dist():
 
     MERMAID_DIR.mkdir(parents=True, exist_ok=True)
     CODE_IMG_DIR.mkdir(parents=True, exist_ok=True)
+    PDF_IMG_DIR.mkdir(parents=True, exist_ok=True)
     print(f"[INIT] ディレクトリ準備完了")
 
 force_remove_dist()
@@ -173,6 +204,57 @@ elif Path("cover.jpg").exists():
     optimize_image(cover_dest)
 else:
     print("[INFO] 表紙画像が見つかりません")
+
+
+# ========= PDF処理 =========
+def split_pdf_by_pages() -> dict:
+    """PDFを各ページ画像に変換し、MDファイルインデックスに対応付ける"""
+    if not RESOURCE_PDF_PATH.exists():
+        print(f"[WARN] PDFが見つかりません: {RESOURCE_PDF_PATH}")
+        return {}
+
+    print(f"[PDF] {RESOURCE_PDF_PATH.name} を各章に配分中...")
+    chapter_images = {}  # {md_index: [image_rel_paths]}
+
+    try:
+        import fitz  # PyMuPDF
+        doc = fitz.open(str(RESOURCE_PDF_PATH))
+        total_pages = len(doc)
+        print(f"[PDF] 総ページ数: {total_pages}")
+
+        for page_num in range(total_pages):
+            chapter_index = PAGE_TO_MD_INDEX.get(page_num)
+            if chapter_index is None:
+                print(f"[WARN] ページ{page_num}はマッピングなし")
+                continue
+
+            page = doc[page_num]
+            zoom = 150 / 72
+            mat = fitz.Matrix(zoom, zoom)
+            pix = page.get_pixmap(matrix=mat)
+
+            out_path = PDF_IMG_DIR / f"chapter{chapter_index:02d}_page{page_num+1:02d}.png"
+            pix.save(str(out_path))
+            optimize_image(out_path)
+
+            if chapter_index not in chapter_images:
+                chapter_images[chapter_index] = []
+            chapter_images[chapter_index].append(f"images/pdf/{out_path.name}")
+            print(f"  -> 章{chapter_index} にPDFページ{page_num+1}を配分")
+
+        doc.close()
+        print(f"[PDF] {len(chapter_images)}章に配分完了")
+        return chapter_images
+
+    except ImportError:
+        print("[ERROR] PyMuPDFがインストールされていません: pip install PyMuPDF")
+    except Exception as e:
+        print(f"[ERROR] PDF処理失敗: {e}")
+    return {}
+
+
+# PDFを各章に配分
+chapter_pdf_images = split_pdf_by_pages()
 
 
 # ========= Mermaid =========
@@ -338,7 +420,7 @@ def md_images_to_html(md_text: str) -> str:
 
 
 # ========= Markdown処理 =========
-def process_md(md_path: Path):
+def process_md(md_path: Path, chapter_index: int = -1):
     print(f"\n[MD] {md_path.name}")
     text = md_path.read_text(encoding="utf-8")
     
@@ -513,7 +595,18 @@ def process_md(md_path: Path):
     for line in text.splitlines():
         if line.strip() and not line.strip().startswith("<"): lines.append(f"<p>{line}</p>")
         else: lines.append(line)
-    return "\n".join(lines), chapter_title
+    html_content = "\n".join(lines)
+
+    # 章ごとのPDF画像をH1タグの直後に挿入
+    if chapter_index in chapter_pdf_images:
+        pdf_html = '<div style="margin: 2em 0; page-break-inside: avoid;">\n'
+        for pdf_img_path in chapter_pdf_images[chapter_index]:
+            pdf_html += f'<div style="margin: 0.5em 0; text-align: center;"><img src="{pdf_img_path}" alt="Slide" style="max-width: 100%; height: auto; border: 1px solid #ddd;"/></div>\n'
+        pdf_html += '</div>\n'
+        h1_pattern = r'(<h1[^>]*>.*?</h1>)'
+        html_content = re.sub(h1_pattern, r'\1\n' + pdf_html, html_content, count=1)
+
+    return html_content, chapter_title
 
 # ========= メイン =========
 def main():
@@ -526,9 +619,9 @@ def main():
 
     body = []
     chapters = []
-    for md in md_files:
+    for chapter_index, md in enumerate(md_files):
         try:
-            html, title = process_md(md)
+            html, title = process_md(md, chapter_index)
             body.append(html)
             chapters.append({'id': md.stem, 'title': title})
         except Exception as e:
@@ -593,6 +686,23 @@ img{{max-width:100%; height:auto;}}
             else:
                 stderr2 = result2.stderr.decode('utf-8', errors='replace')
                 print(f"[ERROR] MOBI変換失敗: {stderr2}")
+
+        # PDF変換
+        if Path(BOOK_EPUB).exists():
+            print("[PDF変換開始...]")
+            book_pdf = DIST_DIR / "book.pdf"
+            result3 = subprocess.run([
+                "ebook-convert", str(BOOK_EPUB), str(book_pdf),
+                "--pdf-page-numbers",
+                "--paper-size", "a5",
+                "--pdf-default-font-size", "12",
+                "--pdf-mono-font-size", "12"
+            ], capture_output=True)
+            if result3.returncode == 0:
+                print("[OK] PDF完了:", book_pdf)
+            else:
+                stderr3 = result3.stderr.decode('utf-8', errors='replace')
+                print(f"[ERROR] PDF変換失敗: {stderr3}")
     except Exception as e:
         print(f"[ERROR] 変換失敗: {e}")
         print("Calibreがインストールされているか確認してください。")
