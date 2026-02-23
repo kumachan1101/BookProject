@@ -1,0 +1,273 @@
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\01_section_1.md:245:#### 普遍的な設計力を獲得する意義 AND #### 1. **C言語の特異な立ち位置を理解する**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md:565:#### `static`キーワードの設計上の役割 AND #### 1. 静的な依存の切断を物理的に行う道具である
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md:213:#### 関数ポインタの設計上の役割 AND #### 1. 動的な依存の切断と制御を実現する道具である
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md:735:#### コンポジションの設計ポイント AND #### 所有権の三つのパターン
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_02.md:183:#### 構造体の役割の明確化 AND #### Value Object
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:20:#### 不完全型によるモジュール境界の確立 AND #### 物理的な依存の遮断
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:81:#### 設計の三本柱と不完全型 AND #### 契約 (境界)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:173:#### 構造体のメモリ確保と初期化（生成） AND #### context.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:199:#### 値の取得（アクセサ） AND #### context.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:215:#### リソースの解放（破棄） AND #### context.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:261:#### エントリポイント AND #### client.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:372:#### デリゲートを利用した生成関数の実装（VTableの注入） AND #### object.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:414:#### カプセル化を維持した状態取得アクセサ AND #### object.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:431:#### VTableを内包するオブジェクトの破棄 AND #### object.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:473:#### VTableを注入するコンポジションルートの構築 AND #### client.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:494:#### エントリポイント AND #### client.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md:765:#### 不完全型と不透明ポインタの設計上の役割 AND #### 1. 「情報隠蔽」の究極的な実現手段である
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:144:#### 依存不足による不完全なヘッダ設計（アンチパターン） AND #### sensor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:159:#### 利用側への不当な負担（アンチパターンの利用） AND #### application.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:180:#### コンパイル不能な実装ファイル（不備の露呈） AND #### sensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:215:#### IWYU原則に基づく自己完結したヘッダ設計 AND #### sensor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:234:#### 自身のヘッダを検証するインクルード順序 AND #### sensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:285:#### クリーンな依存によるクライアントコード AND #### application.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:373:#### ハードウェア詳細への不必要な依存（アンチパターン） AND #### sensor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:394:#### 推移的依存による被害の波及（アンチパターンの利用） AND #### logger.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:409:#### ハードウェア層の抽象化API定義 AND #### hardware_driver.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:477:#### 前方宣言による依存の完全排除（不完全型の活用） AND #### sensor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:498:#### 実装ファイルへの依存の封じ込め AND #### sensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:574:#### 疎結合なロガーのインターフェース AND #### logger.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:591:#### 抽象に依存したデータ出力の実装 AND #### logger.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:614:#### 構成ルートにおけるモジュールの統合 AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:708:#### 一般的すぎる名前による危険な設計（アンチパターン） AND #### user.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:728:#### 他モジュールとの必然的な名前衝突（アンチパターンの利用） AND #### product.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:744:#### プレフィックスを用いた擬似的名前空間の確立 AND #### user.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:773:#### プレフィックス規約を適用した具象構造と生成関数 AND #### user.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:841:#### 競合を回避する別モジュールの独立インターフェース AND #### product.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:862:#### 独立した名前空間内での実装定義 AND #### product.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md:921:#### プレフィックスによる衝突回避の統合利用 AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:10:#### 設計の三本柱とエラーハンドリングの関係 AND #### エラーの伝播と責任
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:92:#### ユーザーモジュール専用のエラー名前空間 AND #### user.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:113:#### ストレージモジュール専用のエラー名前空間 AND #### storage.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:132:#### エラー発生源の機械的な特定 AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:265:#### 戻り値と出力パラメータの物理的完全分離 AND #### user.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:283:#### 確実なポインタ初期化による事故防止 AND #### user.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:349:#### エラーチェックを強要する安全な制御フロー AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:456:#### 戻り値の型を維持した拡張エラーインターフェース AND #### file_module.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:493:#### スレッドセーフなエラー状態の格納 AND #### file_module.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:624:#### クリーンな戻り値とエラー詳細の後追い取得 AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:761:#### I/Oエラーをシミュレートするダミー実装 AND #### storage.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:805:#### 中間層の抽象的なエラー契約定義 AND #### user_profile.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:826:#### 具象エラーから抽象エラーへのマッピング実行 AND #### user_profile.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01.md:881:#### 上位層における抽象化されたエラーの受け取り AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_02.md:1:#### エラーコードの定義 AND #### 設計的判断
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:334:#### 実装例 AND #### data_manager.h - 外部に公開する契約
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:342:#### 不完全型による内部構造の隠蔽と契約定義 AND #### data_manager.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:374:#### 内部リソースの確保と初期化（生成） AND #### data_manager.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:424:#### 確保の逆順に行う安全なリソース解放（移譲） AND #### data_manager.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:453:#### 副作用のない安全なデータ参照（参照） AND #### data_manager.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:473:#### ライフサイクルに従った安全な利用フロー AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:607:#### 呼び出し側を主体とするバッファ渡しインターフェース AND #### buffer_processor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:627:#### 安全な境界チェックを伴うデータ書き込み AND #### buffer_processor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_01.md:662:#### スタック割り当てによる高速で安全な利用フロー AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_02.md:1:#### パターンの重要ポイント AND #### 逆順の解放プロセス
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\09_第1部 第7章 メモリ管理パターン - 責任の明確化_02.md:150:#### 実践のチェックリスト AND #### **設計時**  
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\10_第1部 総括 堅牢なコードの「基礎」は固まった.md:132:#### 「責任・契約・依存」の三本柱の実現状況 AND #### 三本柱の相互作用
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\11_第2部 導入：原則編の目的と学習ロードマップ.md:183:#### 解説のポイント：なぜ「制約」が設計を強くするのか AND #### **制約を武器にする**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\11_第2部 導入：原則編の目的と学習ロードマップ.md:242:#### 次章への橋渡し AND #### 第2部の学習目標：設計力の完成
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:215:#### 認証の関心事のみに凝集したデータ構造 AND #### user_auth.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:235:#### 表示の関心事のみに凝集したデータ構造 AND #### user_profile.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:255:#### 前方宣言による物理的依存の切断 AND #### user_entity.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:517:#### ✅ 原則適用後 (SRP準拠) AND #### 責任の分割
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:549:#### 他の処理に影響を与えない独立した文字加工 AND #### log_formatter.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:584:#### 出力先をカプセル化する永続化の契約 AND #### file_log_writer.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:598:#### 物理的な手続きに専念する書き込み実装 AND #### file_log_writer.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:623:#### クライアントに公開するシンプルなインターフェース AND #### logger.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:638:#### 委譲による制御フローのオーケストレーション AND #### logger.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:662:#### 内部の複雑さを感じさせない利用コード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01.md:692:#### 変化のない出力ログ AND #### app.log の内容（適用前と同じ）
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:60:#### ハードコードされた分岐に依存するクライアント AND #### compression_bad.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:132:#### ✅ 原則適用後 (SRP準拠) AND #### 責任の分割
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:147:#### 実行の責任を抽象化する契約定義 AND #### compression_strategy.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:171:#### 実装の詳細を隠蔽するファクトリ公開 AND #### lz4_strategy.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:187:#### 単一のアルゴリズムに専念する計算モジュール AND #### lz4_strategy.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:222:#### Gzipアルゴリズムのファクトリ公開 AND #### gzip_strategy.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:236:#### Gzipの計算ロジックのみに責任を持つ実装 AND #### gzip_strategy.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:270:#### 戦略の選択基準を公開するインターフェース AND #### compression_selector.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:286:#### ポリシーの関心事のみを集約した選択モジュール AND #### compression_selector.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:310:#### 利用者へ提供する抽象的な圧縮の窓口 AND #### compressor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:327:#### 選択と実行のコーディネートに徹する制御モジュール AND #### compressor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:352:#### 複雑さを意識させない利用コード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:540:#### 内部データ構造へ直接依存する表示ロジック AND #### library_bad.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:587:#### ✅ 原則適用後 (SRP準拠) AND #### 責任の分割
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:618:#### 内部を完全に隠蔽する状態管理の契約 AND #### library.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:642:#### データの保持と操作に専念するモジュール AND #### library.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:676:#### メモリ管理と整合性維持の実装 AND #### library.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:726:#### 表示形式を拡張可能な出力の契約 AND #### ui.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:743:#### データの見せ方に専念する表示モジュール AND #### ui.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_02.md:783:#### 独立したモジュールを組み合わせる利用コード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:133:#### あらゆるデバイスが準拠すべき共通契約 AND #### idevice.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:164:#### 実装詳細と状態を隠蔽したシリアル通信の実装 AND #### serial_device.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:224:#### 具象実装を一切知らない純粋なビジネスロジック AND #### application_core.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:289:#### 既存コードを修正せずに追加可能な新機能 AND #### usb_device.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:453:#### 設計の意図 AND #### 計算ルールがハードコードされた算出ロジック
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:523:#### 戦略の実行のみに専念する計算機 AND #### price_calculator.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:545:#### パーセント割引の計算ロジック AND #### percent_discount.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:577:#### 固定額割引の計算ロジック AND #### fixed_discount.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:613:#### 外部から戦略を注入するクライアント AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:740:#### 不正な入力に脆い計算ロジック AND #### fee_calculator_bad.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:766:#### 危険な状態を隠す呼び出しコード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:850:#### クレジット決済の固有データを秘匿する計算実装 AND #### credit_fee.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:882:#### コンビニ決済の固有データを秘匿する計算実装 AND #### convenience_fee.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:916:#### 新しい支払い方法にも無修正で対応する計算基盤 AND #### fee_calculator.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md:941:#### 戦略オブジェクトを生成して注入するコード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md:230:#### 即時送信モジュールの公開インターフェース AND #### immediate_notify.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md:243:#### 予約送信モジュールの公開インターフェース AND #### scheduled_notify.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md:260:#### 依存性を注入する最上位の構成コード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md:371:#### 具象への依存を隔離したファクトリ実装 AND #### device_factory.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md:412:#### OCPの本質とC言語での実装 AND #### 1.  **OCPの本質は「抽象への依存」**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md:231:#### 全実装が遵守すべき不完全型の契約書 AND #### IFileStream.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md:395:#### 任意のサイズ入力を許容する抽象契約 AND #### istorage.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md:415:#### 具象の都合をクライアントに押し付けるLSP違反実装 AND #### UnalignedStorage.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md:449:#### ✅ 原則適用後：具象側での制約の吸収（LSP準拠） AND #### **解決策**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01.md:520:#### 複雑さを内部で吸収するLSP準拠の実装 AND #### AlignedStorage.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:99:#### 最適化がもたらす時間的契約の裏切り AND #### EcoSensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:146:#### ✅ 原則適用後：契約に忠実な振る舞い（LSP準拠） AND ####  **解決策**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:233:#### 契約を優先する誠実なポーリング実装 AND #### RealTimeSensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:258:#### 時間的な振る舞いを明記したセンサー契約 AND #### isensor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:353:#### 戻り値の意味を厳密に定義したリソース契約 AND #### iresource.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:392:#### 内部の事情をそのまま漏洩させる違反実装 AND #### NetResourceProvider.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:506:#### 内部エラーを契約コードへ翻訳するマッパー AND #### NetResourceProvider.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:547:#### マッピングを経由して事後条件を守る実装 AND #### NetResourceProvider.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:605:#### 抽象化されたエラーのみを処理するクライアント AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_02.md:662:#### リスコフ置換原則 (LSP) の設計指針 AND #### 1.  **LSPの本質を「置換可能性」の保証と定義する** :
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:249:#### 再コンパイルの連鎖を招く肥大化したヘッダ AND #### device_manager.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:321:#### 設定機能専用の重いデータ定義 AND #### device_types.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:340:#### 監視クライアントを守るスリムな契約 AND #### device_monitor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:358:#### 必要な依存だけを受け入れる設定機能の契約 AND #### device_configurator.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:374:#### 複数の契約を裏側で統合する具象実装 AND #### device_manager.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:400:#### 余計な依存から解放された監視クライアント AND #### Client_Monitor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:489:#### あらゆる機能を詰め込んだ巨大なVTable AND #### idevice_rw_config.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:505:#### 不要な実装を強要されLSP違反を犯すデバイス AND #### ReadOnlyDevice.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:592:#### 読み取り能力だけに特化した最小の契約 AND #### idevice_reader.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:607:#### 設定の書き込み能力だけに特化した契約 AND #### idevice_configurator.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:622:#### データベース最適化能力だけに特化した契約 AND #### idevice_optimizer.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:639:#### 必要な能力だけを束ねるコンポジット構造体 AND #### IDeviceRWC.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:661:#### 自分が提供できる能力だけを素直に実装するデバイス AND #### ReadOnlyDevice.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:691:#### 複合されたポインタから安全に機能を利用するクライアント AND #### Client_Updater.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01.md:726:#### 機能をパズルのように組み立てて注入するコード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md:61:#### 無自覚に依存を抱え込む下位モジュール AND #### module_b.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md:85:#### ポインタ利用のためだけに全定義を巻き込む中間ヘッダ AND #### module_a.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md:106:#### 無関係な宣言まで強制的に読み込まされる利用者 AND #### Client_C.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md:172:#### 不完全型を用いて依存を断ち切る防波堤ヘッダ AND #### module_a.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md:198:#### 依存を内部に閉じ込める実装ファイル AND #### module_a.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_02.md:215:#### 下位の変更から完全に保護された利用者 AND #### Client_C.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:77:#### 具象への直接依存を強いるMySQL専用ヘッダ AND #### mysql_driver.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:104:#### MySQL固有の操作が露見した実装 AND #### mysql_driver.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:147:#### MySQLに完全に縛り付けられたビジネスロジック AND #### order_service.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:213:#### DB変更に伴う痛ましい全面書き換え行 AND #### order_service_postgres_change.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:362:#### データベース操作の抽象的な契約 AND #### idatabase.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:386:#### 使い勝手を向上させるヘルパーマクロ AND #### idatabase.h (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:405:#### 契約に従いMySQL固有のデータを隠蔽する実装 AND #### mysql_adapter.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:422:#### 契約メソッドを実装するMySQLアダプタ AND #### mysql_adapter.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:456:#### 抽象インターフェースを生成するファクトリ（MySQL） AND #### mysql_adapter.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:492:#### PostgreSQL固有のデータを隠蔽し契約を守るアダプタ AND #### postgres_adapter.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:532:#### 抽象インターフェースを生成するファクトリ（PostgreSQL） AND #### postgres_adapter.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:571:#### 抽象のみを信じて操作する純粋なビジネスロジック AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:598:#### 利用する具象を選択して注入するエントリーポイント AND #### main.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:709:#### 具象センサーをすべて知っているレポーター AND #### weather_reporter.c (DIP違反)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:740:#### 新しいデバイスが増えるたびに成長を続ける分岐地獄 AND #### weather_reporter.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:782:#### 意味不明なマジックナンバーに振り回される利用者 AND #### weather_reporter.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:822:#### センサーというハードウェアを抽象化した契約 AND #### isensor.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:847:#### 契約に従う物理ハードウェアセンサーの実装 AND #### hardware_sensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:880:#### 契約に従うテスト用モックセンサーの実装 AND #### mock_sensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:912:#### 抽象インターフェース共通の解放処理 AND #### common_sensor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:932:#### 抽象を受け入れるコンストラクタを持つ契約 AND #### weather_reporter.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:958:#### 注入された抽象に処理を委譲するビジネスロジック AND #### weather_reporter.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:1003:#### 具象を組み立てて上位モジュールに注入するコード AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md:1039:#### 依存性を注入して実行された処理の結果 AND #### 実行結果
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:27:#### 複数の変換ロジックが混在し密結合したプロセッサ AND #### data_processor.c (DIP違反)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:53:#### 変更の理由が異なる機能が同居するアンチパターン AND #### data_processor.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:123:#### 変換という振る舞いだけを定義した抽象的な契約 AND #### itransform.h (抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:147:#### 契約に従い詳細を隠蔽したAES変換の実装 AND #### concrete_transforms.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:186:#### 契約に透過的に従うZIPおよびNoOp変換の実装 AND #### concrete_transforms.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:260:#### 戦略を受け取り契約に従って処理を委譲するプロセッサ AND #### data_processor.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:286:#### 関数呼び出しごとに戦略を動的に切り替える利用者 AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:364:#### 具象の通知手段をすべて知り尽くしたサービス AND #### user_service.c (DIP違反)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:400:#### 具象のポインタとタイプを強引に渡すセッター AND #### user_service.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:425:#### マジックナンバーとキャストに苦しむ利用者 AND #### user_service.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:499:#### 通知という振る舞いを抽象化した契約 AND #### inotifier.h (抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:521:#### 契約に従うメールおよびSMS通知の実装 AND #### notifiers.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:571:#### 不透明ポインタで内部状態を完全に隠蔽したサービス AND #### user_service.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:601:#### 実行中にいつでも抽象を交換できるセッター AND #### user_service.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:632:#### 上位モジュールが使用するAPIだけを定義した公開ヘッダ AND #### inotifier.h (外部公開APIのイメージ)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:654:#### 安全に古い通知器を破棄し新しいものを注入する利用者 AND #### main.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:681:#### システムを止めずに依存先を切り替えるセッター注入 AND #### main.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:809:#### モックの実装例 AND #### **mock_database.c（テスト用モック）**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:819:#### 呼び出し回数やクエリ内容を記録するテスト用モック AND #### mock_database.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:866:#### 契約を遵守してモックを生成するファクトリ AND #### mock_database.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:896:#### モックの中身を覗き見して検証するテスト準備 AND #### test_business_logic.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md:919:#### 外部環境に一切依存しない超高速なテストコード AND #### test_business_logic.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md:8:#### 税計算の振る舞いだけを定義した抽象契約 AND #### itax.h (抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md:27:#### 本物の実装を待たずにロジックを証明するテスト AND #### test_order.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md:82:#### 契約に従い後から追加される本物の実装 AND #### japan_tax.c (本物の実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md:161:#### よくある誤解と注意点 AND #### 誤解1：「すべてを抽象化すべき」
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md:200:#### 操作の順序制約を表現した抽象インターフェース AND #### FileSystem_Example.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_03.md:213:#### DIPの本質 AND #### 技術要素の関連図
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:131:#### 全ての具象に直接依存した変更に脆い初期状態 AND #### simple_processor.c (初期バージョン - 密結合状態)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:153:#### 物理的な操作と制御の流れが混ざり合った状態 AND #### simple_processor.c (続き: ロジックの混在)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:175:#### 具象パーサーを直接呼び出してしまう解析処理 AND #### simple_processor.c (続き: 解析責任の混入)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:193:#### 実行の流れと後始末が混然一体となった制御 AND #### simple_processor.c (続き: 出力と終了処理)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:324:#### 全モジュールで共有される安定したデータ構造 AND #### processed_data.h (共通データ型)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:340:#### 読み書きの機能だけを抜き出した抽象契約 AND #### i_io.h (IOの抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:374:#### VTableをラップし安全性を担保する抽象API AND #### i_io.c (抽象APIの実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:406:#### 生成と破棄の責任をセットにした解析の契約 AND #### i_parser.h (Parserの抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:440:#### メモリ管理の詳細を隠蔽し安全に呼び出すAPI AND #### i_parser.c (抽象APIの実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:477:#### 抽象契約のみに依存する再設計された中核 AND #### processor.h (再設計された中核)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:494:#### 純粋な制御責任だけを持つ美しいプロセッサ AND #### processor.c (制御ロジックの完成)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:559:#### 抽象インターフェースを返すファクトリの公開 AND #### file_io_impl.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:573:#### 契約に適合するように実装されたファイル操作 AND #### file_io_impl.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:608:#### 具象データと振る舞いを結合するファクトリ AND #### file_io_impl.c (続き: VTableと生成)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:654:#### 抽象を返す生成関数だけを見せる公開ヘッダ AND #### json_parser_impl.h (具象Parserのファクトリ)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:668:#### 破棄の責任もセットで持つJSON解析の実装 AND #### json_parser_impl.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_01.md:702:#### メモリ管理の詳細を隠蔽するVTableと生成関数 AND #### json_parser_impl.c (続き: 解放と生成)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_02.md:26:#### 全ての具象を知り依存を注入する構成責任者 AND #### main.c (コンポジションルート)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_02.md:134:#### 依存が正しく注入され実行された結果 AND #### 実行結果
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_02.md:171:#### OCPを検証するためのネットワーク操作スタブ AND #### net_io_impl.c (検証用スタブ実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\17_第2部 第13章 統合実践（基本）_02.md:216:#### 既存のロジックに触れずに行う具象の切り替え AND #### main.c (NetIOへの切り替え)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:88:#### 順序がハードコードされ修正が困難なプロセッサ AND #### pipeline_bad.c (密結合なパイプライン)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:168:#### 原則適用前 (Bad) の出力 AND #### 柔軟性が欠如した固定順序の実行結果
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:192:#### 固定された関数名が引き起こす修正地獄 AND #### pipeline_process_bad.c (修正地獄の元凶)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:209:#### 順序変更によって引き起こされる組み合わせ爆発 AND #### code_snippet_01.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:312:#### 具体的な処理プロセッサを作成する抽象契約 AND #### concrete_processors.h (具象プロセッサ生成の宣言)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:330:#### マクロを活用して大量のボイラープレートを削減した実装 AND #### concrete_processors.c (マクロによる一括生成)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:429:#### 不完全型で実装の詳細を隠蔽した最高レベルの抽象契約 AND #### i_processor.h (抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:448:#### 安全な実行と破棄を保証する抽象APIの実働部 AND #### i_processor.c (抽象APIの実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:492:#### 複数のプロセッサを一つに束ねる複合処理の契約 AND #### pipeline_processor.h (Compositeのヘッダ)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:508:#### 与えられた処理を順に実行する複合体の実装 AND #### pipeline_processor.c (Compositeの実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:552:#### 自身の破棄と実体のバインドを行う複合体の生成 AND #### pipeline_processor.c (続き)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:608:#### 処理の順序と構成を自由に組み立てるコンポジションルート AND #### main.c (柔軟な組み立て)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:666:#### 実行結果と設計の比較 AND #### 原則適用後 (Good) の出力
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:672:#### 柔軟に順序が組み替えられた実行結果 AND #### 実行結果
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:686:#### C言語の隠れた武器：マクロで「面倒くさい」を自動化する AND #### なぜマクロを使うと楽になれるのか
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:701:#### 全てを手作業で記述した場合の冗長で脆いコード AND #### NoMacro_Example.c (マクロなしの冗長なコード)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:781:#### マクロを利用した極めて簡潔で安全なプロセッサの生成 AND #### Macro_Usage.c (マクロの利用)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_01.md:839:#### トークン結合を用いた動的な識別子生成 AND #### Macro_Expansion.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:22:#### わずか1行の追加で完了する新しい処理の拡張 AND #### Macro_Usage_Example.c (新しい部品の追加)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:39:#### マクロの存在を意識させないクリーンな利用側コード AND #### Client_Usage_Example.c (使う側のコード)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:55:#### 処理の無限の組み合わせを可能にする究極の柔軟性 AND #### flexible_pipeline_demo.c (究極の柔軟性)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:107:#### 構成ルートにおける柔軟な組み合わせの設定 AND #### flexible_pipeline_demo.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:156:#### 無限の組み合わせを配列の定義だけで実現 AND #### Combinations.c (無限の組み合わせ)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:174:#### 画像処理における柔軟なパイプラインの応用例 AND #### Image_Pipeline.c (画像処理での応用)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:195:#### データ分析における試行錯誤を支えるパイプライン構造 AND #### Data_Analysis_Pipeline.c (データ分析での応用)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:228:#### 適切な設計投資がもたらす圧倒的な保守性と拡張性 AND #### Comparison.c (設計投資のリターン)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:320:#### 本物の処理が走ってしまいテストが書けないコード AND #### test_impossible_example.c (テストが書けないコード)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:375:#### 隠れた状態と密結合によりテストを拒絶する実装 AND #### bad_implementation.c (テスト不能な密結合コード)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:436:#### どうやっても本物の重い処理が走ってしまうテスト AND #### test_failure.c (強制的に本物が動くテスト)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:453:#### 利用者からは裏側の依存が全く見えない危険な状態 AND #### usage_confusion.c (見えない依存関係)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:477:#### 原則適用後の構造（DIP準拠） AND #### 全体構造図（ファイル構成と依存関係）
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:532:#### VTableを隠蔽し安全な交換を可能にする暗号化の契約 AND #### i_crypto_engine.h (暗号化の抽象契約)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:553:#### 具象実装を作る人だけがアクセスできる内部構造 AND #### i_crypto_engine_internal.h (実装者用の内部ヘッダ)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:576:#### 利用者を安全に守る抽象APIのラップ実装 AND #### i_crypto_engine.c (抽象APIの実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:612:#### 自身が必要とする依存を世界に宣言した抽象的な契約 AND #### customer_module.h (依存を明示したヘッダ)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:637:#### 本物の処理の存在を知らずに抽象のみで動くロジック AND #### customer_module.c (抽象にのみ依存するロジック)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:678:#### 本番用（AES実装） AND #### **aes_crypto_adapter.h**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:684:#### 構成ルートにのみ公開される本番用エンジンのファクトリ AND #### aes_crypto_adapter.h
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:700:#### 状態を内部に隠蔽し契約通りに振る舞う本番用エンジン AND #### aes_crypto_adapter.c (本番用の具象実装)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:771:#### テスト用（Mock実装） AND #### **mock_crypto.h**
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:777:#### テストコードと状態を共有し呼び出しを記録するテスト専用エンジン AND #### mock_crypto.h (テスト用のモックエンジン)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:799:#### 実際の処理は行わず引数を記録するだけのスパイ実装 AND #### mock_crypto.c
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:855:#### 本物のエンジンを注入して動作させる本番用の構成 AND #### main_production.c (本番環境での組み立て)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:893:#### 本物の暗号化処理が正しく動作した結果 AND #### 実行結果
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:907:#### モックエンジンを注入して副作用なく検証する構成 AND #### test_customer_module.c (テスト環境での組み立て)
+c:/Users/kumac/OneDrive/デスクトップ/antigravity/BookProject/02_章別\18_第2部 第14章 統合実践（応用）_02.md:960:#### 重い処理をバイパスし正確に呼び出しを記録した結果 AND #### 実行結果

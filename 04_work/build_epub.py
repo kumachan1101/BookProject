@@ -76,7 +76,7 @@ IMGKIT_OPTIONS = {
 CODE_CSS = """
 <style>
 /* 全体の背景 */
-body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 1400px; max-width: 1400px; box-sizing: border-box; overflow: hidden; }
+body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box; overflow: hidden; }
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
@@ -85,6 +85,7 @@ body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 140
   line-height: 1.45 !important; /* 行間を広めに */
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-weight: 600 !important;
+  width: 1400px !important; box-sizing: border-box;
 }
 
 /* コード表示領域 */
@@ -97,6 +98,7 @@ body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px; min-width: 140
   line-height: 1.45 !important;
   font-weight: 600 !important;
   border: 2px solid #44475a; /* 枠線を少し明るく */
+  width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
   overflow-wrap: break-word;
@@ -312,11 +314,11 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
     part_num = 0
     
     # 固定行数で統一（サイズの安定化）
-    MAX_LINES = 28
+    MAX_LINES = 22
     # タイトル付き最初の画像は少し減らす
-    MAX_LINES_WITH_TITLE = 25
+    MAX_LINES_WITH_TITLE = 19
     # オーファン防止：残りがこの行数以下なら前のチャンクに含める
-    ORPHAN_THRESHOLD = 6
+    ORPHAN_THRESHOLD = 4
     
     while start_line < len(highlighted_lines):
         is_first = (part_num == 0 and title)
@@ -338,19 +340,22 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
 <meta charset="utf-8">
 {CODE_CSS}
 </head>
-<body>
+<body style="width: 1400px; margin: 0; padding: 0;">
 """
         # ファイル名（タイトル）の見やすさを改善
         # 背景色を明るいパープルグレーに変更し、黒いコード部分と明確に区別
         if title and part_num == 0:
             html += f"""<div style="background: #FFFFFF; color: #000000; padding: 25px 40px; 
             font-family: 'Consolas', 'Monaco', monospace; font-size: 34px; 
-            font-weight: 800; border-bottom: 4px solid #999999; margin-bottom: 0;">
+            font-weight: 800; border-bottom: 4px solid #999999; margin-bottom: 0;
+            width: 1400px; box-sizing: border-box; display: block;">
 {title}
 </div>
 """
         
-        html += f"""<div class="highlight"><pre>{chunk_html}</pre></div>
+        html += f"""<div class="highlight" style="width: 1400px; box-sizing: border-box; display: block;">
+<pre style="width: 1400px; box-sizing: border-box; display: block; margin: 0;">{chunk_html}</pre>
+</div>
 </body>
 </html>"""
         
@@ -459,10 +464,10 @@ def process_md(md_path: Path, chapter_index: int = -1):
             # ページ区切りを削除し、マージンを最小限に
             result.append(f'<div style="margin: 0.3em 0; text-align: center; background-color: #fafafa; padding: 0.5em; border: 1px solid #ddd;"><img src="images/code/{img}" alt="Code {code_counter} Part {i+1}" style="max-width: 100%; height: auto;"/></div>')
         
-        placeholder = f"@@CODE_BLOCK_{code_counter}@@"
-        code_placeholders[placeholder] = "".join(result)
+        placeholder = f"@@CODEBLOCK_PLACEHOLDER_{code_counter}@@"
+        code_placeholders[placeholder] = '\n'.join(result)
         return placeholder
-
+        
     text = re.sub(r'####\s+([^\n]+)\n+```c\s*(.*?)```', lambda m: extract_code_common(m.group(2), m.group(1)), text, flags=re.S)
     text = re.sub(r'\*\*([^\*]+)\*\*\s*[：:]*\s*\n+```c\s*(.*?)```', lambda m: extract_code_common(m.group(2), m.group(1)), text, flags=re.S)
     for keyword in ["実行結果", "出力例", "実行例"]:
@@ -494,6 +499,12 @@ def process_md(md_path: Path, chapter_index: int = -1):
     # プレースホルダを復元（コード画像、Mermaid画像）
     for k, v in code_placeholders.items(): text = text.replace(k, v)
     for k, v in mermaid_placeholders.items(): text = text.replace(k, v)
+
+    # WikiLinksの変換： 
+    # 2. Convert WikiLinks with alias: [[Link|Text]] -> Text
+    text = re.sub(r'\[\[(?:[^|\]]*)\|([^\]]*)\]\]', r'\1', text)
+    # 3. Convert simple WikiLinks: [[Link]] -> Link
+    text = re.sub(r'\[\[([^\]]*)\]\]', r'\1', text)
 
     # テーブル処理（簡潔かつ堅牢に）
     def table_repl(match):
@@ -597,6 +608,12 @@ def process_md(md_path: Path, chapter_index: int = -1):
     text = re.sub(r'❌', r'<span style="color: #ef5350; font-weight: bold;">✕</span>', text)
     text = re.sub(r'✅', r'<span style="color: #66bb6a; font-weight: bold;">✓</span>', text)
     text = re.sub(r'[⚠⚠️]', r'<span style="color: #ffa726; font-weight: bold;">⚠</span>', text)
+    # チェックリスト（段落・リストとして機能させる）
+    # 先頭の箇条書き記号（-, *）をオプションにし、空白から始まるケースも許容
+    text = re.sub(r'^(\s*)[\-\*]?\s*\[[xX]\]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="color: #66bb6a; font-weight: bold; margin-right: 0.5em; font-family: sans-serif;">✓</span>\2</div>', text, flags=re.M)
+    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="border: 1px solid #666; width: 1.2em; height: 1.2em; display: inline-block; margin-right: 0.5em; vertical-align: middle; background: #fff;">&nbsp;</span>\2</div>', text, flags=re.M)
+    
+    # 以前の单纯な置換は残しておく（文中のインライン用）
     text = re.sub(r'\[[xX]\]', r'<span style="color: #66bb6a; font-weight: bold;">✓</span>', text)
     text = re.sub(r'\[ \]', r'<span style="border: 1px solid #666; width: 1em; display: inline-block;">&nbsp;</span>', text)
     
@@ -604,7 +621,7 @@ def process_md(md_path: Path, chapter_index: int = -1):
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
 
     # 見出し（Kindle用にスタイル強化）
-    text = re.sub(r"^# (.+)$", lambda m: f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 2em 0 1.2em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always;">{m.group(1)}</h1>', text, flags=re.M)
+    text = re.sub(r"^# (.+)$", lambda m: f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 1em 0 0.5em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always; page-break-after: avoid;">{m.group(1)}</h1>', text, flags=re.M)
     text = re.sub(r"^## (.+)$", r'<h2 style="font-size: 1.5em; margin: 2em 0 1em 0; font-weight: bold; background-color: #e3f2fd; padding: 0.6em 0.8em; border-left: 5px solid #1976d2;">\1</h2>', text, flags=re.M)
     text = re.sub(r"^### (.+)$", r'<h3 style="font-size: 1.3em; margin: 1.5em 0 0.8em 0; font-weight: bold; background-color: #e8f5e9; padding: 0.5em 0.7em; border-left: 4px solid #388e3c;">\1</h3>', text, flags=re.M)
     text = re.sub(r"^#### (.+)$", r'<h4 style="font-size: 1.15em; margin: 1.2em 0 0.6em 0; font-weight: bold; background-color: #fff3e0; padding: 0.4em 0.6em; border-left: 3px solid #ff9800;">\1</h4>', text, flags=re.M)
@@ -612,8 +629,12 @@ def process_md(md_path: Path, chapter_index: int = -1):
     text = re.sub(r"^###### (.+)$", r'<h6 style="font-size: 1em; margin: 0.8em 0 0.4em 0; font-weight: bold;">\1</h6>', text, flags=re.M)
 
     # リストと段落
-    text = re.sub(r"^[\-\*]\s+(.+)$", r"<li>\1</li>", text, flags=re.M)
-    text = re.sub(r"(<li>.*?</li>\n?)+", lambda m: f"<ul style='margin: 1.2em 0; padding-left: 2em; line-height: 1.9;'>\n{m.group(0)}</ul>\n", text, flags=re.S)
+    # 番号付きリストと箇条書きリスト（ネスト対応）を包括的に <li> に変換
+    text = re.sub(r"^(\s*)[\-\*]\s+(.+)$", r"\1<li>\2</li>", text, flags=re.M)
+    text = re.sub(r"^(\s*)\d+\.\s+(.+)$", r"\1<li>\2</li>", text, flags=re.M)
+    
+    # <li> の連続を <ul> で囲む（簡易的）
+    text = re.sub(r"((?:\s*<li>.*?</li>\n?)+)", lambda m: f"<ul style='margin: 1.2em 0; padding-left: 2em; line-height: 1.9;'>\n{m.group(1)}</ul>\n", text, flags=re.S)
 
     lines = []
     for line in text.splitlines():
@@ -623,7 +644,7 @@ def process_md(md_path: Path, chapter_index: int = -1):
 
     # 章ごとのPDF画像をH1タグの直後に挿入
     if chapter_index in chapter_pdf_images:
-        pdf_html = '<div style="margin: 2em 0; page-break-inside: avoid;">\n'
+        pdf_html = '<div style="margin: 0.5em 0; page-break-inside: avoid;">\n'
         for pdf_img_path in chapter_pdf_images[chapter_index]:
             pdf_html += f'<div style="margin: 0.5em 0; text-align: center;"><img src="{pdf_img_path}" alt="Slide" style="max-width: 100%; height: auto; border: 1px solid #ddd;"/></div>\n'
         pdf_html += '</div>\n'
