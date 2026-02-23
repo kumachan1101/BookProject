@@ -75,76 +75,77 @@ IMGKIT_OPTIONS = {
 # 視認性を最大化したCSS設定（ファイル名見出し・色分け強化版）
 CODE_CSS = """
 <style>
-/* 全体の背景 */
-body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box; overflow: hidden; }
+/* 全体の背景 (Gruvbox Dark) */
+body { margin: 0; padding: 0; background: #282828; width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box; overflow: hidden; }
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
-  background: #1a1a1a !important;
+  background: #282828 !important;
   font-size: 38px !important; /* 文字サイズ大 */
   line-height: 1.45 !important; /* 行間を広めに */
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
   font-weight: 600 !important;
   width: 1400px !important; box-sizing: border-box;
+  padding: 0 40px !important; /* コンテナ全体に左右の余白を追加 */
 }
 
 /* コード表示領域 */
 .highlight pre {
-  background: #1a1a1a !important;
-  color: #f8f8f2 !important; /* 文字色を白に近づける */
-  padding: 0 !important; /* 分割時の隙間を無くすためパディング解除 */
+  background: #282828 !important;
+  color: #EBDBB2 !important; /* Gruvbox 基本文字色 */
+  padding: 10px 0 !important; /* 上下の微調整のみ、左右パディングはコンテナで持つ */
   margin: 0 !important;
   font-size: 38px !important;
   line-height: 1.45 !important;
   font-weight: 600 !important;
-  width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box;
+  width: 100% !important; box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
 
-/* --- シンタックスハイライト（色分けの明確化） --- */
+/* --- シンタックスハイライト（Gruvbox Dark Theme） --- */
 
-/* 1. コメント: 暗めのグレー（背景に沈ませる） */
+/* 1. コメント: Gruvbox Gray */
 .highlight .c1, .highlight .cm, .highlight .c {
-  color: #6272a4 !important; /* 青みがかったグレー */
-  font-weight: normal !important; /* コメントは太字にしない */
-  font-style: italic !important;
+  color: #928374 !important;
+  font-weight: 600 !important;
+  font-style: normal !important;
 }
 
-/* 2. プリプロセッサ (#include, #define): 鮮やかなピンク */
+/* 2. プリプロセッサ (#include, #define): Gruvbox Aqua */
 .highlight .cp { 
-  color: #ff79c6 !important; 
+  color: #8EC07C !important; 
   font-weight: 700 !important; 
 }
 
-/* 3. インクルードファイル名 (<stdio.h>): 明るい水色（コメントと完全に区別） */
+/* 3. インクルードファイル名 (<stdio.h>): Gruvbox Green */
 .highlight .cpf { 
-  color: #8be9fd !important; 
+  color: #B8BB26 !important; 
   font-weight: 700 !important; 
 }
 
-/* キーワード (if, return, int, void) - ピンク/紫系 */
-.highlight .k, .highlight .kt { color: #ff79c6 !important; font-weight: 700 !important; }
+/* キーワード (if, return, int, void) - Gruvbox Red / Orange */
+.highlight .k, .highlight .kt { color: #FB4934 !important; font-weight: 700 !important; }
 
-/* 関数名 - 緑色 */
-.highlight .nf, .highlight .nb { color: #50fa7b !important; font-weight: 700 !important; }
+/* 関数名 - Gruvbox Green / Yellow */
+.highlight .nf, .highlight .nb { color: #FABD2F !important; font-weight: 700 !important; }
 
-/* 変数名 - 白 */
-.highlight .n { color: #f8f8f2 !important; }
+/* 変数名 - 基本色 */
+.highlight .n { color: #EBDBB2 !important; }
 
-/* 数値 - 紫 */
-.highlight .mi, .highlight .mf { color: #bd93f9 !important; font-weight: 700 !important; }
+/* 数値 - Gruvbox Purple */
+.highlight .mi, .highlight .mf { color: #D3869B !important; font-weight: 700 !important; }
 
-/* 文字列 - 黄色 */
-.highlight .s { color: #f1fa8c !important; font-weight: 700 !important; }
+/* 文字列 - Gruvbox Green */
+.highlight .s { color: #B8BB26 !important; font-weight: 700 !important; }
 
-/* 演算子 - ピンク */
-.highlight .o { color: #ff79c6 !important; font-weight: 700 !important; }
+/* 演算子 - Gruvbox Orange */
+.highlight .o { color: #FE8019 !important; font-weight: 700 !important; }
 
-/* 括弧・カンマ - 白 */
-.highlight .p { color: #f8f8f2 !important; }
+/* 括弧・カンマ - 基本色 */
+.highlight .p { color: #EBDBB2 !important; }
 </style>
 """
 
@@ -342,11 +343,11 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
 <body style="width: 1400px; margin: 0; padding: 0;">
 """
         # ファイル名（タイトル）の見やすさを改善
-        # 背景色を明るいパープルグレーに変更し、黒いコード部分と明確に区別
+        # Gruvbox Dark に合わせて少し明るいグレー（#3C3836等）の背景にする
         if title and part_num == 0:
-            html += f"""<div style="background: #FFFFFF; color: #000000; padding: 25px 40px; 
+            html += f"""<div style="background: #3C3836; color: #EBDBB2; padding: 25px 40px; 
             font-family: 'Consolas', 'Monaco', monospace; font-size: 34px; 
-            font-weight: 800; border-bottom: 4px solid #999999; margin-bottom: 0;
+            font-weight: 800; border-bottom: 2px solid #665C54; margin-bottom: 0;
             width: 1400px; box-sizing: border-box; display: block;">
 {title}
 </div>
@@ -566,7 +567,7 @@ def process_md(md_path: Path, chapter_index: int = -1):
                     f'border-radius:4px; margin:1.2em 0; padding:0.8em 1em; page-break-inside:avoid;">'
                     f'<div style="color:{border_color}; font-weight:bold; margin-bottom:0.4em;">'
                     f'{icon} {display_title}</div>'
-                    f'<div style="color:#333; line-height:1.8;">{body_html}</div>'
+                    f'<div style="color:#000; line-height:1.8;">{body_html}</div>'
                     f'</div>'
                 )
                 result.append(html)
@@ -606,11 +607,11 @@ def process_md(md_path: Path, chapter_index: int = -1):
     # チェックリスト（段落・リストとして機能させる）
     # 先頭の箇条書き記号（-, *）をオプションにし、空白から始まるケースも許容
     text = re.sub(r'^(\s*)[\-\*]?\s*\[[xX]\]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="color: #66bb6a; font-weight: bold; margin-right: 0.5em; font-family: sans-serif;">✓</span>\2</div>', text, flags=re.M)
-    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="border: 2px solid #666; width: 0.8em; height: 0.8em; display: inline-block; margin-right: 0.5em; vertical-align: middle; background: #fff; box-sizing: border-box; line-height: 0.1;">&nbsp;</span>\2</div>', text, flags=re.M)
+    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="border: 2px solid #666; width: 1em; height: 1em; display: inline-block; margin-right: 0.5em; vertical-align: text-bottom; background: #fff; box-sizing: border-box;"></span>\2</div>', text, flags=re.M)
     
-    # 以前の单纯な置換は残しておく（文中のインライン用）
+    # 以前の単純な置換は残しておく（文中のインライン用）
     text = re.sub(r'\[[xX]\]', r'<span style="color: #66bb6a; font-weight: bold;">✓</span>', text)
-    text = re.sub(r'\[ \]', r'<span style="border: 1px solid #666; width: 0.8em; height: 0.8em; display: inline-block; box-sizing: border-box; vertical-align: middle; line-height: 0.1;">&nbsp;</span>', text)
+    text = re.sub(r'\[ \]', r'<span style="border: 1px solid #666; width: 1em; height: 1em; display: inline-block; box-sizing: border-box; vertical-align: text-bottom;"></span>', text)
     
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
@@ -633,8 +634,13 @@ def process_md(md_path: Path, chapter_index: int = -1):
 
     lines = []
     for line in text.splitlines():
-        if line.strip() and not line.strip().startswith("<"): lines.append(f"<p>{line}</p>")
-        else: lines.append(line)
+        stripped = line.strip()
+        # ブロック要素（h1-h6, div, ul, li, table等）以外から始まる行は<p>タグで囲む
+        # これにより、<b>や<i>から始まる行も正しく段落として認識される
+        if stripped and not re.match(r'^</?(h[1-6]|div|ul|li|table|thead|tbody|tr|th|td|blockquote|p)\b', stripped, re.I):
+            lines.append(f"<p>{line}</p>")
+        else:
+            lines.append(line)
     html_content = "\n".join(lines)
 
     # 章ごとのPDF画像をH1タグの直後に挿入
