@@ -92,12 +92,11 @@ body { margin: 0; padding: 0; background: #1a1a1a; width: 1400px !important; min
 .highlight pre {
   background: #1a1a1a !important;
   color: #f8f8f2 !important; /* 文字色を白に近づける */
-  padding: 35px !important;
+  padding: 0 !important; /* 分割時の隙間を無くすためパディング解除 */
   margin: 0 !important;
   font-size: 38px !important;
   line-height: 1.45 !important;
   font-weight: 600 !important;
-  border: 2px solid #44475a; /* 枠線を少し明るく */
   width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
@@ -459,13 +458,9 @@ def process_md(md_path: Path, chapter_index: int = -1):
         
         imgs = code_to_images_with_title(code, md_path.stem, code_counter, title)
         
-        result = []
-        for i, img in enumerate(imgs):
-            # ページ区切りを削除し、マージンを最小限に
-            result.append(f'<div style="margin: 0.3em 0; text-align: center; background-color: #fafafa; padding: 0.5em; border: 1px solid #ddd;"><img src="images/code/{img}" alt="Code {code_counter} Part {i+1}" style="max-width: 100%; height: auto;"/></div>')
-        
         placeholder = f"@@CODEBLOCK_PLACEHOLDER_{code_counter}@@"
-        code_placeholders[placeholder] = '\n'.join(result)
+        # 枠線とパディングを1つのコンテナに集約（内部画像の隙間を排除）
+        code_placeholders[placeholder] = f'<div style="margin: 1em 0; background-color: #1a1a1a; border: 2px solid #44475a; padding: 25px 0; page-break-inside: avoid; width: 100%; box-sizing: border-box; overflow: hidden; line-height: 0;">' + "".join([f'<img src="images/code/{img}" alt="Code {code_counter} Part {i+1}" style="display: block; width: 100%; height: auto; margin: 0; padding: 0; border: none;"/>' for i, img in enumerate(imgs)]) + '</div>'
         return placeholder
         
     text = re.sub(r'####\s+([^\n]+)\n+```c\s*(.*?)```', lambda m: extract_code_common(m.group(2), m.group(1)), text, flags=re.S)
@@ -611,11 +606,11 @@ def process_md(md_path: Path, chapter_index: int = -1):
     # チェックリスト（段落・リストとして機能させる）
     # 先頭の箇条書き記号（-, *）をオプションにし、空白から始まるケースも許容
     text = re.sub(r'^(\s*)[\-\*]?\s*\[[xX]\]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="color: #66bb6a; font-weight: bold; margin-right: 0.5em; font-family: sans-serif;">✓</span>\2</div>', text, flags=re.M)
-    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="border: 1px solid #666; width: 1.2em; height: 1.2em; display: inline-block; margin-right: 0.5em; vertical-align: middle; background: #fff;">&nbsp;</span>\2</div>', text, flags=re.M)
+    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="border: 2px solid #666; width: 0.8em; height: 0.8em; display: inline-block; margin-right: 0.5em; vertical-align: middle; background: #fff; box-sizing: border-box; line-height: 0.1;">&nbsp;</span>\2</div>', text, flags=re.M)
     
     # 以前の单纯な置換は残しておく（文中のインライン用）
     text = re.sub(r'\[[xX]\]', r'<span style="color: #66bb6a; font-weight: bold;">✓</span>', text)
-    text = re.sub(r'\[ \]', r'<span style="border: 1px solid #666; width: 1em; display: inline-block;">&nbsp;</span>', text)
+    text = re.sub(r'\[ \]', r'<span style="border: 1px solid #666; width: 0.8em; height: 0.8em; display: inline-block; box-sizing: border-box; vertical-align: middle; line-height: 0.1;">&nbsp;</span>', text)
     
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
