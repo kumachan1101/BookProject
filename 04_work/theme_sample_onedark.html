@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>One Dark (Atom/VSCode 標準ダーク) - Sample</title>
+<style>
+body { margin: 0; padding: 20px; background: #e0e0e0; font-family: sans-serif; }
+.container { margin: 0 auto; width: 1400px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+/* タイトル帯 */
+.title-bar {
+    background: #3e4451;
+    color: #ABB2BF;
+    padding: 25px 40px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 34px;
+    font-weight: 800;
+    border-bottom: 2px solid #5c6370;
+    box-sizing: border-box;
+}
+
+/* Pygmentsコンテナ */
+.highlight {
+    background: #282C34 !important;
+    font-size: 38px !important;
+    line-height: 1.45 !important;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+    font-weight: 600 !important;
+    padding: 0 40px !important;
+    box-sizing: border-box;
+}
+
+.highlight pre {
+    background: #282C34 !important;
+    color: #ABB2BF !important;
+    padding: 10px 0 !important;
+    margin: 0 !important;
+    font-size: 38px !important;
+    line-height: 1.45 !important;
+    font-weight: 600 !important;
+    white-space: pre-wrap;
+}
+
+/* 各要素の色 */
+.highlight .c1, .highlight .cm, .highlight .c { color: #5c6370 !important; font-weight: 600 !important; }
+.highlight .cp { color: #c678dd !important; font-weight: 700 !important; }
+.highlight .cpf { color: #98c379 !important; font-weight: 700 !important; }
+.highlight .k, .highlight .kt { color: #c678dd !important; font-weight: 700 !important; }
+.highlight .nf, .highlight .nb { color: #61afef !important; font-weight: 700 !important; }
+.highlight .n { color: #ABB2BF !important; }
+.highlight .mi, .highlight .mf { color: #d19a66 !important; font-weight: 700 !important; }
+.highlight .s { color: #98c379 !important; font-weight: 700 !important; }
+.highlight .o { color: #56b6c2 !important; font-weight: 700 !important; }
+.highlight .p { color: #ABB2BF !important; }
+
+h1 { text-align: center; color: #333; }
+</style>
+</head>
+<body>
+    <h1>One Dark (Atom/VSCode 標準ダーク)</h1>
+    <div class="container">
+        <div class="title-bar">sample.c</div>
+        <div class="highlight">
+<pre>
+<span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="c1">// サンプルコメント</span>
+<span class="kt">void</span> <span class="nf">sample_function</span>(<span class="kt">int</span> <span class="n">value</span>) {
+    <span class="k">if</span> (<span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span>) {
+        <span class="nf">printf</span>(<span class="s">"Value is %d\n"</span>, <span class="n">value</span>);
+    } <span class="k">else</span> {
+        <span class="k">return</span>;
+    }
+}
+</pre>
+        </div>
+    </div>
+</body>
+</html>

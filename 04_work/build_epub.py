@@ -75,29 +75,29 @@ IMGKIT_OPTIONS = {
 # 視認性を最大化したCSS設定（ファイル名見出し・色分け強化版）
 CODE_CSS = """
 <style>
-/* 全体の背景 (Gruvbox Dark) */
-body { margin: 0; padding: 0; background: #282828; width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box; overflow: hidden; }
+/* 全体の背景 (Moonlit Ocean) */
+body { margin: 0; padding: 0; background: #0D1B2A; width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box; overflow: hidden; }
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
-  background: #282828 !important;
+  background: #0D1B2A !important;
   font-size: 38px !important; /* 文字サイズ大 */
-  line-height: 1.45 !important; /* 行間を広めに */
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
-  font-weight: 600 !important;
+  line-height: 1.85 !important; /* 指定された行間 */
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 500 !important;
   width: 1400px !important; box-sizing: border-box;
   padding: 0 40px !important; /* コンテナ全体に左右の余白を追加 */
 }
 
 /* コード表示領域 */
 .highlight pre {
-  background: #282828 !important;
-  color: #EBDBB2 !important; /* Gruvbox 基本文字色 */
+  background: #0D1B2A !important;
+  color: #C8D8E8 !important; /* Moonlit Ocean 基本文字色 */
   padding: 10px 0 !important; /* 上下の微調整のみ、左右パディングはコンテナで持つ */
   margin: 0 !important;
   font-size: 38px !important;
-  line-height: 1.45 !important;
-  font-weight: 600 !important;
+  line-height: 1.85 !important;
+  font-weight: 500 !important;
   width: 100% !important; box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
@@ -105,47 +105,53 @@ body { margin: 0; padding: 0; background: #282828; width: 1400px !important; min
   word-wrap: break-word;
 }
 
-/* --- シンタックスハイライト（Gruvbox Dark Theme） --- */
+/* --- シンタックスハイライト（Moonlit Ocean Theme） --- */
 
-/* 1. コメント: Gruvbox Gray */
+/* 1. コメント: #4A6A8A, italic */
 .highlight .c1, .highlight .cm, .highlight .c {
-  color: #928374 !important;
-  font-weight: 600 !important;
-  font-style: normal !important;
+  color: #4A6A8A !important;
+  font-weight: 500 !important;
+  font-style: italic !important;
 }
 
-/* 2. プリプロセッサ (#include, #define): Gruvbox Aqua */
+/* 2. prefix (#include, $): #56CCF2, bold */
 .highlight .cp { 
-  color: #8EC07C !important; 
-  font-weight: 700 !important; 
+  color: #56CCF2 !important; 
+  font-weight: bold !important; 
 }
 
-/* 3. インクルードファイル名 (<stdio.h>): Gruvbox Green */
-.highlight .cpf { 
-  color: #B8BB26 !important; 
-  font-weight: 700 !important; 
+/* 3. string ("文字列", <ヘッダ>): #6FCF97 */
+.highlight .cpf, .highlight .s, .highlight .s1, .highlight .s2 { 
+  color: #6FCF97 !important; 
+  font-weight: bold !important; 
 }
 
-/* キーワード (if, return, int, void) - Gruvbox Red / Orange */
-.highlight .k, .highlight .kt { color: #FB4934 !important; font-weight: 700 !important; }
+/* 4. keyword (if, return など制御): #F2994A, bold */
+.highlight .k, .highlight .kn, .highlight .kr, .highlight .kd { 
+  color: #F2994A !important; 
+  font-weight: bold !important; 
+}
 
-/* 関数名 - Gruvbox Green / Yellow */
-.highlight .nf, .highlight .nb { color: #FABD2F !important; font-weight: 700 !important; }
+/* 5. type (int, struct などの型名): #BB86FC */
+.highlight .kt, .highlight .nc { 
+  color: #BB86FC !important; 
+  font-weight: bold !important; 
+}
 
-/* 変数名 - 基本色 */
-.highlight .n { color: #EBDBB2 !important; }
+/* 6. number (数値リテラル): #F2C94C */
+.highlight .mi, .highlight .mf, .highlight .mh { 
+  color: #F2C94C !important; 
+  font-weight: bold !important; 
+}
 
-/* 数値 - Gruvbox Purple */
-.highlight .mi, .highlight .mf { color: #D3869B !important; font-weight: 700 !important; }
+/* 関数名 - 少し明るめの色(基本文字色より少し目立たせる程度) */
+.highlight .nf, .highlight .nb { color: #8BB8D4 !important; font-weight: bold !important; }
 
-/* 文字列 - Gruvbox Green */
-.highlight .s { color: #B8BB26 !important; font-weight: 700 !important; }
+/* 変数名・括弧・演算子 - 基本文字色 */
+.highlight .n, .highlight .p, .highlight .o { color: #C8D8E8 !important; } 
 
-/* 演算子 - Gruvbox Orange */
-.highlight .o { color: #FE8019 !important; font-weight: 700 !important; }
-
-/* 括弧・カンマ - 基本色 */
-.highlight .p { color: #EBDBB2 !important; }
+/* 標準出力など : #8BB8D4 */
+.highlight .go { color: #8BB8D4 !important; }
 </style>
 """
 
@@ -343,11 +349,11 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
 <body style="width: 1400px; margin: 0; padding: 0;">
 """
         # ファイル名（タイトル）の見やすさを改善
-        # Gruvbox Dark に合わせて少し明るいグレー（#3C3836等）の背景にする
+        # Moonlit Ocean に合わせて、背景より少し明るいネイビー（#1B2B3E等）の帯にする
         if title and part_num == 0:
-            html += f"""<div style="background: #3C3836; color: #EBDBB2; padding: 25px 40px; 
-            font-family: 'Consolas', 'Monaco', monospace; font-size: 34px; 
-            font-weight: 800; border-bottom: 2px solid #665C54; margin-bottom: 0;
+            html += f"""<div style="background: #1B2B3E; color: #C8D8E8; padding: 25px 40px; 
+            font-family: 'JetBrains Mono', monospace; font-size: 34px; 
+            font-weight: 800; border-bottom: 2px solid #4A6A8A; margin-bottom: 0;
             width: 1400px; box-sizing: border-box; display: block;">
 {title}
 </div>
@@ -605,13 +611,14 @@ def process_md(md_path: Path, chapter_index: int = -1):
     text = re.sub(r'✅', r'<span style="color: #66bb6a; font-weight: bold;">✓</span>', text)
     text = re.sub(r'[⚠⚠️]', r'<span style="color: #ffa726; font-weight: bold;">⚠</span>', text)
     # チェックリスト（段落・リストとして機能させる）
-    # 先頭の箇条書き記号（-, *）をオプションにし、空白から始まるケースも許容
-    text = re.sub(r'^(\s*)[\-\*]?\s*\[[xX]\]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="color: #66bb6a; font-weight: bold; margin-right: 0.5em; font-family: sans-serif;">✓</span>\2</div>', text, flags=re.M)
-    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="border: 2px solid #666; width: 1em; height: 1em; display: inline-block; margin-right: 0.5em; vertical-align: text-bottom; background: #fff; box-sizing: border-box;"></span>\2</div>', text, flags=re.M)
+    # CSSでの図形描画はフォントによるベースラインの崩れが起きやすいため、確かな文字「□」「☑」を使用する
+    # 浮き・沈みを防ぐため vertical-align: baseline に統一
+    text = re.sub(r'^(\s*)[\-\*]?\s*\[[xX]\]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="color: #66bb6a; font-size: 1.25em; margin-right: 0.4em; vertical-align: baseline;">☑</span>\2</div>', text, flags=re.M)
+    text = re.sub(r'^(\s*)[\-\*]?\s*\[ \]\s+(.+)$', r'<div style="margin: 0.8em 0; line-height: 1.6; padding-left: 2em; text-indent: -2em;">\1<span style="color: #999; font-size: 1.25em; margin-right: 0.4em; vertical-align: baseline;">□</span>\2</div>', text, flags=re.M)
     
     # 以前の単純な置換は残しておく（文中のインライン用）
-    text = re.sub(r'\[[xX]\]', r'<span style="color: #66bb6a; font-weight: bold;">✓</span>', text)
-    text = re.sub(r'\[ \]', r'<span style="border: 1px solid #666; width: 1em; height: 1em; display: inline-block; box-sizing: border-box; vertical-align: text-bottom;"></span>', text)
+    text = re.sub(r'\[[xX]\]', r'<span style="color: #66bb6a; font-size: 1.1em; vertical-align: baseline;">☑</span>', text)
+    text = re.sub(r'\[ \]', r'<span style="color: #999; font-size: 1.1em; vertical-align: baseline;">□</span>', text)
     
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
