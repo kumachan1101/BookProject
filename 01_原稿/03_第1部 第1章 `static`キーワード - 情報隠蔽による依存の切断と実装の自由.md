@@ -430,6 +430,8 @@ static struct ConnectionPool s_pool = {
     .query_count = 0
 };
 
+
+
 // 具象実装B: シングルトン取得API
 ConnectionPool* connection_pool_get(void)
 {

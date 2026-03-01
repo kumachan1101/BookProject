@@ -15,35 +15,71 @@ DIST_DIR = Path("../05_生成/dist")
 IMG_DIR = DIST_DIR / "images"
 MERMAID_DIR = IMG_DIR / "mermaid"
 CODE_IMG_DIR = IMG_DIR / "code"
-PDF_IMG_DIR = IMG_DIR / "pdf"
+SLIDES_IMG_DIR = IMG_DIR / "slides"
 
 # PDF資料のパス（04_workから見た相対パス）
-RESOURCE_PDF_PATH = Path("../03_資料/SOLID_C_Architecture.pdf")
+# 旧: RESOURCE_PDF_PATH = Path("../03_資料/SOLID_C_Architecture.pdf")
+SLIDES_DIR = Path("../03_資料/png")
 
-# PDFページ → MDファイルインデックスのマッピング（20ページ分）
-# インデックスは sorted(02_章別/*.md) の順番に対応
-# PDFスライドは章順に作成されているため、順番に各章の先頭ファイルへ対応付け
-PAGE_TO_MD_INDEX = {
-    0:  0,   # PDF p1  → 01_序論
-    1:  1,   # PDF p2  → 02_第1部 学習ガイドマップ
-    2:  2,   # PDF p3  → 03_第1部 第1章 static
-    3:  3,   # PDF p4  → 04_第1部 第2章 関数ポインタ_01
-    4:  5,   # PDF p5  → 05_第1部 第3章 構造体_01
-    5:  7,   # PDF p6  → 06_第1部 第4章 不完全型
-    6:  8,   # PDF p7  → 07_第1部 第5章 モジュール_01
-    7:  10,  # PDF p8  → 08_第1部 第6章 エラーハンドリング_01
-    8:  12,  # PDF p9  → 09_第1部 第7章 メモリ管理_01
-    9:  14,  # PDF p10 → 10_第1部 まとめ
-    10: 15,  # PDF p11 → 11_第2部 学習ガイドマップ
-    11: 16,  # PDF p12 → 12_第2部 第8章 SRP_01
-    12: 18,  # PDF p13 → 13_第2部 第9章 OCP_01
-    13: 20,  # PDF p14 → 14_第2部 第10章 LSP_01
-    14: 22,  # PDF p15 → 15_第2部 第11章 ISP_01
-    15: 24,  # PDF p16 → 16_第2部 第12章 DIP_01
-    16: 27,  # PDF p17 → 17_第2部 第13章 統合（基本）_01
-    17: 29,  # PDF p18 → 18_第2部 第14章 統合（応用）_01
-    18: 31,  # PDF p19 → 19_第2部 第15章 SOLID統合
-    19: 32,  # PDF p20 → 20_結論
+# ファイルの先頭prefix "01_" などの章番号文字列から、MDファイルインデックスへのマッピング
+# (sorted(02_章別/*.md)した結果の chapter_index に合致させる)
+CHAPTER_NUM_TO_MD_INDEX = {
+    "01": 0,   # 01_section_1 (序論)
+    "02": 1,   # 02_第1部
+    "03": 2,   # 03_第1部 第1章
+    "04": 3,   # 04_第1部 第2章
+    "05": 5,   # 05_第1部 第3章
+    "06": 7,   # 06_第1部 第4章
+    "07": 8,   # 07_第1部 第5章
+    "08": 10,  # 08_第1部 第6章
+    "09": 12,  # 09_第1部 第7章
+    "10": 14,  # 10_第1部 まとめ
+    "11": 15,  # 11_第2部
+    "12": 16,  # 12_第2部 第8章
+    "13": 18,  # 13_第2部 第9章
+    "14": 20,  # 14_第2部 第10章
+    "15": 22,  # 15_第2部 第11章
+    "16": 24,  # 16_第2部 第12章
+    "17": 27,  # 17_第2部 第13章
+    "18": 29,  # 18_第2部 第14章
+    "19": 31,  # 19_第2部 第15章
+    "20": 32,  # 20_おわりに
+}
+
+# ユーザー指定の目次タイトルマッピング
+CUSTOM_TOC_TITLES = {
+    "01_section_1": "はじめに",
+    "02_第1部 導入：基礎道具編の目的と学習ロードマップ": "第1部 導入：基礎道具編の目的と学習ロードマップ",
+    "03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由": "第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由",
+    "04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01": "第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現",
+    "04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現": "第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現",
+    "05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01": "第1部 第3章 構造体設計とコンポジション - データと責任の統合",
+    "05_第1部 第3章 構造体設計とコンポジション - データと責任の統合": "第1部 第3章 構造体設計とコンポジション - データと責任の統合",
+    "06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化": "第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化",
+    "07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01": "第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化",
+    "07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化": "第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化",
+    "08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約_01": "第1部 第6章 エラーハンドリングパターン - 堅牢な契約",
+    "08_第1部 第6章 エラーハンドリングパターン - 堅牢な契約": "第1部 第6章 エラーハンドリングパターン - 堅牢な契約",
+    "09_第1部 第7章 メモリ管理パターン - 責任の明確化_01": "第1部 第7章 メモリ管理パターン - 責任の明確化",
+    "09_第1部 第7章 メモリ管理パターン - 責任の明確化": "第1部 第7章 メモリ管理パターン - 責任の明確化",
+    "10_第1部 総括 堅牢なコードの「基礎」は固まった": "第1部 総括 堅牢なコードの「基礎」は固まった",
+    "11_第2部 導入：原則編の目的と学習ロードマップ": "第2部 導入：原則編の目的と学習ロードマップ",
+    "12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針_01": "第2部 第8章 単一責任原則 (SRP): 変更の軸を明確にする設計指針",
+    "12_第2部 第8章 単一責任原則 (SRP) 変更の軸を明確にする設計指針": "第2部 第8章 単一責任原則 (SRP): 変更の軸を明確にする設計指針",
+    "13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01": "第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる",
+    "13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる": "第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる",
+    "14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証_01": "第2部 第10章 リスコフ置換原則 (LSP): 多態性の安全性と契約の保証",
+    "14_第2部 第10章 リスコフ置換原則 (LSP) 多態性の安全性と契約の保証": "第2部 第10章 リスコフ置換原則 (LSP): 多態性の安全性と契約の保証",
+    "15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化_01": "第2部 第11章 インターフェース分離原則 (ISP): 不要な依存の排除とモジュール結合度の最小化",
+    "15_第2部 第11章 インターフェース分離原則 (ISP) 不要な依存の排除とモジュール結合度の最小化": "第2部 第11章 インターフェース分離原則 (ISP): 不要な依存の排除とモジュール結合度の最小化",
+    "16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01": "第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性",
+    "16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性": "第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性",
+    "17_第2部 第13章 統合実践（基本）_01": "第2部 第13章 統合実践（基本）",
+    "17_第2部 第13章 統合実践（基本）": "第2部 第13章 統合実践（基本）",
+    "18_第2部 第14章 統合実践（応用）_01": "第2部 第14章 統合実践（応用）",
+    "18_第2部 第14章 統合実践（応用）": "第2部 第14章 統合実践（応用）",
+    "19_第2部 第15章：SOLID原則を「使える思考」にする": "第2部 第15章 SOLID原則を「使える思考」にする",
+    "20_おわりに": "おわりに"
 }
 
 BOOK_HTML = DIST_DIR / "book.html"
@@ -72,88 +108,93 @@ IMGKIT_OPTIONS = {
     "disable-smart-width": "",   # 指定幅を厳守
 }
 
+
 # 視認性を最大化したCSS設定（ファイル名見出し・色分け強化版）
 CODE_CSS = """
 <style>
-/* 全体の背景 (Moonlit Ocean) */
-body { margin: 0; padding: 0; background: #0D1B2A; width: 1400px !important; min-width: 1400px !important; max-width: 1400px !important; box-sizing: border-box; overflow: hidden; }
+/* 全体の背景 */
+html, body { 
+  margin: 0; padding: 0; 
+  background: #0F172A !important; 
+  width: 1400px !important; 
+  min-width: 1400px !important; 
+  min-height: 100vh !important;
+  box-sizing: border-box; 
+  overflow: hidden; 
+}
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
-  background: #0D1B2A !important;
-  font-size: 38px !important; /* 文字サイズ大 */
-  line-height: 1.85 !important; /* 指定された行間 */
+  background: #0F172A !important;
+  font-size: 38px !important;
+  line-height: 1.85 !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 500 !important;
-  width: 1400px !important; box-sizing: border-box;
-  padding: 0 40px !important; /* コンテナ全体に左右の余白を追加 */
+  width: 1400px !important; 
+  box-sizing: border-box;
+  padding: 0 40px !important;
+  display: block !important;
 }
 
 /* コード表示領域 */
 .highlight pre {
-  background: #0D1B2A !important;
-  color: #C8D8E8 !important; /* Moonlit Ocean 基本文字色 */
-  padding: 10px 0 !important; /* 上下の微調整のみ、左右パディングはコンテナで持つ */
+  background: #0F172A !important;
+  color: #FFFFFF !important;
+  padding: 10px 0 !important;
   margin: 0 !important;
   font-size: 38px !important;
   line-height: 1.85 !important;
   font-weight: 500 !important;
-  width: 100% !important; box-sizing: border-box;
+  width: 100% !important; 
+  box-sizing: border-box;
   white-space: pre-wrap;
   word-break: break-all;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  display: block !important;
 }
 
-/* --- シンタックスハイライト（Moonlit Ocean Theme） --- */
-
-/* 1. コメント: #4A6A8A, italic */
-.highlight .c1, .highlight .cm, .highlight .c {
-  color: #4A6A8A !important;
-  font-weight: 500 !important;
+/* 1. コメント */
+.highlight .c1, .highlight .cm, .highlight .c, .highlight .cp {
+  color: #64748B !important;
+  font-weight: 600 !important;
   font-style: italic !important;
 }
-
-/* 2. prefix (#include, $): #56CCF2, bold */
-.highlight .cp { 
-  color: #56CCF2 !important; 
-  font-weight: bold !important; 
+/* 2. prefix (#include, $) */
+.highlight .cp {
+  color: #C4B5FD !important;
+  font-weight: bold !important;
+  font-style: normal !important;
 }
-
-/* 3. string ("文字列", <ヘッダ>): #6FCF97 */
-.highlight .cpf, .highlight .s, .highlight .s1, .highlight .s2 { 
-  color: #6FCF97 !important; 
-  font-weight: bold !important; 
+/* 3. string ("文字列", <ヘッダ>) */
+.highlight .cpf, .highlight .s, .highlight .s1, .highlight .s2 {
+  color: #A3E635 !important;
+  font-weight: 600 !important;
 }
-
-/* 4. keyword (if, return など制御): #F2994A, bold */
-.highlight .k, .highlight .kn, .highlight .kr, .highlight .kd { 
-  color: #F2994A !important; 
-  font-weight: bold !important; 
+/* 4. keyword (if, return など) */
+.highlight .k, .highlight .kn, .highlight .kr, .highlight .kd {
+  color: #38BDF8 !important;
+  font-weight: bold !important;
 }
-
-/* 5. type (int, struct などの型名): #BB86FC */
-.highlight .kt, .highlight .nc { 
-  color: #BB86FC !important; 
-  font-weight: bold !important; 
+/* 5. type (int, struct など) */
+.highlight .kt, .highlight .nc {
+  color: #818CF8 !important;
+  font-weight: 600 !important;
 }
-
-/* 6. number (数値リテラル): #F2C94C */
-.highlight .mi, .highlight .mf, .highlight .mh { 
-  color: #F2C94C !important; 
-  font-weight: bold !important; 
+/* 6. number (数値リテラル) */
+.highlight .mi, .highlight .mf, .highlight .mh {
+  color: #FBBF24 !important;
+  font-weight: 600 !important;
 }
-
-/* 関数名 - 少し明るめの色(基本文字色より少し目立たせる程度) */
-.highlight .nf, .highlight .nb { color: #8BB8D4 !important; font-weight: bold !important; }
-
-/* 変数名・括弧・演算子 - 基本文字色 */
-.highlight .n, .highlight .p, .highlight .o { color: #C8D8E8 !important; } 
-
-/* 標準出力など : #8BB8D4 */
-.highlight .go { color: #8BB8D4 !important; }
+/* 関数名 */
+.highlight .nf, .highlight .nb { color: #A78BFA !important; font-weight: bold !important; }
+/* 変数名・括弧・演算子 */
+.highlight .n, .highlight .p, .highlight .o { color: #FFFFFF !important; }
+/* 標準出力 */
+.highlight .go { color: #FFFFFF !important; opacity: 0.8 !important; font-weight: 600 !important; }
 </style>
 """
+
 
 # MAX_LINES_PER_IMAGE は動的計算に置き換え（TARGET_CODE_IMAGE_HEIGHT / LINE_HEIGHT_PX ベース）
 
@@ -174,7 +215,7 @@ def force_remove_dist():
 
     MERMAID_DIR.mkdir(parents=True, exist_ok=True)
     CODE_IMG_DIR.mkdir(parents=True, exist_ok=True)
-    PDF_IMG_DIR.mkdir(parents=True, exist_ok=True)
+    SLIDES_IMG_DIR.mkdir(parents=True, exist_ok=True)
     print(f"[INIT] ディレクトリ準備完了")
 
 force_remove_dist()
@@ -216,55 +257,43 @@ else:
     print("[INFO] 表紙画像が見つかりません")
 
 
-# ========= PDF処理 =========
-def split_pdf_by_pages() -> dict:
-    """PDFを各ページ画像に変換し、MDファイルインデックスに対応付ける"""
-    if not RESOURCE_PDF_PATH.exists():
-        print(f"[WARN] PDFが見つかりません: {RESOURCE_PDF_PATH}")
+# ========= スライド画像処理 =========
+def gather_slide_images() -> dict:
+    """用意されたスライド画像(PNG)を収集し、MDファイルインデックスに対応付ける"""
+    if not SLIDES_DIR.exists():
+        print(f"[WARN] スライドフォルダが見つかりません: {SLIDES_DIR}")
         return {}
 
-    print(f"[PDF] {RESOURCE_PDF_PATH.name} を各章に配分中...")
+    print(f"[スライド画像] {SLIDES_DIR.name} 内の画像を各章に配分中...")
     chapter_images = {}  # {md_index: [image_rel_paths]}
 
-    try:
-        import fitz  # PyMuPDF
-        doc = fitz.open(str(RESOURCE_PDF_PATH))
-        total_pages = len(doc)
-        print(f"[PDF] 総ページ数: {total_pages}")
+    for chapter_num_str, chapter_index in CHAPTER_NUM_TO_MD_INDEX.items():
+        img_path = SLIDES_DIR / f"chapter_{chapter_num_str}.png"
+        if not img_path.exists():
+            print(f"[INFO] {img_path.name} は存在しません。スキップします。")
+            continue
+            
+        # EPUBパッケージングのため、dist/images/slides へコピーする
+        out_path = SLIDES_IMG_DIR / img_path.name
+        import shutil
+        shutil.copy(img_path, out_path)
+        optimize_image(out_path)
 
-        for page_num in range(total_pages):
-            chapter_index = PAGE_TO_MD_INDEX.get(page_num)
-            if chapter_index is None:
-                print(f"[WARN] ページ{page_num}はマッピングなし")
-                continue
+        rel_path = f"images/slides/{img_path.name}"
+        
+        if chapter_index not in chapter_images:
+            chapter_images[chapter_index] = []
+        chapter_images[chapter_index].append(rel_path)
+        
+        print(f"  -> 章{chapter_index} ({img_path.name}) を配分")
 
-            page = doc[page_num]
-            zoom = 150 / 72
-            mat = fitz.Matrix(zoom, zoom)
-            pix = page.get_pixmap(matrix=mat)
-
-            out_path = PDF_IMG_DIR / f"chapter{chapter_index:02d}_page{page_num+1:02d}.png"
-            pix.save(str(out_path))
-            optimize_image(out_path)
-
-            if chapter_index not in chapter_images:
-                chapter_images[chapter_index] = []
-            chapter_images[chapter_index].append(f"images/pdf/{out_path.name}")
-            print(f"  -> 章{chapter_index} にPDFページ{page_num+1}を配分")
-
-        doc.close()
-        print(f"[PDF] {len(chapter_images)}章に配分完了")
-        return chapter_images
-
-    except ImportError:
-        print("[ERROR] PyMuPDFがインストールされていません: pip install PyMuPDF")
-    except Exception as e:
-        print(f"[ERROR] PDF処理失敗: {e}")
-    return {}
+    print(f"[スライド画像] {len(chapter_images)}章に配分完了")
+    return chapter_images
 
 
-# PDFを各章に配分
-chapter_pdf_images = split_pdf_by_pages()
+
+# 事前生成されたスライド画像(PNG)を各章に配分
+chapter_pdf_images = gather_slide_images()
 
 
 # ========= Mermaid =========
@@ -309,7 +338,7 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
     
     print(f"  コード全体: {len(lines)}行")
     
-    formatter = HtmlFormatter(full=False, style="dracula", linenos=False, noclasses=True)
+    formatter = HtmlFormatter(full=False, linenos=False, noclasses=False)
     full_highlighted = highlight(code, CLexer(), formatter)
     
     pre_match = re.search(r'<pre[^>]*>(.*?)</pre>', full_highlighted, re.DOTALL)
@@ -341,26 +370,25 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
         chunk_html = '\n'.join(highlighted_lines[start_line:end_line])
         
         html = f"""<!DOCTYPE html>
-<html>
+<html style="background-color: #0F172A; min-height: 100vh;">
 <head>
 <meta charset="utf-8">
 {CODE_CSS}
 </head>
-<body style="width: 1400px; margin: 0; padding: 0;">
+<body style="width: 1400px; margin: 0; padding: 0; background-color: #0F172A; min-height: 100vh;">
 """
         # ファイル名（タイトル）の見やすさを改善
-        # Moonlit Ocean に合わせて、背景より少し明るいネイビー（#1B2B3E等）の帯にする
         if title and part_num == 0:
-            html += f"""<div style="background: #1B2B3E; color: #C8D8E8; padding: 25px 40px; 
+            html += f"""<div style="background: #1E293B; color: #F8FAFC; padding: 25px 40px; 
             font-family: 'JetBrains Mono', monospace; font-size: 34px; 
-            font-weight: 800; border-bottom: 2px solid #4A6A8A; margin-bottom: 0;
+            font-weight: 800; border-bottom: 2px solid #3B82F6; margin-bottom: 0;
             width: 1400px; box-sizing: border-box; display: block;">
 {title}
 </div>
 """
         
-        html += f"""<div class="highlight" style="width: 1400px; box-sizing: border-box; display: block;">
-<pre style="width: 1400px; box-sizing: border-box; display: block; margin: 0;">{chunk_html}</pre>
+        html += f"""<div class="highlight" style="width: 1400px; box-sizing: border-box; display: block; background-color: #0F172A;">
+<pre style="width: 1400px; box-sizing: border-box; display: block; margin: 0; background-color: #0F172A;">{chunk_html}</pre>
 </div>
 </body>
 </html>"""
@@ -446,11 +474,19 @@ def md_images_to_html(md_text: str) -> str:
 # ========= Markdown処理 =========
 def process_md(md_path: Path, chapter_index: int = -1):
     print(f"\n[MD] {md_path.name}")
-    text = md_path.read_text(encoding="utf-8")
     
-    # 章タイトル抽出
-    h1_match = re.search(r"^# (.+)$", text, flags=re.M)
-    chapter_title = h1_match.group(1) if h1_match else md_path.stem
+    try:
+        text = md_path.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        text = md_path.read_text(encoding="shift_jis")
+
+    # 目次用タイトルの決定（マッピングから取得、なければファイル名）
+    # ファイルが分割されている場合(_01, _02など)、ベース名でマッチングを試みる
+    base_stem = re.sub(r'_\d+$', '', md_path.stem)
+    chapter_title = CUSTOM_TOC_TITLES.get(md_path.stem) or CUSTOM_TOC_TITLES.get(base_stem) or md_path.stem
+
+    # 元のファイル内のH1は削除する（後でカスタムタイトルを強制挿入するため）
+    text = re.sub(r"^# .+$", "", text, flags=re.M)
 
     code_counter = 0
     code_placeholders = {}
@@ -624,7 +660,12 @@ def process_md(md_path: Path, chapter_index: int = -1):
     text = re.sub(r"\*(.+?)\*", r"<i>\1</i>", text)
 
     # 見出し（Kindle用にスタイル強化）
-    text = re.sub(r"^# (.+)$", lambda m: f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 1em 0 0.5em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always; page-break-after: avoid;">{m.group(1)}</h1>', text, flags=re.M)
+    # カスタムタイトルを明示的にH1として各章の先頭に付与する
+    # ※ただし _02 などの分割ファイルの場合はH1を付けない（1つの章としてまとめるため）
+    if not re.search(r'_\d{2}$', md_path.stem) or md_path.stem.endswith("_01"):
+        h1_html = f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 1em 0 0.5em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always; page-break-after: avoid;">{chapter_title}</h1>\n\n'
+        text = h1_html + text
+
     text = re.sub(r"^## (.+)$", r'<h2 style="font-size: 1.5em; margin: 2em 0 1em 0; font-weight: bold; background-color: #e3f2fd; padding: 0.6em 0.8em; border-left: 5px solid #1976d2;">\1</h2>', text, flags=re.M)
     text = re.sub(r"^### (.+)$", r'<h3 style="font-size: 1.3em; margin: 1.5em 0 0.8em 0; font-weight: bold; background-color: #e8f5e9; padding: 0.5em 0.7em; border-left: 4px solid #388e3c;">\1</h3>', text, flags=re.M)
     text = re.sub(r"^#### (.+)$", r'<h4 style="font-size: 1.15em; margin: 1.2em 0 0.6em 0; font-weight: bold; background-color: #fff3e0; padding: 0.4em 0.6em; border-left: 3px solid #ff9800;">\1</h4>', text, flags=re.M)
@@ -676,7 +717,9 @@ def main():
         try:
             html, title = process_md(md, chapter_index)
             body.append(html)
-            chapters.append({'id': md.stem, 'title': title})
+            # ページ分割された後半のファイル（_02等）はHTMLの目次（TOC）に含めない
+            if not re.search(r'_\d{2}$', md.stem) or md.stem.endswith("_01"):
+                chapters.append({'id': md.stem, 'title': title})
         except Exception as e:
             print(f"[ERROR] {md.name} 処理中にエラー: {e}")
             import traceback
