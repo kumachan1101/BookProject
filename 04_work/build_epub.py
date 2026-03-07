@@ -89,7 +89,7 @@ BOOK_MOBI = DIST_DIR / "book.mobi"
 COVER_IMAGE = Path("../05_生成/cover.png")
 
 # Kindle互換性設定
-MAX_IMAGE_WIDTH = 1400
+MAX_IMAGE_WIDTH = 2000
 MAX_IMAGE_HEIGHT = 1600
 
 # 【重要】ご自身の環境に合わせてパスを変更してください
@@ -113,26 +113,25 @@ IMGKIT_OPTIONS = {
 CODE_CSS = """
 <style>
 /* 全体の背景 */
-html, body { 
+html, body {
   margin: 0; padding: 0; 
   background: #0F172A !important; 
-  width: 1400px !important; 
-  min-width: 1400px !important; 
-  min-height: 100vh !important;
+  width: 2000px !important;
+  max-width: 2000px !important;
   box-sizing: border-box; 
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 /* Pygmentsハイライトコンテナ */
 .highlight {
   background: #0F172A !important;
-  font-size: 38px !important;
-  line-height: 1.85 !important;
+  font-size: 48px !important;
+  line-height: 1.6 !important;
   font-family: 'JetBrains Mono', monospace !important;
   font-weight: 500 !important;
-  width: 1400px !important; 
   box-sizing: border-box;
-  padding: 0 40px !important;
+  width: 2000px !important;
+  padding: 0 40px !important; /* 両端の余白 */
   display: block !important;
 }
 
@@ -142,16 +141,14 @@ html, body {
   color: #FFFFFF !important;
   padding: 10px 0 !important;
   margin: 0 !important;
-  font-size: 38px !important;
-  line-height: 1.85 !important;
+  font-size: 48px !important;
+  line-height: 1.6 !important;
   font-weight: 500 !important;
-  width: 100% !important; 
-  box-sizing: border-box;
-  white-space: pre-wrap;
-  word-break: break-all;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  word-break: break-all !important;
   display: block !important;
+  box-sizing: border-box;
 }
 
 /* 1. コメント */
@@ -370,29 +367,28 @@ def code_to_images_with_title(code: str, md_stem: str, code_index: int, title: s
         chunk_html = '\n'.join(highlighted_lines[start_line:end_line])
         
         html = f"""<!DOCTYPE html>
-<html style="background-color: #0F172A; min-height: 100vh;">
+<html>
 <head>
 <meta charset="utf-8">
 {CODE_CSS}
 </head>
-<body style="width: 1400px; margin: 0; padding: 0; background-color: #0F172A; min-height: 100vh;">
+<body style="margin: 0; padding: 0; background-color: #0F172A; width: 2000px;">
 """
         # ファイル名（タイトル）の見やすさを改善
         if title and part_num == 0:
             html += f"""<div style="background: #1E293B; color: #F8FAFC; padding: 25px 40px; 
-            font-family: 'JetBrains Mono', monospace; font-size: 34px; 
-            font-weight: 800; border-bottom: 2px solid #3B82F6; margin-bottom: 0;
-            width: 1400px; box-sizing: border-box; display: block;">
-{title}
+    border-bottom: 2px solid #334155;
+    font-size: 48px; font-weight: bold; font-family: 'JetBrains Mono', monospace;
+    display: flex; align-items: center; gap: 15px; width: 2000px; box-sizing: border-box;">
+    {title}
 </div>
 """
-        
-        html += f"""<div class="highlight" style="width: 1400px; box-sizing: border-box; display: block; background-color: #0F172A;">
-<pre style="width: 1400px; box-sizing: border-box; display: block; margin: 0; background-color: #0F172A;">{chunk_html}</pre>
+        # 横幅の背景色拡張のため、さらにwrapperを追加
+        html += f"""<div style="background: #0F172A; padding-top: 20px; padding-bottom: 20px; width: 2000px; box-sizing: border-box;">
+<div class="highlight"><pre>{chunk_html}</pre></div>
 </div>
 </body>
 </html>"""
-        
         img_name = f"{md_stem}_code{code_index}_part{part_num}.png"
         out_path = CODE_IMG_DIR / img_name
         
@@ -731,15 +727,18 @@ def main():
     for i, c in enumerate(chapters, 1): toc += f'<p><a href="#chapter-{c["id"]}">{i}. {c["title"]}</a></p>'
     toc += '</div>'
 
-    BOOK_HTML.write_text(f"""<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head><title>Book</title>
-<style>
-body{{font-family:"Hiragino Mincho ProN",serif; line-height:1.8; margin:0; padding:1em; text-align:justify; color:#111;}} 
-img{{max-width:100%; height:auto;}}
-</style>
-</head><body>{toc}{''.join(body)}</body></html>""", encoding="utf-8")
+    css_content = "body{font-family:'Hiragino Mincho ProN',serif; line-height:1.8; margin:0; padding:1em; text-align:justify; color:#222;}\nimg{max-width:100%; height:auto;}"
+
+    html_content = (
+        '<?xml version="1.0" encoding="utf-8"?>\n'
+        '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">\n'
+        '<html xmlns="http://www.w3.org/1999/xhtml">\n'
+        '<head><title>Book</title>\n'
+        '<style>\n' + css_content + '\n</style>\n'
+        '</head><body>\n' + toc + ''.join(body) + '\n</body></html>'
+    )
+
+    BOOK_HTML.write_text(html_content, encoding="utf-8")
 
     print(f"[HTML] {BOOK_HTML} 生成完了")
 
@@ -802,6 +801,18 @@ img{{max-width:100%; height:auto;}}
     except Exception as e:
         print(f"[ERROR] 変換失敗: {e}")
         print("Calibreがインストールされているか確認してください。")
+
+    # --- 6. スタンドアロンHTMLの自動生成 ---
+    print("\n[スタンドアロンHTML (Google Drive閲覧用) を生成しています...]")
+    standalone_script = Path.cwd() / "convert_to_standalone.py"
+    if standalone_script.exists():
+        try:
+            subprocess.run(["python", str(standalone_script)], cwd=str(Path.cwd()), check=True)
+            print("[OK] スタンドアロンHTMLの生成完了")
+        except Exception as e:
+            print(f"[ERROR] スタンドアロンHTMLの生成失敗: {e}")
+    else:
+        print(f"[WARN] {standalone_script} が見つからないため実行スキップ")
 
 if __name__ == "__main__":
     main()
