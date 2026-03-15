@@ -86,7 +86,7 @@ BOOK_HTML = DIST_DIR / "book.html"
 BOOK_EPUB = DIST_DIR / "book.epub"
 BOOK_MOBI = DIST_DIR / "book.mobi"
 
-COVER_IMAGE = Path("../05_生成/cover.png")
+COVER_IMAGE = Path("../05_生成/cover.jpg")
 
 # Kindle互換性設定
 MAX_IMAGE_WIDTH = 2000
@@ -472,7 +472,7 @@ def process_md(md_path: Path, chapter_index: int = -1):
     print(f"\n[MD] {md_path.name}")
     
     try:
-        text = md_path.read_text(encoding="utf-8")
+        text = md_path.read_text(encoding="utf-8-sig")
     except UnicodeDecodeError:
         text = md_path.read_text(encoding="shift_jis")
 
@@ -565,16 +565,25 @@ def process_md(md_path: Path, chapter_index: int = -1):
     # > [!NOTE] タイトル
     # > 本文行1
     # > 本文行2
-    # → 水色/黄色/緑色の装飾ボックスに変換
+    # → 種別ごとに別色の装飾ボックスに変換
+    #
+    # [INFO] 読者の疑問：…  → 水色  (#e1f5fe / #0288d1)
+    # [INFO] コラム：…      → 紫色  (#f3e5f5 / #7b1fa2)
+    # [INFO] 補足：… / その他  → 緑色  (#e8f5e9 / #2e7d32)
+    # [NOTE]              → オレンジ (#fff3e0 / #e65100)
+    # [IMPORTANT]         → 赤色  (#ffebee / #b71c1c)
+    # [WARNING]           → 琼琶色 (#fff8e1 / #f57c00)
+    # [TIP]               → ティール (#e0f2f1 / #00695c)
+    # [CAUTION]           → 深赤  (#ffcdd2 / #c62828)
 
     callout_styles = {
-        'NOTE':      ('✏', '#e3f2fd', '#1565c0', '#bbdefb'),
-        'INFO':      ('ℹ', '#e3f2fd', '#1565c0', '#bbdefb'),
-        'TIP':       ('💡', '#e8f5e9', '#2e7d32', '#c8e6c9'),
-        'IMPORTANT': ('⚠', '#fff8e1', '#e65100', '#ffe082'),
-        'WARNING':   ('⚠', '#fff3e0', '#bf360c', '#ffcc80'),
-        'CAUTION':   ('❌', '#ffebee', '#b71c1c', '#ffcdd2'),
-        'SUCCESS':   ('✓', '#e8f5e9', '#2e7d32', '#c8e6c9'),
+        'NOTE':      ('✏', '#fff3e0', '#e65100', '#ffe0b2'),  # オレンジ：備考・注記
+        'INFO':      ('ℹ', '#e8f5e9', '#2e7d32', '#c8e6c9'),  # 緑：補足（デフォルト）
+        'TIP':       ('✨', '#e0f2f1', '#00695c', '#b2dfdb'),       # ティール：実践ハント
+        'IMPORTANT': ('⚠', '#ffebee', '#b71c1c', '#ffcdd2'),  # 赤：重要事項
+        'WARNING':   ('⚠', '#fff8e1', '#f57c00', '#ffe082'),  # 琥珀：注意喚起
+        'CAUTION':   ('❗', '#ffcdd2', '#c62828', '#ef9a9a'),       # 深赤：危険・禁止
+        'SUCCESS':   ('✓', '#e8f5e9', '#2e7d32', '#c8e6c9'),       # 緑：成功・推奨
     }
 
     def convert_callout(text):
@@ -588,6 +597,21 @@ def process_md(md_path: Path, chapter_index: int = -1):
                 ctype = m.group(1).upper()
                 ctitle = m.group(2).strip()
                 icon, bg, border_color, header_bg = callout_styles.get(ctype, ('ℹ', '#e3f2fd', '#1565c0', '#bbdefb'))
+                
+                # タイトルによる動的スタイリング (INFO 専用：読者の疑問/コラム/補足 で色を分ける)
+                if ctype == 'INFO':
+                    if '読者の疑問' in ctitle:
+                        # 水色：読者の疑問
+                        icon, bg, border_color = ('❓', '#e1f5fe', '#0288d1')
+                    elif 'コラム' in ctitle:
+                        # 紫色：コラム
+                        icon, bg, border_color = ('📖', '#f3e5f5', '#7b1fa2')
+                    else:
+                        # 緑色：補足（デフォルト）
+                        if not ctitle or ctitle.upper() == 'INFO':
+                            ctitle = '補足'
+                        icon, bg, border_color = ('ℹ', '#e8f5e9', '#2e7d32')
+                
                 # 本文行を収集（> で始まる連続行）
                 body_lines = []
                 i += 1
@@ -659,7 +683,7 @@ def process_md(md_path: Path, chapter_index: int = -1):
     # カスタムタイトルを明示的にH1として各章の先頭に付与する
     # ※ただし _02 などの分割ファイルの場合はH1を付けない（1つの章としてまとめるため）
     if not re.search(r'_\d{2}$', md_path.stem) or md_path.stem.endswith("_01"):
-        h1_html = f'<h1 id="chapter-{md_path.stem}" style="font-size: 2em; margin: 1em 0 0.5em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always; page-break-after: avoid;">{chapter_title}</h1>\n\n'
+        h1_html = f'<h1 id="chap{chapter_index}" style="font-size: 2em; margin: 1em 0 0.5em 0; font-weight: bold; line-height: 1.4; background-color: #e0e0e0; padding: 0.5em 0.8em; border-bottom: 4px solid #333; page-break-before: always; page-break-after: avoid;">{chapter_title}</h1>\n\n'
         text = h1_html + text
 
     text = re.sub(r"^## (.+)$", r'<h2 style="font-size: 1.5em; margin: 2em 0 1em 0; font-weight: bold; background-color: #e3f2fd; padding: 0.6em 0.8em; border-left: 5px solid #1976d2;">\1</h2>', text, flags=re.M)
@@ -715,7 +739,7 @@ def main():
             body.append(html)
             # ページ分割された後半のファイル（_02等）はHTMLの目次（TOC）に含めない
             if not re.search(r'_\d{2}$', md.stem) or md.stem.endswith("_01"):
-                chapters.append({'id': md.stem, 'title': title})
+                chapters.append({'id': f"chap{chapter_index}", 'title': title})
         except Exception as e:
             print(f"[ERROR] {md.name} 処理中にエラー: {e}")
             import traceback
@@ -724,7 +748,7 @@ def main():
     toc = ""
     if cover_dest: toc += f'<div style="text-align:center; page-break-after:always;"><img src="images/{cover_dest.name}" /></div>'
     toc += '<div style="page-break-before:always; page-break-after:always;"><h2>目次</h2>'
-    for i, c in enumerate(chapters, 1): toc += f'<p><a href="#chapter-{c["id"]}">{i}. {c["title"]}</a></p>'
+    for i, c in enumerate(chapters, 1): toc += f'<p><a href="#{c["id"]}">{i}. {c["title"]}</a></p>'
     toc += '</div>'
 
     css_content = "body{font-family:'Hiragino Mincho ProN',serif; line-height:1.8; margin:0; padding:1em; text-align:justify; color:#222;}\nimg{max-width:100%; height:auto;}"

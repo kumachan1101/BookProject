@@ -1,0 +1,375 @@
+=== File: 03_第1部 第1章 `static`キーワード - 情報隠蔽による依存の切断と実装の自由.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > === Temperature Sensor Example ===
+    > [Sensor] Initializing with calibration offset: -15
+    > [Main] Temperature: 22.0°C
+    > [Main] Temperature: 22.0°C
+    > [Main] Temperature: 22.0°C
+  [Preceding Code (approx last 15 lines)]:
+    | 
+    |     // センサー読み取り（3回）
+    |     for (int i = 0; i < 3; i++) {
+    |         int temp = temperature_sensor_read();
+    | 
+    |         if (temp != TEMP_SENSOR_ERROR) {
+    |             printf("[Main] Temperature: %d.%d°C\n", temp / 10, temp % 10);
+    |         } else {
+    |             printf("[Main] Failed to read temperature\n");
+    |         }
+    |     }
+    | 
+    |     return 0;
+    | }
+    | 
+
+  --- Exec Block 3 ---
+  [Execution Output]:
+    > === Connection Pool Example ===
+    > [Pool] Initializing connection pool (max: 5 connections)
+    > [Pool] Executing query #1: SELECT * FROM users
+    > [Pool] Executing query #2: INSERT INTO logs VALUES (...)
+    > [Pool] Executing query #3: SELECT * FROM users
+  [Preceding Code (approx last 15 lines)]:
+    | {
+    |     ConnectionPool* pool = connection_pool_get();
+    |     connection_pool_execute(pool, "INSERT INTO logs VALUES (...)");
+    | }
+    | 
+    | int main(void)
+    | {
+    |     printf("=== Connection Pool Example ===\n");
+    |     module_a_process();
+    |     module_b_process();
+    |     module_a_process();
+    | 
+    |     return 0;
+    | }
+    | 
+
+=== File: 04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_01.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > TRACE: [Client] 演算テストを開始します。
+    > [Client] === 加算 (x=10, y=20) ===
+    > [Client] 結果: 30
+    > 
+    > [Client] === 乗算 (x=10, y=20) に切り替え ===
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    | int main(void)
+    | {
+    |     run_calculator_test();
+    |     return EXIT_SUCCESS;
+    | }
+    | 
+
+=== File: 04_第1部 第2章 関数ポインタと間接呼び出し - 動的結合の実現_02.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > [main] 処理開始: 制御の反転（IoC）テスト
+    > --- Listener V1 注入（状態1を通知）---
+    > [Monitor] 状態変化を通知します: 1
+    >   [Listener V1] 状態コード 1 を検知しました。
+    > 
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    |     // 1. 具象ロジックV1を注入し、状態変化を通知
+    |     register_status_listener(handle_status_update_v1);
+    |     printf("--- Listener V1 注入（状態1を通知）---\n");
+    |     notify_status_change(1); // MonitorがV1を呼び出す
+    | 
+    |     // 2. 具象ロジックV2に切り替え、別の状態変化を通知
+    |     register_status_listener(handle_status_update_v2);
+    |     printf("\n--- Listener V2 に切り替え（状態2を通知）---\n");
+    |     notify_status_change(2); // MonitorがV2を呼び出す
+    | 
+    |     printf("\n[main] 処理終了。\n");
+    | 
+    |     return EXIT_SUCCESS;
+    | }
+    | 
+
+=== File: 05_第1部 第3章 構造体設計とコンポジション - データと責任の統合_01.md ===
+  --- Exec Block 3 ---
+  [Execution Output]:
+    > [Device] 生成完了。内部バッファを所有し、Loggerを参照しています。
+    > [Device] 内部バッファ(所有)を解放しました。
+    > [Device] Device本体を解放しました。
+  [Preceding Code (approx last 15 lines)]:
+    | 
+    | int main(void)
+    | {
+    |     Logger dummy_logger;
+    |     // 生成: 外部リソース(Logger)を注入
+    |     Device* dev = device_create(&dummy_logger);
+    | 
+    |     if (dev != NULL) {
+    |         // 破棄: Deviceとその所有物だけが消える
+    |         device_destroy(dev);
+    |     }
+    |     // dummy_loggerはここでまだ生きている（Deviceに所有されていないため）
+    |     return 0;
+    | }
+    | 
+
+=== File: 06_第1部 第4章 不完全型と不透明ポインタ - 型情報の隠蔽による契約のカプセル化.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > [context.c] Context struct secured: 0x...
+    > [client.c] Context value: 42
+    > [context.c] Context struct freed: 0x...
+  [Preceding Code (approx last 15 lines)]:
+    | int main(void)
+    | {
+    |     use_context_module();
+    |     return EXIT_SUCCESS;
+    | }
+    | 
+
+=== File: 07_第1部 第5章 モジュール構成とヘッダ設計 - 最小限の契約公開と依存の最小化_01.md ===
+  --- Exec Block 2 ---
+  [Execution Output]:
+    > [user.c] User 'Alice' created
+    > [product.c] Product 'Laptop' created
+    > [main] User name: Alice
+    > [main] Product name: Laptop
+    > [user.c] User 'Alice' destroyed
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    | {
+    |     // 名前空間（プレフィックス）が異なるため、問題なく共存できる
+    |     User_t* u = user_create("Alice");
+    |     Product_t* p = product_create("Laptop", 999.99f);
+    | 
+    |     if (u && p) {
+    |         printf("[main] User name: %s\n", user_get_name(u));
+    |         printf("[main] Product name: %s\n", product_get_name(p));
+    |         user_destroy(u);
+    |         product_destroy(p);
+    |     }
+    | 
+    |     return EXIT_SUCCESS;
+    | }
+    | 
+
+=== File: 13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_01.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > --- 10%割引を実行 ---
+    > [Calculator] Result: 9000円
+    > 
+    > --- 500円引きを実行 ---
+    > [Calculator] Result: 9500円
+  [Preceding Code (approx last 15 lines)]:
+    | 
+    |     if (s1) {
+    |         calculate_price(s1, base_price); // 注入！
+    |         // free(s1) 等の終了処理が必要（省略）
+    |     }
+    |     printf("\n--- 500円引きを実行 ---\n");
+    |     IDiscount* s2 = create_fixed_discount(500);
+    | 
+    |     if (s2) {
+    |         calculate_price(s2, base_price); // 注入！
+    |     }
+    | 
+    |     return 0;
+    | }
+    | 
+
+  --- Exec Block 2 ---
+  [Execution Output]:
+    > --- クレジットカード ---
+    > [Calculator] 金額: 10000円
+    > [Calculator] 手数料: 500円
+    > 
+    > --- コンビニ払い ---
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    | int main(void) {
+    |     printf("--- クレジットカード ---\n");
+    |     calculate_fee(PAY_CREDIT, 10000);
+    |     printf("\n--- コンビニ払い ---\n");
+    |     calculate_fee(PAY_CONVENIENCE, 10000);
+    | 
+    |     return 0;
+    | }
+    | 
+
+  --- Exec Block 3 ---
+  [Execution Output]:
+    > --- クレジットカード ---
+    > [Calculator] 金額: 10000円
+    > [Calculator] 手数料: 500円
+    > 
+    > --- コンビニ払い ---
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    | 
+    | int main(void) {
+    |     int price = 10000;
+    |     printf("--- クレジットカード ---\n");
+    |     IFee* credit = create_credit_fee(5); // 5%の手数料戦略を生成
+    |     calculate_fee(credit, price);        // 注入！
+    |     // 終了処理が必要(省略)
+    |     printf("\n--- コンビニ払い ---\n");
+    |     IFee* conv = create_convenience_fee(300); // 300円の固定手数料戦略を生成
+    |     calculate_fee(conv, price);               // 注入！
+    |     // 終了処理が必要(省略)
+    | 
+    |     return 0;
+    | }
+    | 
+
+=== File: 13_第2部 第9章 開放閉鎖原則（OCP）：拡張のために開き、修正に対して閉じる_02.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > === 即時送信 ===
+    > [Notifier] 即時送信モード
+    >   今すぐ送信: Hello
+    > 
+    > === 予約送信 ===
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    |     } else {
+    |         printf("[Notifier] 即時送信モード\n");
+    |         printf("  今すぐ送信: %s\n", message);
+    |     }
+    | }
+    | 
+    | int main(void) {
+    |     printf("=== 即時送信 ===\n");
+    |     send_notification("Hello", false);
+    |     printf("\n=== 予約送信 ===\n");
+    |     send_notification("Hello", true);
+    | 
+    |     return 0;
+    | }
+    | 
+
+  --- Exec Block 2 ---
+  [Execution Output]:
+    > === 即時送信 ===
+    > [Notifier] 通知処理開始
+    > [Immediate Channel 1] 今すぐ送信: Hello
+    > [Notifier] 通知処理終了
+    > 
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    | extern void send_notification(INotifyStrategy* strategy, const char* message);
+    | 
+    | int main(void) {
+    |     printf("=== 即時送信 ===\n");
+    |     INotifyStrategy* immediate = create_immediate_notify(1);
+    |     send_notification(immediate, "Hello");
+    |     destroy_immediate_notify(immediate);
+    |     printf("\n=== 予約送信 ===\n");
+    |     INotifyStrategy* scheduled = create_scheduled_notify("2024-01-01 10:00");
+    |     send_notification(scheduled, "Hello");
+    |     destroy_scheduled_notify(scheduled);
+    | 
+    |     return 0;
+    | }
+    | 
+
+=== File: 16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_01.md ===
+  --- Exec Block 4 ---
+  [Execution Output]:
+    > === 本番環境（物理センサーを注入） ===
+    > [Hardware] Reading from I2C bus(0x48)...
+    > Current Temperature: 28 C
+    > 
+    > === テスト環境（モックを注入） ===
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    |     report_weather(p1);
+    |     destroy_reporter(p1); // Reporterを破棄（Sensorは残る）
+    |     destroy_sensor(hw);   // Sensorを破棄
+    | 
+    |     // 2. 単体テスト用のモックセンサーを注入
+    |     printf("\n=== テスト環境（モックを注入） ===\n");
+    |     ISensor* mock = create_mock_sensor(25);
+    |     WeatherReporter* p2 = create_reporter(mock);
+    |     report_weather(p2);
+    |     destroy_reporter(p2);
+    |     destroy_sensor(mock);
+    | 
+    |     return 0;
+    | }
+    | 
+
+=== File: 16_第2部 第12章 依存性逆転原則（DIP）：抽象への依存とテスト容易性_02.md ===
+  --- Exec Block 5 ---
+  [Execution Output]:
+    > === テスト実行 ===
+    > === Test Operations ===
+    > [Mock] Connect called (count: 1)
+    > [Mock] Execute called: SELECT * FROM users (count: 1)
+    > [Mock] Execute called: UPDATE products SET price = price * 1.1 (count: 2)
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    |     printf("✓ execute が2回呼ばれた\n");
+    |     assert(strstr(mock_ctx->last_query, "UPDATE") != NULL);
+    |     printf("✓ 最後のクエリはUPDATE文\n");
+    |     // テスト終了後に手動でリソースを解放する
+    |     free(mock_ctx);
+    |     free(mock_db);
+    |     printf("\n全てのテストが成功しました！\n");
+    | }
+    | 
+    | int main(void) {
+    |     test_business_logic();
+    | 
+    |     return 0;
+    | }
+    | 
+
+=== File: 18_第2部 第14章 統合実践（応用）_02.md ===
+  --- Exec Block 1 ---
+  [Execution Output]:
+    > === 本番環境 ===
+    >   [AES] 実際の暗号化処理中...
+    >   [CustomerModule] 顧客 '田中太郎' のカード情報を保存: [AES]1234-5678-9012-3456
+  [Preceding Code (approx last 15 lines)]:
+    | 
+    |     if (!cm) {
+    |         fprintf(stderr, "顧客モジュールの生成に失敗しました\n");
+    |         crypto_destroy(engine);
+    |         return 1;
+    |     }
+    |     // 3. 使用
+    |     CustomerData data = {"田中太郎", "1234-5678-9012-3456"};
+    |     customer_save(cm, &data);
+    |     // 4. リソース解放（統一されたインターフェースで破棄）
+    |     customer_module_destroy(cm);
+    |     crypto_destroy(engine);  // aes_crypto_destroyではなくcrypto_destroyを使用
+    |     return 0;
+    | }
+    | 
+
+  --- Exec Block 2 ---
+  [Execution Output]:
+    > === テスト環境 ===
+    >   [Mock] 暗号化をシミュレート（実際の処理なし）
+    >   [CustomerModule] 顧客 'Test User' のカード情報を保存: [MOCK]encrypted
+    > [検証結果]
+    >   呼び出し回数: 1
+    > ...
+  [Preceding Code (approx last 15 lines)]:
+    |     printf("  呼び出し回数: %d\n", mock_data.call_count);
+    |     printf("  最後の入力: %s\n", mock_data.last_input);
+    |     assert(mock_data.call_count == 1);
+    |     assert(strcmp(mock_data.last_input, "1234-5678-9012-3456") == 0);
+    |     printf("  ✓ テスト成功\n");
+    |     // 6. リソース解放（統一されたインターフェースで破棄）
+    |     customer_module_destroy(cm);
+    |     crypto_destroy(mock);  // mock_crypto_destroyではなくcrypto_destroyを使用
+    | }
+    | 
+    | int main(void) {
+    |     test_customer_save();
+    |     return 0;
+    | }
+    | 
+
